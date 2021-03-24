@@ -1,0 +1,49 @@
+@media (min-width: 992px)
+{
+	.full-header #logo {
+		padding-left: 30px;
+		border-left: 1px solid #EEE;
+		padding-right: 0;
+		border-right: unset;
+	}
+
+	.top-cart-content {
+    left: -15px;
+	right: unset;
+	}
+}
+
+
+.header-misc {
+    margin-right: 15px;
+    margin-left: unset;
+}
+
+#top-account {
+    padding: 3px 3px 3px 15px;
+}
+
+h2{width: fit-content;}
+
+h2:before {
+    right: 0;
+	left: unset;
+}
+
+.fancy-title::after {
+    margin-right: 0.75rem;
+}
+
+.fancy-title::before {
+    margin-left: 0.75rem;
+}
+
+.shop, .product {
+    border-radius: 40px 10px;
+}
+
+
+.product-image > .badge, .sale-flash {
+	left: unset;
+    right: 10px;
+}
