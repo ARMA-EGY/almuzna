@@ -7,17 +7,17 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7 text-right">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Members</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">الاعضاء</li>
                 </ol>
               </nav>
             </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="/register" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> New Member</a>
+            <div class="col-lg-6 col-5 text-left">
+              <a href="/register" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة عضو جديد</a>
             </div>
           </div>
         </div>
@@ -32,18 +32,18 @@
         <div class="col-xl-12">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">All Members <span class="badge badge-primary p-2">{{$users->total()}}</span></h3>
+              <h3 class="text-white mb-0">اجمالي الاعضاء <span class="badge badge-primary p-2">{{$users->total()}}</span></h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-dark table-flush">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Member</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Active</th>
+                    <th scope="col">الاعضاء</th>
+                    <th scope="col">الوظيفة</th>
+                    <th scope="col">البريد الالكتروني</th>
+                    <th scope="col">الهاتف</th>
+                    <th scope="col">الحالة</th>
                   </tr>
                 </thead>
                 <tbody class="list">
@@ -53,7 +53,7 @@
                     <td>{{ ($users->currentPage()-1) * $users->perPage() + $loop->index + 1 }}</td>
                     <td scope="row">
                       <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
+                        <a href="#" class="avatar rounded-circle mx-3">
                           <img alt="Image placeholder" src="{{ asset($user->avatar) }}">
                         </a>
                         <div class="media-body">

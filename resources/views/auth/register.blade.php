@@ -8,13 +8,13 @@
         <div class="container-fluid">
           <div class="header-body">
             <div class="row align-items-center py-4">
-              <div class="col-lg-6 col-7">
+              <div class="col-lg-6 col-7 text-right">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                   <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('admin-members')}}">Members</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">New Member</li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin-members')}}">الاعضاء</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">اضافة عضو جديد</li>
                   </ol>
                 </nav>
               </div>
@@ -33,7 +33,7 @@
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Add New Member </h3>
+                    <h3 class="mb-0">اضافة عضو جديد </h3>
                   </div>
                 </div>
               </div>
@@ -44,8 +44,8 @@
                     <div class="row">
 
                       <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-username">Username</label>
+                        <div class="form-group text-right">
+                          <label class="form-control-label" for="input-username">الاسم</label>
                           <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                           @error('name')
@@ -57,8 +57,8 @@
                       </div>
 
                       <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-email">Email address</label>
+                        <div class="form-group text-right">
+                          <label class="form-control-label" for="input-email">البريد الالكتروني</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                             @error('email')
@@ -74,18 +74,18 @@
                     <div class="row">
   
                         <div class="col-lg-6">
-                          <div class="form-group">
-                            <label class="form-control-label" for="input-phone">Phone</label>
-                            <input type="number" name="phone" id="input-phone" class="form-control" placeholder="Phone Number"  >
+                          <div class="form-group text-right">
+                            <label class="form-control-label" for="input-phone">الهاتف</label>
+                            <input type="number" name="phone" id="input-phone" class="form-control" placeholder="رقم الهاتف"  >
                           </div>
                         </div>
 
                         <div class="col-lg-6">
-                          <div class="form-group">
-                              <label class="form-control-label" for="input-gender">Gender</label>
+                          <div class="form-group text-right">
+                              <label class="form-control-label" for="input-gender">النوع</label>
                               <select class="form-control" name="gender" id="input-gender" required>
-                                  <option value="Female">Female</option>
-                                  <option value="Male">Male</option>
+                                  <option value="Female">انثى</option>
+                                  <option value="Male">ذكر</option>
                               </select>
                           </div>
                         </div>
@@ -95,8 +95,8 @@
                     <div class="row">
 
                       <div class="col-lg-6">
-                        <div class="form-group">
-                          <label class="form-control-label" for="input-phone">Password</label>
+                        <div class="form-group text-right">
+                          <label class="form-control-label" for="input-phone">كلمة المرور</label>
                           <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                           @error('password')
@@ -108,8 +108,8 @@
                       </div>
 
                       <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="password-confirm" class="form-control-label">{{ __('Confirm Password') }}</label>
+                        <div class="form-group text-right">
+                            <label for="password-confirm" class="form-control-label">تأكيد كلمة المرور</label>
                              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
                       </div>
@@ -119,8 +119,8 @@
                     <div class="row">
   
                           <div class="col-lg-6">
-                            <div class="form-group">
-                              <label class="form-control-label" for="input-role">Role</label>
+                            <div class="form-group text-right">
+                              <label class="form-control-label" for="input-role">الوظيفة</label>
                               <select class="form-control" name="role" id="input-role" required>
                                 <option>Admin</option>
                                 <option>Moderator</option>
@@ -134,7 +134,7 @@
                   <hr class="my-4" />
                   <!-- Save -->
                   <div class="col-12 text-right">
-                    <button type="submit" class="btn btn-success submit">Add</button>
+                    <button type="submit" class="btn btn-success submit">اضافة</button>
                   </div>
                 </form>
               </div>

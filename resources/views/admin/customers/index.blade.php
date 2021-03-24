@@ -14,18 +14,18 @@
         <div class="header-body">
           <div class="row align-items-center py-4">
 
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7 text-right">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Customers</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">العملاء</li>
                 </ol>
               </nav>
             </div>
 
-            <div class="col-lg-6 col-5 text-right">
-              <a href="{{ route('customers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> New Customer</a>
+            <div class="col-lg-6 col-5 text-left">
+              <a href="{{ route('customers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة عميل</a>
             </div>
 
             @if(session()->has('success'))	
@@ -52,7 +52,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">All Customers  <span class="badge badge-primary p-2">{{$customers_count}}</span></h3>
+                  <h3 class="mb-0">اجمالي العملاء  <span class="badge badge-primary p-2">{{$customers_count}}</span></h3>
                 </div>
               </div>
             </div>
@@ -65,10 +65,10 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >Name</th>
-                    <th scope="col" class="sort" >Phone</th>
-                    <th scope="col" class="sort" >Wallet</th>
-                    <th scope="col" class="sort" >First Order</th>
+                    <th scope="col" class="sort" >الاسم</th>
+                    <th scope="col" class="sort" >رقم الهاتف</th>
+                    <th scope="col" class="sort" >المحفظة</th>
+                    <th scope="col" class="sort" >اول طلب</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -82,10 +82,10 @@
                      <b> {{  $customer->name }} </b>
                     </td>
                     <td>{{ $customer->phone }}</td>
-                    <td>{{ $customer->wallet }}</td>
-                    <td>{{ $customer->first_order }}</td>
+                    <td>{{ $customer->wallet }} رس</td>
+                    <td> @if ($customer->first_order == 0) لم يتم @elseif ($customer->first_order == 1) تم @endif </td>
                     <td>
-                      <a href="{{ route('customers.edit', $customer->id)}}" class="btn btn-primary float-left btn-sm mx-1"><i class="fa fa-edit"></i> Edit</a>
+                      <a href="{{ route('customers.edit', $customer->id)}}" class="btn btn-primary float-left btn-sm mx-1"><i class="fa fa-edit"></i> تعديل بيانات</a>
                     </td>
                   </tr>
 
@@ -97,7 +97,7 @@
 
 
             @else 
-                <p class="text-center"> No Customers Yet.</p>
+                <p class="text-center"> لا يوجد عملاء</p>
             @endif
 
             <!-- Card footer -->
