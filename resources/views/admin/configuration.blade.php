@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7 text-right">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Configuration</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">الاعدادات</li>
                 </ol>
               </nav>
             </div>
@@ -32,7 +32,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Configuration </h3>
+                  <h3 class="mb-0">الاعدادات </h3>
                 </div>
               </div>
             </div>
@@ -40,9 +40,8 @@
               <form class="configuration_form">
                 @csrf
 
-                <h6 class="heading-small text-muted">1- Minimum value for the order </h6>
                 <h6 class="heading-small text-muted text-right mb-4">١- قيمة الحد الادنى للطلب </h6>
-                <div class="pl-lg-4">
+                <div class="pr-lg-4">
                   <div class="row">
 
                       <div class="input-group col-9 mb-3 px-0">
@@ -59,9 +58,8 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted">2- Maximum order value for same day delivery</h6>
                 <h6 class="heading-small text-muted text-right mb-4">٢- أقصى قيمة للطلب للتوصيل في نفس اليوم </h6>
-                <div class="pl-lg-4">
+                <div class="pr-lg-4">
                   <div class="row">
 
                       <div class="input-group col-9 mb-3 px-0">
@@ -78,9 +76,8 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted">3- Sales Tax</h6>
                 <h6 class="heading-small text-muted text-right mb-4">٣- ضريبة المبيعات</h6>
-                <div class="pl-lg-4">
+                <div class="pr-lg-4">
                   <div class="row">
 
                       <div class="input-group col-9 mb-3 px-0">

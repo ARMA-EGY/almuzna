@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7 text-right">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Social Media</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">وسائل التواصل الاجتماعي</li>
                 </ol>
               </nav>
             </div>
@@ -32,15 +32,15 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Edit Social Media  </h3>
+                  <h3 class="mb-0">تعديل وسائل التواصل  </h3>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <form class="social_form">
                 @csrf
-                <h6 class="heading-small text-muted mb-4">Social Media Links</h6>
-                <div class="pl-lg-4">
+                <h6 class="heading-small text-muted mb-4 text-right">روابط وسائل التواصل</h6>
+                <div class="pr-lg-4">
                   <div class="row">
 
 
@@ -56,7 +56,7 @@
                           <label for="facebook" class="input-group-text" id="basic-addon1"><i class="fab fa-facebook"></i></label>
                           <input type="hidden" name="platform[]" value="Facebook">
                         </div>
-                      <input id="facebook" class="form-control" type="text" name="link[]" placeholder="Facebook Link" autocomplete="off" aria-describedby="basic-addon1" value="{{$social->link}}">
+                      <input dir="ltr" id="facebook" class="form-control" type="text" name="link[]" placeholder="Facebook Link" autocomplete="off" aria-describedby="basic-addon1" value="{{$social->link}}">
                       </div>
                       
                       <div class="col-3">
@@ -75,7 +75,7 @@
                           <label for="twitter" class="input-group-text" id="basic-addon2"><i class="fab fa-twitter"></i></label>
                           <input type="hidden" name="platform[]" value="Twitter">
                         </div>
-                        <input id="twitter" class="form-control" type="text" name="link[]" placeholder="Twitter Link" autocomplete="off" aria-describedby="basic-addon2" value="{{$social->link}}">
+                        <input dir="ltr" id="twitter" class="form-control" type="text" name="link[]" placeholder="Twitter Link" autocomplete="off" aria-describedby="basic-addon2" value="{{$social->link}}">
                       </div>
                       
                       <div class="col-3">
@@ -94,7 +94,7 @@
                           <label for="insta" class="input-group-text" id="basic-addon3"><i class="fab fa-instagram"></i></label>
                           <input type="hidden" name="platform[]" value="Instagram">
                         </div>
-                        <input id="insta" class="form-control" type="text" name="link[]" placeholder="Instagram Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
+                        <input dir="ltr" id="insta" class="form-control" type="text" name="link[]" placeholder="Instagram Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
                       </div>
                       
                       <div class="col-3">
@@ -113,7 +113,7 @@
                           <label for="linkedin" class="input-group-text" id="basic-addon3"><i class="fab fa-linkedin"></i></label>
                           <input type="hidden" name="platform[]" value="Linkedin">
                         </div>
-                        <input id="linkedin" class="form-control" type="text" name="link[]" placeholder="Linkedin Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
+                        <input dir="ltr" id="linkedin" class="form-control" type="text" name="link[]" placeholder="Linkedin Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
                       </div>
                       
                       <div class="col-3">
@@ -132,7 +132,7 @@
                         <label for="linkedin" class="input-group-text" id="basic-addon3"><i class="fab fa-pinterest"></i></label>
                         <input type="hidden" name="platform[]" value="Pinterest">
                       </div>
-                      <input id="pinterest" class="form-control" type="text" name="link[]" placeholder="Pinterest Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
+                      <input dir="ltr" id="pinterest" class="form-control" type="text" name="link[]" placeholder="Pinterest Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
                     </div>
                     
                     <div class="col-3">
@@ -151,7 +151,7 @@
                         <label for="linkedin" class="input-group-text" id="basic-addon3"><i class="fab fa-youtube"></i></label>
                         <input type="hidden" name="platform[]" value="Youtube">
                       </div>
-                      <input id="youtube" class="form-control" type="text" name="link[]" placeholder="Youtube Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
+                      <input dir="ltr" id="youtube" class="form-control" type="text" name="link[]" placeholder="Youtube Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
                     </div>
                     
                     <div class="col-3">
@@ -170,7 +170,7 @@
                         <label for="linkedin" class="input-group-text" id="basic-addon3"><i class="fab fa-telegram"></i></label>
                         <input type="hidden" name="platform[]" value="Telegram">
                       </div>
-                      <input id="telegram" class="form-control" type="text" name="link[]" placeholder="Telegram Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
+                      <input dir="ltr" id="telegram" class="form-control" type="text" name="link[]" placeholder="Telegram Link" autocomplete="off" aria-describedby="basic-addon3" value="{{$social->link}}">
                     </div>
                     
                     <div class="col-3">
@@ -197,14 +197,14 @@
               @if ($social->platform == 'Messenger')
 
                 <!-- Facebook Messenger -->
-                <h6 class="heading-small text-muted mb-4">Facebook Messenger</h6>
+                <h6 class="heading-small text-muted mb-4 text-right">الماسنجر</h6>
                 <input type="hidden" name="platform[]" value="Messenger">
                 <div class="pl-lg-4">
                   <div class="row">
 
                     <div class="col-9">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-password">Messenger</label>
+                      <div class="form-group text-right">
+                        <label class="form-control-label" for="input-password">كود الماسنجر</label>
                         <textarea class="form-control" name="link[]" id="" cols="30" rows="10" placeholder="Put Facebook Messenger Code Here...">{{$social->link}}</textarea>
                       </div>
                     </div>
@@ -227,7 +227,7 @@
 
                 <!-- Save -->
                 <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-primary submit">Save Changes</button>
+                  <button type="submit" class="btn btn-sm btn-primary submit">حفظ التغييرات</button>
                 </div>
               </form>
             </div>

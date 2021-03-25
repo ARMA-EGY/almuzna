@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7 text-right">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">الصفحة الشخصية</li>
                 </ol>
               </nav>
             </div>
@@ -31,43 +31,43 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Edit profile </h3>
+                  <h3 class="mb-0">تعديل الصفحة الشخصية </h3>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <form class="user_info_form">
                 @csrf
-                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <h6 class="heading-small text-muted mb-4 text-right">البيانات</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-username">Username</label>
+                      <div class="form-group text-right">
+                        <label class="form-control-label" for="input-username">الاسم</label>
                         <input type="text" id="input-username" name="name" class="form-control" value="{{ Auth::user()->name }}" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
+                      <div class="form-group text-right">
+                        <label class="form-control-label" for="input-email">البريد الالكتروني</label>
                         <input type="email" name="email" id="input-email" class="form-control" value="{{ Auth::user()->email }}" required>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-gender">Gender</label>
+                      <div class="form-group text-right">
+                        <label class="form-control-label" for="input-gender">النوع</label>
                         <select class="form-control" name="gender" id="input-gender" required>
-                          <option value="Female" @if(Auth::user()->gender == 'Female') selected @endif>Female</option>
-                          <option value="Male" @if(Auth::user()->gender == 'Male') selected @endif>Male</option>
+                          <option value="Female" @if(Auth::user()->gender == 'Female') selected @endif>انثى</option>
+                          <option value="Male" @if(Auth::user()->gender == 'Male') selected @endif>ذكر</option>
                         </select>
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-phone">Phone</label>
-                        <input type="number" name="phone" id="input-phone" class="form-control" placeholder="Phone Number" value="{{ Auth::user()->phone }}" required>
+                      <div class="form-group text-right">
+                        <label class="form-control-label" for="input-phone">رقم الهاتف</label>
+                        <input type="number" name="phone" id="input-phone" class="form-control" placeholder="رقم الهاتف" value="{{ Auth::user()->phone }}" required>
                       </div>
                     </div>
                   </div>
@@ -76,7 +76,7 @@
                 <!-- Save -->
                 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                 <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-success submit">Save Changes</button>
+                  <button type="submit" class="btn btn-sm btn-success submit">حفظ</button>
                 </div>
               </form>
             </div>
@@ -88,7 +88,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Password</h3>
+                  <h3 class="mb-0">كلمة المرور</h3>
                 </div>
               </div>
             </div>
@@ -96,18 +96,18 @@
               <form class="change_password_form">
                 @csrf
                 <!-- password -->
-                <h6 class="heading-small text-muted mb-4">Change Password</h6>
+                <h6 class="heading-small text-muted mb-4 text-right">تغيير كلمة المرور</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-password">Current Password</label>
+                      <div class="form-group text-right">
+                        <label class="form-control-label" for="input-password">كلمة المرور الحالية</label>
                         <input id="input-password" class="form-control" name="oldpassword" type="password" required>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-password2">New Password</label>
+                      <div class="form-group text-right">
+                        <label class="form-control-label" for="input-password2">كلمة المرور الجديدة</label>
                         <input id="input-password2" class="form-control" name="newpassword" type="password" required>
                       </div>
                     </div>
@@ -117,7 +117,7 @@
                 <!-- Save -->
                 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                 <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-danger submit">Change Password</button>
+                  <button type="submit" class="btn btn-sm btn-danger submit">حفظ التغيير</button>
                 </div>
               </form>
             </div>

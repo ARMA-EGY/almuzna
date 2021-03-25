@@ -340,17 +340,17 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7 text-right">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Messages</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">الرسائل</li>
                 </ol>
               </nav>
             </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral get_receiver_email"> Receiver Email</a>
+            <div class="col-lg-6 col-5 text-left">
+              <a href="#" class="btn btn-sm btn-neutral get_receiver_email"> البريد الالكتروني المتلقي للرسائل</a>
             </div>
           </div>
         </div>
@@ -367,15 +367,15 @@
             <div class="grid-body">
               <div class="row">
                 <!-- BEGIN INBOX MENU -->
-                <div class="col-md-3">
-                  <h2 class="grid-title"><i class="fa fa-inbox"></i> Inbox</h2>
+                <div class="col-md-3 text-right">
+                  <h2 class="grid-title"><i class="fa fa-inbox"></i> صندوق الوارد</h2>
                   
 
                   <hr>
 
                   <div>
                     <ul class="nav nav-pills nav-stacked">
-                      <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox ({{$messages->total()}})</a></li>
+                      <li class="active"><a href="#"><i class="fa fa-inbox"></i> عدد الرسائل ({{$messages->total()}})</a></li>
                     </ul>
                   </div>
                 </div>

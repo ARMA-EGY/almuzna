@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7 text-right">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Pages</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">الصفحات</li>
                 </ol>
               </nav>
             </div>
@@ -31,7 +31,7 @@
           <div class="card">
             <!-- Card header -->
             <div class="card-header border-0">
-              <h3 class="mb-0">All Pages <span class="badge badge-primary p-2">{{$pages->total()}}</span></h3>
+              <h3 class="mb-0">اجمالي الصفحات<span class="badge badge-primary p-2">{{$pages->total()}}</span></h3>
             </div>
             <!-- Light table -->
             <div class="table-responsive">
@@ -39,9 +39,9 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" data-sort="name">Page Name</th>
-                    <th scope="col">Visits</th>
-                    <th scope="col">Unique Visitors</th>
+                    <th scope="col" class="sort" data-sort="name">اسم الصفحة</th>
+                    <th scope="col">عدد الزيارات</th>
+                    <th scope="col">عدد الزوار</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -56,8 +56,8 @@
                       <td><span >{{ number_format($page->visits->sum('views')) }}</span></td>
                       <td><span >{{ number_format($page->visits->count()) }}</span> </td>
                       <td>
-                        <a href="#" target="_blank" class="btn btn-sm btn-primary">Edit Page</a>
-                        <button data-token="{{$page->token}}" class="btn btn-sm btn-warning get_seo"><i class="fas fa-share-alt"></i> Edit SEO</button>
+                        <a href="#" target="_blank" class="btn btn-sm btn-primary">تعديل محتوى الصفحة</a>
+                        <button data-token="{{$page->token}}" class="btn btn-sm btn-warning get_seo"><i class="fas fa-share-alt"></i> تعديل SEO </button>
                       </td>
                     </tr>
                   @endforeach

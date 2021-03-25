@@ -8,12 +8,12 @@
         <div class="container-fluid">
           <div class="header-body">
             <div class="row align-items-center py-4">
-              <div class="col-lg-6 col-7">
+              <div class="col-lg-6 col-7 text-right">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                   <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Logo</li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">اللوجو</li>
                   </ol>
                 </nav>
               </div>
@@ -29,7 +29,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Logo</div>
+                <div class="card-header">اللوجو</div>
 
                 <div class="card-body">
                     <form method="post" action="{{route('changelogo')}}" enctype="multipart/form-data">
@@ -41,8 +41,8 @@
                             </div>
                         @endif
 
-                        <div class="form-group">
-                          <label for="change_logo">Change Logo</label>
+                        <div class="form-group text-right">
+                          <label for="change_logo">تغيير اللوجو</label>
                           <input id="change_logo" type="file" name="logo" class=" form-control" required>
                         </div>
 
@@ -55,7 +55,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary submit">
-                                    Upload
+                                    تحميل
                                 </button>
                             </div>
                         </div>
