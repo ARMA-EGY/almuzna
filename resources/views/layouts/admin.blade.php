@@ -163,42 +163,42 @@
                       <ul class="nav nav-sm flex-column">
 
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-orders-pending')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-pending') ? 'active' : '' }}">
                             <i class="fas fa-cube text-yellow"></i>
                             <span class="sidenav-normal"> متعلق </span>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-orders-accepted')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-accepted') ? 'active' : '' }}">
                             <i class="fas fa-cube text-info"></i>
                             <span class="sidenav-normal"> مقبول </span>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-orders-ontheway')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-ontheway') ? 'active' : '' }}">
                             <i class="fas fa-cube text-primary"></i>
                             <span class="sidenav-normal"> في الطريق </span>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-orders-delivered')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-delivered') ? 'active' : '' }}">
                             <i class="fas fa-cube text-success"></i>
                             <span class="sidenav-normal"> تم الاستلام </span>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-orders-cancelled')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-cancelled') ? 'active' : '' }}">
                             <i class="fas fa-cube text-red"></i>
                             <span class="sidenav-normal"> الغاء </span>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-orders')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders') ? 'active' : '' }}">
                             <i class="fas fa-cubes"></i>
                             <span class="sidenav-normal"> جميع الطلبات </span>
                           </a>
