@@ -86,6 +86,17 @@ class OrdersController extends Controller
         ]);
 
     }
+
+
+    //======== Get Order Details ======== 
+    public function getorderdetails(Request $request)
+    {
+        $order     = Order::where('id', $request->orderid)->first();
+
+        return view('admin.modals.order_details', [
+            'order'    => $order,
+        ]);
+    }
     
 
     /**

@@ -80,7 +80,7 @@
                     </td>
                     <td>{{ $order->total }} ريال سعودي</td>
                     <td>
-                      <a href="#" class="btn btn-warning btn-sm mx-1"><i class="fa fa-eye"></i> مشاهدة الطلب</a>
+                      <a href="#" class="btn btn-warning btn-sm mx-1 get_order_details" data-id="{{  $order->id }}"><i class="fa fa-eye"></i> مشاهدة الطلب</a>
                     </td>
                   </tr>
 
@@ -123,6 +123,29 @@
 $('#example').DataTable( {
     "pagingType": "numbers"
   } );
+
+  $('.get_order_details').click(function()
+        {
+            var orderid 	= $(this).attr('data-id');
+            var loader 	= $('#loader').attr('data-load');
+
+            $('#popup').modal('show');
+            $('#modal_body').html(loader);
+
+            $.ajax({
+                url:"{{route('get-order-details')}}",
+                type:"POST",
+                dataType: 'text',
+                data:    {"_token": "{{ csrf_token() }}",
+                            orderid: orderid},
+                success : function(response)
+                    {
+                    $('#modal_body').html(response);
+                    }  
+                })
+
+        });
+
 </script>
     
 @endsection

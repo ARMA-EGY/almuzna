@@ -151,6 +151,9 @@ Route::post('/removeproduct', 'Products\ProductsController@removeproduct')->name
 Route::post('/removeproductcategory', 'Products\CategoriesController@removecategory')->name('remove-product-category');
 Route::post('/removeoffer', 'Offers\OffersController@removeoffer')->name('remove-offer');
 
+
+Route::post('/getorderdetails', 'Orders\OrdersController@getorderdetails')->name('get-order-details');
+
 /*
 |------------------------------------------------------------------------
 |Edit Pages Routes

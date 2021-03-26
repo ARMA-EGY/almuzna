@@ -112,6 +112,10 @@ body
     border-radius: unset;
 }
 
+.modal-header .close {
+    margin: -1rem -1rem -1rem 0;
+}
+
 @media (min-width: 1200px)
 {
     .g-sidenav-pinned .sidenav.fixed-left + .main-content 
