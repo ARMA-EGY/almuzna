@@ -53,15 +53,30 @@ class ProductsController extends Controller
     public function store(ProductRequest $request)
     {
 
-        $product = Product::create([
-            'name_en' => $request->name_en,
-            'name_ar' => $request->name_ar,
-            'price' => $request->price,
-            'type' => 'product',
-            'refill' => $request->refill,
-            'refill_price' => $request->refill_price,
-            'photo' => $request->photo->store('images/product', 'public'),
-        ]);
+        if($request->refill == 1)
+        {
+            $product2 = Product::create([
+                'name_en' => $request->name_en,
+                'name_ar' => $request->name_ar,
+                'price' => $request->price,
+                'type' => 'product',
+                'refill' => $request->refill,
+                'refill_price' => 0,
+                'photo' => $request->photo->store('images/product', 'public'),
+            ]);
+        }
+        elseif($request->refill == 0)
+        {
+            $product = Product::create([
+                'name_en' => $request->name_en,
+                'name_ar' => $request->name_ar,
+                'price' => $request->price,
+                'type' => 'product',
+                'refill' => 0,
+                'refill_price' => 0,
+                'photo' => $request->photo->store('images/product', 'public'),
+            ]);
+        }
 
         session()->flash('success', 'Product created successfully');
         

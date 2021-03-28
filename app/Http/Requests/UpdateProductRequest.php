@@ -24,8 +24,8 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_en' => 'required|unique:products,name_en,'.$this->product->id,
-            'name_ar' => 'required|unique:products,name_ar,'.$this->product->id,
+            'name_en' => 'required',
+            'name_ar' => 'required',
         ];
     }
 

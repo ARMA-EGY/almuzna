@@ -98,30 +98,14 @@
                         
                         <div class="row">
 
-                            <!--=================  Price  =================-->
-                            <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">السعر</label>
-                                <input type="number" name="price" class="@error('price') is-invalid @enderror form-control" placeholder="سعر المنتج" value="{{ isset($product) ? $product->price : old('price') }}" required>
-                            
-                                @error('price')
-                                    <div>
-                                        <span class="text-danger">{{ $message }}</span>
-                                    </div>
-                                @enderror
-            
-                            </div>
-
-                        </div>
-                          <hr class="my-3">
-
-                          <div class="row">
+                            <!--=================  Kind  =================-->
 
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">يوجد اعادة تعبئة؟</label>
+                                <label class="font-weight-bold text-uppercase">النوع</label>
 
                                 <select class="form-control" id="on_sale" name="refill" id="input-gender" required>
-                                    <option value="0" @isset($product) @if ($product->refill == '0') selected  @endif @endisset >لا</option>
-                                    <option value="1" @isset($product) @if ($product->refill == '1') selected  @endif @endisset>نعم</option>
+                                    <option value="0" @isset($product) @if ($product->refill == '0') selected  @endif @endisset >جديد</option>
+                                    <option value="1" @isset($product) @if ($product->refill == '1') selected  @endif @endisset>اعادة تعبئة</option>
                                   </select>
 
                                 @error('refill')
@@ -130,12 +114,13 @@
                                     </div>
                                 @enderror
                             </div>
+
+                            <!--=================  Price  =================-->
+                            <div class="form-group col-md-6 mb-2 text-right">
+                                <label class="font-weight-bold text-uppercase">السعر</label>
+                                <input type="number" name="price" class="@error('price') is-invalid @enderror form-control" placeholder="سعر المنتج" value="{{ isset($product) ? $product->price : old('price') }}" required>
                             
-                            <div class="form-group col-md-6 mb-2 box2 text-right">
-                                <label class="font-weight-bold text-uppercase">سعر اعادة التعبئه</label>
-                                <input type="number" id="sale_price" name="refill_price" class="@error('refill_price') is-invalid @enderror form-control" placeholder="سعر اعادة التعبئه" value="{{ isset($product) ? $product->refill_price : old('refill_price') }}" >
-                            
-                                @error('refill_price')
+                                @error('price')
                                     <div>
                                         <span class="text-danger">{{ $message }}</span>
                                     </div>
@@ -210,22 +195,6 @@
             $(document).on("click",".remove", function()
             {
                 $(this).parents('.parent').remove();
-            });
-
-            $("#on_sale").on("change",function() 
-            {
-                if ($(this).val() === '1') 
-                    {
-                        $('.box2').slideDown();
-                        $("#sale_price").prop('required',true);
-                    }
-
-                else if ($(this).val() === '0')  
-                    {
-                        $('.box2').slideUp();
-                        $("#sale_price").prop('required',false);
-                    }
-                    
             });
       
     </script>

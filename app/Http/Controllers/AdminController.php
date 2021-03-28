@@ -91,9 +91,9 @@ class AdminController extends Controller
         return view('admin.home', [
             'traffic' => Visit::all()->sum('views'),
             'category_count' => Category::all()->count(),
-            'products_count' => Product::all()->count(),
+            'products_count' => Product::where('type', 'product')->count(),
             'coupons_count' => Coupon::all()->count(),
-            'offers_count' => Offer::all()->count(),
+            'offers_count' => Product::where('type', 'offer')->count(),
             'members_count' => User::all()->count(),
             'customers_count' => Customer::all()->count(),
             'drivers_count' => Driver::all()->count(),
