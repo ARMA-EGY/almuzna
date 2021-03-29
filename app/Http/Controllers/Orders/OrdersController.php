@@ -33,7 +33,7 @@ class OrdersController extends Controller
     public function pending()
     {
 		
-		$orders          = Order::where('status', 'pending')->orderBy('id','desc')->get();
+		$orders          = Order::where('status', 'pending')->whereNull('driver_id')->orderBy('id','desc')->get();
 		
         return view('admin.orders.pending', [
             'orders' => $orders,
