@@ -7,34 +7,45 @@
     </div>
     <div class="modal-body" id="message_body">	
 
-        <form class="edit_status_form text-right" data-target="#order_status">
-
+        <form class="edit_status_form text-right assign" data-target="#order_status">
+            @csrf
             <div class="form-group col-md-6 text-right">
                 <label class="font-weight-bold" for="inputState">السائقين</label>
                 <select id="inputState" name="edit_order_status" class="form-control">
-                    <option value="1" > Driver1</option>
-                    <option value="2" > Driver2</option>
+
+                @if(!$order->driver_id) 
+
+                    @foreach($dv_data as $sdv_data)
+                        @if($sdv_data['count'] < 2 )
+                            <option value="{{$sdv_data['driver']->id}}" > {{$sdv_data['driver']->name}} </option>
+                        @endif
+                    @endforeach
+                @else
+                <option value="s" > {{$order->Driver->name}} </option>
+                @endif
                 </select>
             </div>
-                
-            <input type="hidden" name="order_id" value="">
+            <input type="hidden" name="order_id" value="{{$order->id}}">
+            <input type="submit" value="Send Request" class="submit">
+        </form>        
+            
 
             <div class="row" style="border: 1px solid #ccc;padding: 10px;margin: 10px 15px;border-radius: 5px;box-shadow: 0 0 5px 1px rgba(204, 204, 204, 0.5);">
                 <h5 class="col-md-12 mb-2"><i class="fa fa-info-circle"></i> البيانات</h5>
                 
                 <div class="col-md-6 my-1 pb-2" style="border-bottom: 1px solid #ccc;">
                     <label class="font-weight-bold text-dark mb-1"> الاسم </label> 
-                    <h5 class="text-gray"> elkholuy </h5>
+                    <h5 class="text-gray"> {{$order->Customer->name}} </h5>
                 </div>
                 
                 <div class="col-md-6 my-1 pb-2" style="border-bottom: 1px solid #ccc;">
                     <label class="font-weight-bold text-dark mb-1"> الهاتف </label> 
-                    <h5 class="text-gray"> 01001617656 </h5>
+                    <h5 class="text-gray"> {{$order->Customer->phone}} </h5>
                 </div>
                 
                 <div class="col-md-6 my-1 pb-2" style="border-bottom: 1px solid #ccc;">
                     <label class="font-weight-bold text-dark mb-1"> البريد الالكتروني </label> 
-                    <h5 class="text-gray"> elkholuy@gmail.com </h5>
+                    <h5 class="text-gray"> {{$order->Customer->email}} </h5>
                 </div>
                 
                 <div class="col-md-6 my-1 pb-2" style="border-bottom: 1px solid #ccc;">
@@ -44,7 +55,7 @@
                 
                 <div class="col-md-12 my-1 pb-2">
                     <label class="font-weight-bold text-dark mb-1"> العنوان </label> 
-                    <h5 class="text-gray"> 11 hady street - orabi </h5>
+                    <h5 class="text-gray"> {{$order->delivery_address}} </h5>
                 </div>
                 
             </div>
@@ -61,24 +72,41 @@
                             </tr>
                         </thead>
                         <tbody id="cart_table">
-                
+                @foreach($order->OrderItemsmodel as $OrderItem)
                             <tr>
                             <th scope="row"> 1</th>
-                            <td class="font-weight-bold" style="font-size: 12px;"> <img class="rounded mr-2" src="" width="40"> عبوة ٥ لتر </td>
-                            <td> 3</td>
-                            <td> 30 ريال سعودي</td>
+                            <td class="font-weight-bold" style="font-size: 12px;"> <img class="rounded mr-2" src="" width="40">{{$OrderItem->Product->name_ar}}</td>
+                            <td> {{$OrderItem->quantity}}</td>
+                            <td> {{$OrderItem->total}} ريال سعودي</td>
                             </tr>
-                        
+                @endforeach        
                         </tbody>
                     </table>
                 </div>
             </div>
                 
+
+
+            <div class="container">
+                <h3> الضريبة :</h3>
+                <h4 class="my-2 cart_price">{{$order->sales_tax}} ريال سعودي</h4>
+            </div>            
+
+            <div class="container">
+                <h3> التوصيل :</h3>
+                <h4 class="my-2 cart_price">{{$order->delivery_fees}} ريال سعودي</h4>
+            </div>  
+
+            <div class="container">
+                <h3>المجموع الفرعي :</h3>
+                <h4 class="my-2 cart_price">{{$order->subtotal}} ريال سعودي</h4>
+            </div>
+
             <div class="container">
                 <h3>اجمالي المطلوب :</h3>
-                <h4 class="my-2 cart_price">90 ريال سعودي</h4>
-            </div>
-            
+                <h4 class="my-2 cart_price">{{$order->total}} ريال سعودي</h4>
+            </div>           
+
         </form>
 
     </div>

@@ -655,6 +655,96 @@
             
         });
 
+
+
+
+
+        $('.get_order_details').click(function()
+              {
+                  var orderid   = $(this).attr('data-id');
+                  var loader  = $('#loader').attr('data-load');
+
+                  $('#popup').modal('show');
+                  $('#modal_body').html(loader);
+
+                  $.ajax({
+                      url:"{{route('get-order-details')}}",
+                      type:"POST",
+                      dataType: 'text',
+                      data:    {"_token": "{{ csrf_token() }}",
+                                  orderid: orderid},
+                      success : function(response)
+                          {
+                          $('#modal_body').html(response);
+                          }  
+                      })
+
+              });
+
+
+
+                 
+        // =============  Edit SEO Data =============
+        $(document).on('submit', '.assign', function(e)
+            {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $('.submit').prop('disabled', true);
+
+                var head1 	= 'Done';
+                var title1 	= 'Order assigned Successfully. ';
+                var head2 	= 'Oops...';
+                var title2 	= 'Something went wrong, please try again later.';
+
+
+                $.ajax({
+                    url: 		"{{route('assign-order')}}",
+                    method: 	'POST',
+                    data: formData,
+                    dataType: 	'json',
+                    contentType: false,
+                    processData: false,
+                    success : function(data)
+                        {
+                            $('.submit').prop('disabled', false);
+                            
+                            if (data['status'] == 'true')
+                            {
+                                Swal.fire(
+                                        head1,
+                                        title1,
+                                        'success'
+                                        )
+                                $('.modal').modal('hide');
+                            }
+                            else if (data['status'] == 'false')
+                            {
+                                Swal.fire(
+                                        head2,
+                                        title2,
+                                        'error'
+                                        )
+                            }
+                        },
+                        error : function(reject)
+                        {
+                            $('.submit').prop('disabled', false);
+
+                            var response = $.parseJSON(reject.responseText);
+                            $.each(response.errors, function(key, val)
+                            {
+                                Swal.fire(
+                                        head2,
+                                        val[0],
+                                        'error'
+                                        )
+                            });
+                        }
+                    
+                    
+                });
+
+        });                     
     </script>
 
     @yield('script')
