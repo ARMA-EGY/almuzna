@@ -37,7 +37,7 @@ class OrdersController extends Controller
 		
         return view('admin.orders.pending', [
             'orders' => $orders,
-            'orders_count' => Order::where('status', 'pending')->count(),
+            'orders_count' => Order::where('status', 'pending')->whereNull('driver_id')->count(),
         ]);
 
     }
@@ -49,7 +49,7 @@ class OrdersController extends Controller
 
         return view('admin.orders.accepted', [
             'orders' => $orders,
-            'orders_count' => Order::where('status', 'accepted')->count(),
+            'orders_count' => Order::where('status', 'pending')->whereNotNull('driver_id')->count(),
         ]);
 
     }
@@ -61,7 +61,7 @@ class OrdersController extends Controller
 		
         return view('admin.orders.ontheway', [
             'orders' => $orders,
-            'orders_count' => Order::where('status', 'ontheway')->count(),
+            'orders_count' => Order::where('status', 'on the way')->count(),
         ]);
 
     }
