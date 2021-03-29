@@ -94,6 +94,60 @@
                 </div>
                 <hr class="my-4" />
 
+                <h6 class="heading-small text-muted text-right mb-4">٤- قيمة التوصيل الافتراضية</h6>
+                <div class="pr-lg-4">
+                  <div class="row">
+
+                      <div class="input-group col-9 mb-3 px-0">
+                        <div class="input-group-prepend">
+                          <label for="tax" class="input-group-text" id="basic-addon1"><i class="fas fa-money-bill-alt"></i></label>
+                        </div>
+                        <input type="hidden" name="name[]" value="{{$delivery_fees->name}}">
+                        <input type="hidden" name="type[]" value="{{$delivery_fees->type}}">
+                        <input id="tax" class="form-control" type="number" name="value[]" placeholder="12.5" autocomplete="off" aria-describedby="basic-addon1" value="{{$delivery_fees->value}}">
+                      </div>
+                      
+                  </div>
+                  
+                </div>
+                <hr class="my-4" />
+
+                <h6 class="heading-small text-muted text-right mb-4">٥- نسبة تخفيض على اول طلب</h6>
+                <div class="pr-lg-4">
+                  <div class="row">
+
+                      <div class="input-group col-9 mb-3 px-0">
+                        <div class="input-group-prepend">
+                          <label for="tax" class="input-group-text" id="basic-addon1"><i class="fas fa-shopping-cart"></i></label>
+                        </div>
+                        <input type="hidden" name="name[]" value="{{$first_order_discount->name}}">
+                        <input type="hidden" name="type[]" value="{{$first_order_discount->type}}">
+                        <input id="tax" class="form-control" type="number" name="value[]" placeholder="12.5" autocomplete="off" aria-describedby="basic-addon1" value="{{$first_order_discount->value}}">
+                      </div>
+                      
+                  </div>
+                  
+                </div>
+                <hr class="my-4" />
+
+                <h6 class="heading-small text-muted text-right mb-4">٦- الحد الاقصى لتوصيل الطلبات للسائقين في اليوم</h6>
+                <div class="pr-lg-4">
+                  <div class="row">
+
+                      <div class="input-group col-9 mb-3 px-0">
+                        <div class="input-group-prepend">
+                          <label for="tax" class="input-group-text" id="basic-addon1"><i class="fas fa-user-astronaut"></i></label>
+                        </div>
+                        <input type="hidden" name="name[]" value="{{$driver_order_limit->name}}">
+                        <input type="hidden" name="type[]" value="{{$driver_order_limit->type}}">
+                        <input id="tax" class="form-control" type="number" name="value[]" placeholder="12.5" autocomplete="off" aria-describedby="basic-addon1" value="{{$driver_order_limit->value}}">
+                      </div>
+                      
+                  </div>
+                  
+                </div>
+                <hr class="my-4" />
+
                 
 
 
