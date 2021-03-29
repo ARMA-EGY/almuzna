@@ -13,4 +13,8 @@ class Driver extends Model
         'name', 'phone', 'gender', 'email',  'image', 
     ];
 
+    public function Order(){
+        return $this->hasMany('App\Order','user_id');
+    }     
+
 }
