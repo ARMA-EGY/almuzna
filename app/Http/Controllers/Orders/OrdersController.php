@@ -57,7 +57,7 @@ class OrdersController extends Controller
     public function ontheway()
     {
 		
-		$orders          = Order::where('status', 'ontheway')->orderBy('id','desc')->get();
+		$orders          = Order::where('status', 'on the way')->orderBy('id','desc')->get();
 		
         return view('admin.orders.ontheway', [
             'orders' => $orders,
