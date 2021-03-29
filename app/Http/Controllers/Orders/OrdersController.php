@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Orders;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
+use App\Product;
+use App\OrderItemsmodel;
+use App\Driver;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -42,8 +45,8 @@ class OrdersController extends Controller
     public function accepted()
     {
 		
-		$orders          = Order::where('status', 'accepted')->orderBy('id','desc')->get();
-		
+		$orders  = Order::where('status', 'pending')->whereNotNull('driver_id')->orderBy('id','desc')->get();
+
         return view('admin.orders.accepted', [
             'orders' => $orders,
             'orders_count' => Order::where('status', 'accepted')->count(),
@@ -91,10 +94,27 @@ class OrdersController extends Controller
     //======== Get Order Details ======== 
     public function getorderdetails(Request $request)
     {
-        $order     = Order::where('id', $request->orderid)->first();
+        $dv_data = array();
+        $order     = Order::with('OrderItemsmodel.Product')->where('id', $request->orderid)->first();
+        $drivers   = Driver::all();
 
+        //add driver object and count of orders in this day (the deliver date of the order) to array
+        //do not show the the drivers that exceed the count limit (max no. of orders in one day)
+        //validate on assigning order that did not exceeded the max orders in that day
+        //then add the driver id to order
+        //alert of success or failure
+        foreach($drivers as $driver)
+        {
+            $count = Order::where('driver_id', $driver->id)->where('delivery_date' , $order->delivery_date)->count();
+            $data = ['driver'=>$driver , 'count'=>$count];
+            array_push($dv_data,$data);
+        }
+
+       
         return view('admin.modals.order_details', [
             'order'    => $order,
+            'drivers'    => $drivers,
+            'dv_data'   =>$dv_data
         ]);
     }
     
@@ -174,4 +194,15 @@ class OrdersController extends Controller
 
         $item->delete();
     }
+
+
+    
+    //======== assign order ======== 
+    public function assignorder(Request $request)
+    {
+        $item = Order::where('id', $request->order_id)->update([
+            'driver_id' => $request->edit_order_status
+        ]);
+
+    }    
 }

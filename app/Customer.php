@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Coupon;
+use App\Order;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,4 +19,8 @@ class Customer extends Model
     {
         return $this->belongsToMany(Coupon::class);
     }
+
+    public function Order(){
+        return $this->hasMany('App\Order','user_id');
+    }     
 }
