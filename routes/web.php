@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth','admin']], function ()
 */
 
 Route::post('/configuration', 'AdminController@configurationEdit')->name('configurationEdit');
+Route::post('/firstorderdiscount', 'AdminController@firstorderdiscount')->name('firstorderdiscount');
 Route::post('/social', 'AdminController@social')->name('social');
 Route::post('/getreceiveremail', 'AdminController@getreceiveremail')->name('getreceiveremail');
 Route::post('/receiveremail', 'AdminController@receiveremail')->name('receiveremail');

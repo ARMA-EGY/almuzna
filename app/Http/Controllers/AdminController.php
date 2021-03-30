@@ -32,6 +32,7 @@ use App\Todo;
 use App\Note;
 use App\Event;
 use App\Configuration;
+use App\FirstOrderDiscount;
 use App\Offer;
 use App\Coupon;
 use App\Customer;
@@ -175,21 +176,19 @@ class AdminController extends Controller
         $today_max_price                = Configuration::where('name', 'today_max_price')->first();
         $sales_tax                      = Configuration::where('name', 'sales_tax')->first();
         $delivery_fees                  = Configuration::where('name', 'delivery_fees')->first();
-        $first_order_discount           = Configuration::where('name', 'first_order_discount')->first();
         $driver_order_limit             = Configuration::where('name', 'driver_order_limit')->first();
+        $first_order_discount           = FirstOrderDiscount::first();
 
         $order_value                    = $order_min_price->type . '_value';
         $today_value                    = $today_max_price->type . '_value';
         $sales_value                    = $sales_tax->type . '_value';
         $delivery_value                 = $delivery_fees->type . '_value';
-        $first_order_value              = $first_order_discount->type . '_value';
         $driver_order_value             = $driver_order_limit->type . '_value';
 
         $order_min_price->value         = $order_min_price[$order_value];
         $today_max_price->value         = $today_max_price[$today_value];
         $sales_tax->value               = $sales_tax[$sales_value];
         $delivery_fees->value           = $delivery_fees[$delivery_value];
-        $first_order_discount->value    = $first_order_discount[$first_order_value];
         $driver_order_limit->value      = $driver_order_limit[$driver_order_value];
 
         return view('admin.configuration', [
@@ -240,6 +239,35 @@ class AdminController extends Controller
 
             $con->save();
         }
+
+
+        if($con)
+        {
+            return response()->json([
+                'status' => 'true',
+                'msg' => 'success'
+            ]) ;
+        }
+        else
+        {
+            return response()->json([
+                'status' => 'false',
+                'msg' => 'error'
+            ]) ;
+        }
+    }
+
+    //======== First Order Discount ======== 
+    public function firstorderdiscount(Request $request)
+    {
+
+        $con                = FirstOrderDiscount::first();
+
+        $con->type           = $request->type;
+        $con->value          = $request->value;
+        $con->off            = $request->off;
+
+        $con->save();
 
 
         if($con)

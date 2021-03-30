@@ -76,7 +76,7 @@ class CoreController extends Controller
     //======== Coupons Page ======== 
     public function coupons()
     {
-        $coupons                      = Coupon::where('type','public')->get();
+        $coupons                      = Coupon::where('private',0)->get();
         $page                         = Page::where('name','Coupons')->first();
         $seo                          = Seo::where('page_token',$page->token)->first();
         $socials                      = Social::all();

@@ -40,7 +40,7 @@
               <form class="configuration_form">
                 @csrf
 
-                <h6 class="heading-small text-muted text-right mb-4">١- قيمة الحد الادنى للطلب </h6>
+                <h6 class="heading-small text-muted text-right mb-4"> قيمة الحد الادنى للطلب </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -58,7 +58,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">٢- أقصى قيمة للطلب للتوصيل في نفس اليوم </h6>
+                <h6 class="heading-small text-muted text-right mb-4"> أقصى قيمة للطلب للتوصيل في نفس اليوم </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -76,7 +76,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">٣- ضريبة المبيعات</h6>
+                <h6 class="heading-small text-muted text-right mb-4"> ضريبة المبيعات</h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -94,7 +94,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">٤- قيمة التوصيل الافتراضية</h6>
+                <h6 class="heading-small text-muted text-right mb-4"> قيمة التوصيل الافتراضية</h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -112,25 +112,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">٥- نسبة تخفيض على اول طلب</h6>
-                <div class="pr-lg-4">
-                  <div class="row">
-
-                      <div class="input-group col-9 mb-3 px-0">
-                        <div class="input-group-prepend">
-                          <label for="tax" class="input-group-text" id="basic-addon1"><i class="fas fa-shopping-cart"></i></label>
-                        </div>
-                        <input type="hidden" name="name[]" value="{{$first_order_discount->name}}">
-                        <input type="hidden" name="type[]" value="{{$first_order_discount->type}}">
-                        <input id="tax" class="form-control" type="number" name="value[]" placeholder="12.5" autocomplete="off" aria-describedby="basic-addon1" value="{{$first_order_discount->value}}">
-                      </div>
-                      
-                  </div>
-                  
-                </div>
-                <hr class="my-4" />
-
-                <h6 class="heading-small text-muted text-right mb-4">٦- الحد الاقصى لتوصيل الطلبات للسائقين في اليوم</h6>
+                <h6 class="heading-small text-muted text-right mb-4"> الحد الاقصى لتوصيل الطلبات للسائقين في اليوم</h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -148,12 +130,76 @@
                 </div>
                 <hr class="my-4" />
 
-                
+
+                <!-- Save -->
+                <div class="col-12 text-right">
+                  <button type="submit" class="btn btn-sm btn-primary submit">حفظ التغيرات</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="col-xl-12 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">تخفيض على اول طلب </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form class="first_order_form">
+                @csrf
+
+                <div class="pr-lg-4">
+                  <div class="row">
+
+                    <div class="form-group col-md-4 mb-2 text-right">
+                        <h6 class="heading-small text-muted text-right">نوع الخصم</h6>
+
+                        <select class="form-control" name="type" required>
+                          <option value="percentage"  @if ($first_order_discount->type == 'percentage') selected  @endif  >نسبة مئوية</option>
+                          <option value="cash"  @if ($first_order_discount->type == 'cash') selected  @endif >كاش</option>
+                        </select>
+
+                        @error('type')
+                            <div>
+                                <span class="text-danger">{{ $message }}</span>
+                            </div>
+                        @enderror
+    
+                    </div>
+
+                    <!--=================  Discount  =================-->
+                    <div class="form-group col-md-4 mb-2 text-right">
+                        <h6 class="heading-small text-muted text-right">قيمة الخصم</h6>
+                    
+                        <input type="number" name="value" class="@error('discount') is-invalid @enderror form-control" placeholder="قيمة الخصم" value="{{$first_order_discount->value}}" >
+
+                        @error('value')
+                            <div>
+                                <span class="text-danger">{{ $message }}</span>
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-3">
+                      <input type="checkbox" class="check_off" name="off2" value="0" data-toggle="toggle" data-size="sm" @if ($first_order_discount->off == '0') checked @endif>
+                      <input type="hidden" class="off" name="off" @if ($first_order_discount->off == '1') value="1" @else value="0" @endif>
+                    </div>
+                      
+                  </div>
+                  
+                </div>
+                <hr class="my-4" />
 
 
                 <!-- Save -->
                 <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-primary submit">Save Changes</button>
+                  <button type="submit" class="btn btn-sm btn-primary submit">حفظ التغيرات</button>
                 </div>
               </form>
             </div>
@@ -231,6 +277,78 @@
         });
 
   });
+
+
+  $('.first_order_form').submit(function(e)
+    {
+        e.preventDefault();
+        $('.submit').prop('disabled', true);
+        $('.error').text('');
+
+        var head1 	= 'Done';
+        var title1 	= 'Data Saved Successfully. ';
+        var head2 	= 'Oops...';
+        var title2 	= 'Something went wrong, please try again later.';
+
+
+        $.ajax({
+            url: 		"{{route('firstorderdiscount')}}",
+            method: 	'POST',
+            dataType: 	'json',
+            data:		$(this).serialize()	,
+            success : function(data)
+                {
+                    $('.submit').prop('disabled', false);
+                    
+                    if (data['status'] == 'true')
+                    {
+                        Swal.fire(
+                                head1,
+                                title1,
+                                'success'
+                                )
+                    }
+                    else if (data['status'] == 'false')
+                    {
+                        Swal.fire(
+                                head2,
+                                title2,
+                                'error'
+                                )
+                    }
+                },
+            error : function(reject)
+                {
+                    $('.submit').prop('disabled', false);
+
+                    var response = $.parseJSON(reject.responseText);
+                    $.each(response.errors, function(key, val)
+                    {
+                        Swal.fire(
+                                head2,
+                                val[0],
+                                'error'
+                                )
+                    });
+                }
+            
+            
+        });
+
+  });
+
+  $(document).on("change",".check_off", function()
+            {
+              if ($(this).is(':checked')) 
+              {
+                $(this).parent().next('.off').val(0);
+              }
+              else
+              {
+                $(this).parent().next('.off').val(1);
+              }
+
+            });
 
 </script>
 

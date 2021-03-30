@@ -79,7 +79,7 @@
                     <td>
                      <b> {{  $offer->name_ar }} </b>
                     </td>
-                    <td>{{ $offer->price }}</td>
+                    <td>{{ $offer->price }} ريال سعودي</td>
                     <td>
                       <a href="{{ route('offers.edit', $offer->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i> تعديل</a>
                       <span class="btn btn-sm btn-warning remove_item" data-id="{{$offer->id}}" data-url="{{route('remove-offer')}}"><i class="fa fa-trash-alt"></i> حذف</span>
