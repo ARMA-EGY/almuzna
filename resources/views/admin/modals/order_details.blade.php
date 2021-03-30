@@ -26,8 +26,9 @@
                     @endif
                     </select>
                 </div>
+                @if(!$order->driver_id) 
                 <input type="hidden" name="order_id" value="{{$order->id}}">
-
+                @endif
                 <div class="form-group col-md-6 text-right">
                     <label class="font-weight-bold d-block" for="inputState"></label>
                     <button type="submit" class="btn btn-primary btn-sm mb-2 mt-4 submit">ارسال طلب للسائق</button>
