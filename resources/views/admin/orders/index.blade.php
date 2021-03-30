@@ -66,6 +66,7 @@
                     <th scope="col">#</th>
                     <th scope="col" class="sort" >كود الطلب</th>
                     <th scope="col" class="sort" >اجمالي المطلوب</th>
+                    <th scope="col" class="sort" > حالة الطلب</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -79,6 +80,24 @@
                      <b> # {{  $order->id }} </b>
                     </td>
                     <td>{{ $order->total }} ريال سعودي</td>
+                    <td>
+                      @if ($order->status == 'pending' && $order->driver_id == '')
+                          <span class="text-warning">  معلق </span>
+
+                      @elseif ($order->status == 'pending' && $order->driver_id != '')
+                      <span class="text-info">  مقبول </span>
+
+                      @elseif ($order->status == 'on the way' )
+                      <span class="text-primary">  في الطريق </span>
+
+                      @elseif ($order->status == 'delivered' )
+                      <span class="text-success">  تم الاستلام </span>
+
+                      @elseif ($order->status == 'cancelled' )
+                      <span class="text-danger">  ملغي</span>
+
+                      @endif
+                    </td>
                     <td>
                       <a href="#" class="btn btn-warning btn-sm mx-1 get_order_details" data-id="{{  $order->id }}"><i class="fa fa-eye"></i> مشاهدة الطلب</a>
                     </td>
