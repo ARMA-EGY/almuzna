@@ -17,7 +17,7 @@
                     @if(!$order->driver_id) 
 
                         @foreach($dv_data as $sdv_data)
-                            @if($sdv_data['count'] < 2 )
+                            @if($sdv_data['count'] < $driver_order_limit->decimal_value )
                                 <option value="{{$sdv_data['driver']->id}}" > {{$sdv_data['driver']->name}} </option>
                             @endif
                         @endforeach
