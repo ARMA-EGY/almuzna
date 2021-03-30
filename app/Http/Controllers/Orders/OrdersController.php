@@ -204,5 +204,20 @@ class OrdersController extends Controller
             'driver_id' => $request->edit_order_status
         ]);
 
+        if($item)
+        {
+            return response()->json([
+                'status' => 'true',
+                'msg' => 'success'
+            ]) ;
+        }
+        else
+        {
+            return response()->json([
+                'status' => 'false',
+                'msg' => 'error'
+            ]) ;
+        }
+
     }    
 }

@@ -720,7 +720,6 @@
                                         title1,
                                         'success'
                                         )
-                                $('.modal').modal('hide');
                             }
                             else if (data['status'] == 'false')
                             {
