@@ -89,6 +89,36 @@
 
         <div id="wrapper" class="clearfix">
 
+                <!-- Login Modal -->
+                <div class="modal1 mfp-hide {{$text}}" id="modal-register" dir="{{ $dir }}">
+                    <div class="card mx-auto" style="max-width: 540px;">
+                        <div class="card-header py-3 bg-transparent center">
+                            <h3 class="mb-0 font-weight-normal">{{__('core.LOGIN')}}</h3>
+                        </div>
+                        <div class="card-body mx-auto py-5" style="max-width: 70%;">
+
+                            <h4 class="mb-3 text-center">{{__('core.LOGIN-WITH-PHONE')}}</h4>
+                            <form id="login-form" name="login-form" class="mb-0 row" action="#" method="post">
+
+                                <div class="col-12">
+                                    <input type="number" id="login-form-username" name="login-form-username" value="" class="form-control not-dark" placeholder="{{__('core.PHONE-NUMBER')}}">
+                                </div>
+
+                                <div class="col-12">
+                                    <a href="#" class="text-dark font-weight-light mt-2"><small>{{__('core.ACCEPTS-SAUDI-ONLY')}}</small></a>
+                                </div>
+
+                                <div class="col-12 mt-4">
+                                    <button class="button btn-block m-0" id="login-form-submit" name="login-form-submit" value="login">{{__('core.LOGIN')}}</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer py-4 center">
+                            
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Header
                 ============================================= -->
                 <header id="header" class="full-header header-size-md" dir="{{ $dir }}">
@@ -129,9 +159,9 @@
 
                                     <!-- Top Search
                                     ============================================= -->
-                                    {{-- <div id="top-account">
+                                    <div id="top-account">
                                         <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">{{__('core.LOGIN')}}</span></a>
-                                    </div> --}}
+                                    </div>
                                     <!-- #top-search end -->
 
                                     <!-- Top Cart

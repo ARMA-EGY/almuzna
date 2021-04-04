@@ -150,6 +150,451 @@
 	New Edits
 -----------------------------------------------------------------*/
 
+.profile-card {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ededed;
+    border-radius: 0.1875rem;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    transition: all 0.5s;
+    max-height: 270px;
+    min-height: 270px;
+}
+
+.profile-card.is-auto {
+    height: auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    max-width: auto !important;
+}
+
+.profile-card .profile-image img 
+{
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.profile-card .username 
+{
+    padding-top: 10px;
+}
+
+.profile-card .username span, .profile-card .username small 
+{
+    display: block;
+}
+
+.profile-card .username span 
+{
+    color: #4a4a4a;
+    font-weight: 500;
+}
+
+.profile-card .username small 
+{
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.profile-card .profile-footer 
+{
+    padding: 20px 40px;
+    background: #fcfcfc;
+}
+
+.profile-card .profile-footer .achievement-title 
+{
+    font-family: 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #999;
+}
+
+.profile-card .profile-footer .count 
+{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4a4a4a;
+}
+
+.profile-info-card, .menu-card 
+{
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.profile-info-card .card-title .edit-account, .menu-card .card-title .edit-account 
+{
+    position: relative;
+    height: 40px;
+    width: 40px;
+    max-height: 40px;
+}
+
+.profile-info-card .card-title .edit-account a, .menu-card .card-title .edit-account a 
+{
+    color: grey;
+    height: 40px;
+    width: 40px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1.8px dashed #999;
+    border-radius: 50%;
+    max-height: 40px;
+    transition: all .3s;
+}
+
+.profile-info-card .card-title .edit-account svg, .menu-card .card-title .edit-account svg {
+    transition: all .3s;
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+    stroke-width: 1.2px;
+}
+
+.profile-info-card .card-title .edit-account a:hover, .menu-card .card-title .edit-account a:hover {
+    border: 1.8px solid #0023ff;
+}
+
+.profile-info-card .card-title .edit-account a:hover svg, .menu-card .card-title .edit-account a:hover svg {
+    stroke: #0023ff;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.profile-info-card .card-title h3, .menu-card .card-title h3 {
+    font-weight: 500;
+    color: #828282;
+	font-size: 18px;
+	margin-bottom: 0;
+}
+
+.profile-info-card .card-title, .menu-card .card-title {
+    position: relative;
+    padding: 15px 20px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background: #fcfcfc;
+    z-index: 2;
+}
+
+.profile-info-card .card-body .info-block, .menu-card .card-body .info-block {
+    margin-bottom: 20px;
+}
+
+.profile-info-card .card-body .info-block span.label-text, .menu-card .card-body .info-block span.label-text {
+    color: #4a4a4a;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.profile-info-card .card-body .info-block span, .menu-card .card-body .info-block span {
+    display: block;
+}
+
+.profile-info-card .card-body .info-block span.label-value, .menu-card .card-body .info-block span.label-value {
+    color: #828282;
+}
+
+.menu-card .wishlists li {
+    padding: 5px 20px;
+    border-top: 1px solid #ededed;
+	cursor: pointer;
+}
+
+.nav-locations .nav-link {
+    padding: 15px 20px;
+    border-top: 1px solid #ededed;
+	color: #999;
+	font-size: 0.85rem;
+}
+
+.nav-locations .nav-link.active {
+    background: unset;
+	color: #0e66dd;
+}
+
+.nav-locations .nav-link:first-child {
+    border-top: none !important;
+}
+
+.nav-locations  {
+    margin-bottom: 30px;
+}
+
+.menu-card .wishlists li:first-child {
+    border-top: none !important;
+}
+
+.menu-card .wishlists li a {
+    padding: 10px 0;
+    display: block;
+    color: #999;
+}
+
+.menu-card .wishlists li.is-active a {
+    color: #0e66dd !important;
+}
+
+ul {
+    list-style: none;
+}
+
+.list-card .list-card-header {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    padding: 15px 20px;
+    background: #fcfcfc;
+    border-bottom: 1px solid #ededed;
+    color: #828282;
+    font-size: 14px;
+}
+
+.list-card ul li.is-active {
+    color: #0e66dd;
+}
+
+.list-card ul li .order-indicator.is-progress {
+    background: #0023ff;
+}
+
+.list-card ul li.is-active .order-indicator {
+    opacity: 1;
+}
+
+.list-card ul li .order-indicator {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.list-card ul li .order-indicator.is-preparing {
+    background: #00b289;
+}
+
+.list-card ul li .order-indicator.is-warning {
+    background: #eda514;
+}
+
+.list-card ul li .order-indicator.is-issue {
+    background: #FF7273;
+}
+
+.list-card ul li {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    color: #999;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-top: 1px solid #ededed;
+}
+
+.order-list-card {
+    padding: 40px;
+}
+
+.order-list-card .progress-block {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.order-list-card .progress-block h3 {
+    font-size: .85rem;
+    font-weight: 500;
+	margin-bottom: 0;
+}
+
+.order-list-card .order-block .order-icon {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+}
+
+.order-list-card .order-block .order-icon svg {
+    stroke: #999;
+    stroke-width: 1.4px;
+    height: 20px;
+    width: 20px;
+}
+
+.tag:not(body) {
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    color: #4a4a4a;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font-size: .75rem;
+    height: 2em;
+    -ms-flex-pack: center;
+    justify-content: center;
+    line-height: 1.5;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    white-space: nowrap;
+}
+
+.order-list-card .order-block .tag.primary-tag {
+    background: #0023ff;
+    color: #fff;
+}
+
+.order-list-card .order-block {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.order-list-card .table-block {
+    margin-top: 20px;
+}
+
+.order-list-card .table-block table {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.order-list-card .table-block table tr {
+    background: #fcfcfc;
+    border-bottom: 1px solid #ededed;
+    padding: .35em;
+}
+
+.order-list-card .table-block table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.order-list-card .table-block table th, .order-list-card .table-block table td {
+    padding: .625em;
+    text-align: center;
+}
+
+.order-list-card .table-block table th {
+    font-size: .8rem !important;
+    font-weight: 700;
+    color: #4a4a4a;
+}
+
+.order-list-card .table-block table td {
+    font-size: .75rem;
+    font-weight: 600;
+    color: #828282;
+    padding: .825rem .625em !important;
+}
+
+table td, table th {
+    text-align: left;
+    vertical-align: top;
+}
+
+.card:hover {
+    box-shadow: 0px 5px 43px rgb(0 0 0 / 18%) !important;
+}
+
+.sub-table {
+    width: 100% !important;
+}
+
+.table td, .table th {
+    border: 1px solid #dbdbdb;
+    border-width: 0 0 1px;
+    padding: 0.5em 0.75em;
+    vertical-align: top;
+}
+
+.sub-table .subtotal, .sub-table .vat {
+    text-transform: uppercase;
+    font-weight: 500 !important;
+    font-size: 13px;
+    color: #828282;
+}
+
+.sub-table .subtotal-value, .sub-table .vat-value {
+    font-weight: 500;
+    font-size: 13px;
+    color: #4a4a4a;
+}
+
+.sub-table .total {
+    text-transform: uppercase;
+    font-weight: 500 !important;
+    font-size: 95%;
+    color: #4a4a4a;
+}
+
+.sub-table .total-value {
+    font-weight: 600;
+    color: #0023ff;
+	font-size: 14px;
+}
+
+.table tbody tr:last-child td, .table tbody tr:last-child th {
+    border-bottom-width: 0;
+}
+
+.nav-tabs .nav-link 
+{
+    color: #999;
+    padding: 10px 20px;
+	font-size: 14px;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link 
+{
+    border: unset; 
+    border-bottom: 3px solid #0e66dd !important;
+    color: #0e66dd;
+}
+
+.nav-tabs .nav-link:hover
+{
+    border: unset;
+    border-bottom: 3px solid #ccc;
+}
+
+
 .px-product
 {
     padding-left: 1.5rem !important;
@@ -16721,4 +17166,16 @@ label.checkbox { padding-left: 20px; }
   {
 	  height: 450px;
   }
+}
+
+
+
+@media (max-width: 576px)
+{
+
+  .header-size-md #header-wrap #logo img 
+  {
+	  height: 38px;
+  }
+
 }

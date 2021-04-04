@@ -128,6 +128,19 @@ class CoreController extends Controller
     }
 
 
+    //======== Profile Page ======== 
+    public function profile()
+    {
+        $socials                      = Social::all();
+        
+        $data = [
+            'page_token'=>'',
+            'socials'=>$socials,
+        ];
+
+        return view('profile')->with($data);     
+    }
+
     //======== Single Blog Page ======== 
     public function singleblog($url)
     {
