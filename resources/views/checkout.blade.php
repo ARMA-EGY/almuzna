@@ -141,7 +141,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="col-lg-5 text-center">
+                                        <div class="col-lg-5 text-right">
                                             <a href="#" class="btn btn-primary btn-sm btn-rounded px-lg-5">APPLY</a>
                                         </div>
                 
