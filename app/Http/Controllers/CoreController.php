@@ -141,6 +141,20 @@ class CoreController extends Controller
         return view('profile')->with($data);     
     }
 
+
+    //======== Checkout Page ======== 
+    public function checkout()
+    {
+        $socials                      = Social::all();
+        
+        $data = [
+            'page_token'=>'',
+            'socials'=>$socials,
+        ];
+
+        return view('checkout')->with($data);     
+    }
+
     //======== Single Blog Page ======== 
     public function singleblog($url)
     {

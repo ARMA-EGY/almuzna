@@ -29,6 +29,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/offers', 'CoreController@offers')->name('offers');
     Route::get('/contact', 'CoreController@contact')->name('contact');
     Route::get('/profile', 'CoreController@profile')->name('profile');
+    Route::get('/checkout', 'CoreController@checkout')->name('checkout');
     
 });
 
