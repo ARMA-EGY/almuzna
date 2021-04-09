@@ -91,20 +91,20 @@
 
 					<div class="row grid-6 content-103 justify-content-center">
 
-                        @if ($coupons->count() > 0)
+                        @if ($coupons->['total'] > 0)
 
-                        @foreach ($coupons as $coupon)
+                        @foreach ($coupons['data'] as $coupon)
                             <div class="col-md-4">
                                 <div class='coupon_box'>
                                     <div class='body'>
-                                        <span class="disc-bg">{{$coupon->discount}}</span>
+                                        <span class="disc-bg">{{$coupon['discount']}}</span>
                                         
                                         
-                                        <h3 class='how_much text-center'> <b class="text-white"> {{$coupon->discount}}% </b> </h3>
+                                        <h3 class='how_much text-center'> <b class="text-white"> {{$coupon['discount']}}% </b> </h3>
                                         <h3 class="text-white text-center"> {{__('core.OFF')}} </h3>
                                     </div>
                                     
-                                    <h4 class='title mt-3'> {{$coupon->code}} </h4>
+                                    <h4 class='title mt-3'> {{$coupon['code']}} </h4>
                                 </div>
                             </div>
                         @endforeach

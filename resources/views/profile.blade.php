@@ -54,14 +54,19 @@
                                                 <img src="{{ asset('front_assets/images/avatar1.png')}}" alt="">
                                             </div>
                                             <div class="username text-center">
-                                                <span>Mohamed Khaled</span>
-                                                <small>Member since Sep 23 2017</small>
+                                                <span>{{$user['name']}}</span>
+                                            <?php     
+                                                $time = strtotime($user['created_at']);
+                                                $newformat = date('M d Y',$time);
+                                            ?>
+
+                                                <small>Member since {{$newformat}}</small>
                                             </div>
                                         </div>
                                         <div class="profile-footer text-center">
                                             <span class="achievement-title">{{__('core.WALLET')}}</span>
                                             <div class="count">
-                                                0.00 {{__('core.SAR')}}
+                                                {{$user['wallet']}} {{__('core.SAR')}}
                                             </div>
                                         </div>
                                     </div>
@@ -85,31 +90,31 @@
                                                 <div class="col-md-6">
                                                     <div class="info-block">
                                                         <span class="label-text">{{__('core.NAME')}}</span>
-                                                        <span class="label-value">Mohamed Khaled</span>
+                                                        <span class="label-value">{{$user['name']}}</span>
                                                     </div>
         
                                                     <div class="info-block">
                                                         <span class="label-text">{{__('core.EMAIL')}}</span>
-                                                        <span class="label-value">elkholuy@gmail.com</span>
+                                                        <span class="label-value">{{$user['email']}}</span>
                                                     </div>
                                                 </div>
         
                                                 <div class="col-md-6">
                                                     <div class="info-block">
                                                         <span class="label-text">{{__('core.PHONE')}}</span>
-                                                        <span class="label-value">+966 0100 1617 656</span>
+                                                        <span class="label-value">+966 {{$user['phone']}}</span>
                                                     </div>
 
                                                     <div class="info-block">
                                                         <span class="label-text">{{__('core.BIRTHDATE')}}</span>
-                                                        <span class="label-value">2021-03-25</span>
+                                                        <span class="label-value">{{$user['dateofbirth']}}</span>
                                                     </div>
                                                 </div>
         
                                                 <div class="col-md-6">
                                                     <div class="info-block">
                                                         <span class="label-text">{{__('core.GENDER')}}</span>
-                                                        <span class="label-value">Male</span>
+                                                        <span class="label-value">{{$user['gender']}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -575,35 +580,36 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="update-profile">
+                        @csrf
                         <div class="form-row">
                           <div class="form-group col-12">
                             <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" disabled value="+966 0100 1617 656">
+                            <input type="text" class="form-control" id="phone" name="phone" disabled value="+966 {{$user['phone']}}">
                           </div>
 
                           <div class="form-group col-12">
                             <label for="username">Name</label>
-                            <input type="text" class="form-control" id="username" value="Mohamed Khaled">
+                            <input type="text" class="form-control" id="username" name="username" value="{{$user['name']}}">
                           </div>
 
                           <div class="form-group col-12">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" value="elkholuy@gmail.com">
+                            <input type="email" class="form-control" id="email" name="email" value="{{$user['email']}}">
                           </div>
 
                           <div class="form-group col-12">
                             <label for="birthdate">Birthdate</label>
-                            <input type="date" class="form-control" id="birthdate">
+                            <input type="date" class="form-control" id="birthdate" name="birthdate">
                           </div>
                         </div>
 
                         <div class="form-row">
                           <div class="form-group col-12">
                             <label for="gender">Gender</label>
-                            <select id="gender" class="form-control">
-                              <option selected>Male</option>
-                              <option>Female</option>
+                            <select id="gender" name="gender" class="form-control">
+                              <option <?php if($user['gender']=="male" ) { echo 'selected';} ?> >Male</option>
+                              <option <?php if($user['gender']=="female" ) { echo 'selected';} ?> >Female</option>
                             </select>
                           </div>
                         </div>
@@ -612,7 +618,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-primary sub-prf-frm">Add</button>
                 </div>
             </div>
             </div>
@@ -623,4 +629,62 @@
 
 @section('script')
 
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(".sub-prf-frm").click(function(){        
+        $(".update-profile").submit();
+    });
+
+    $('.update-profile').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url:"{{route('profileUpdate')}}",
+                method:'POST',
+                data:new FormData(this),
+                contentType: false,
+                cache: false,
+                processData : false,
+                dataType:'json',
+                success:function(data)
+                {
+
+                if(data.status == 'false')
+                {
+                    window.location.replace("{{route('welcome')}}");
+                } else if (data.status == 'true')
+                {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                    Toast.fire({
+                      type: 'success',
+                      title: data.msg
+                    }) 
+                    if(data.msg == 'Profile is updated successfully')
+                    {
+                        $('#AccountDetailsModal').modal('hide'); 
+                    }
+                    
+                } 
+                   
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+
+
+    });    
+});
+</script>
 @endsection

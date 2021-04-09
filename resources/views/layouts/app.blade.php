@@ -98,10 +98,11 @@
                         <div class="card-body mx-auto py-5" style="max-width: 70%;">
 
                             <h4 class="mb-3 text-center">{{__('core.LOGIN-WITH-PHONE')}}</h4>
-                            <form id="login-form" name="login-form" class="mb-0 row" action="#" method="post">
+                            
 
+                    
                                 <div class="col-12">
-                                    <input type="number" id="login-form-username" name="login-form-username" value="" class="form-control not-dark" placeholder="{{__('core.PHONE-NUMBER')}}">
+                                    <input type="text" id="get-code-form-number" name="get-code-form-number" value="" class="form-control not-dark" placeholder="{{__('core.PHONE-NUMBER')}}">
                                 </div>
 
                                 <div class="col-12">
@@ -109,9 +110,24 @@
                                 </div>
 
                                 <div class="col-12 mt-4">
-                                    <button class="button btn-block m-0" id="login-form-submit" name="login-form-submit" value="login">{{__('core.LOGIN')}}</button>
+                                    <button class="button btn-block m-0" id="get-code-form-submit">Get Code</button>
                                 </div>
-                            </form>
+                            
+                 
+
+
+                                <div class="col-12">
+                                    <input type="text" id="vcode-form-vcode" name="vcode-form-vcode" value="" class="form-control not-dark" placeholder="verfication code">
+                                </div>
+
+                                <div class="col-12">
+                                    <a href="#" class="text-dark font-weight-light mt-2"><small>A code was sent to your phone</small></a>
+                                </div>
+
+                                <div class="col-12 mt-4">
+                                    <button class="button btn-block m-0" id="vcode-form-submit">Verify</button>
+                                </div> 
+
                         </div>
                         <div class="card-footer py-4 center">
                             
@@ -160,7 +176,16 @@
                                     <!-- Top Search
                                     ============================================= -->
                                     <div id="top-account">
-                                        <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">{{__('core.LOGIN')}}</span></a>
+                                        @if(isset($user))
+                                        <a href="{{route('profile')}}" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
+                                            {{$user['name']}}
+                                        </span></a>    
+                                        @else
+                                        <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
+                                            {{__('core.LOGIN')}}
+                                        </span></a>
+                                        @endif
+ 
                                     </div>
                                     <!-- #top-search end -->
 
@@ -429,6 +454,110 @@
 
         <!--Template functions-->
         <script src="{{ asset('front_assets/js/functions.js')}}"></script>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+
+        <script>
+          // Your web app's Firebase configuration
+          // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+          var firebaseConfig = {
+            apiKey: "AIzaSyCOg5dbhy1uQN2p0XUQaVfCISkrafwZI84",
+            authDomain: "almuzna-water.firebaseapp.com",
+            projectId: "almuzna-water",
+            storageBucket: "almuzna-water.appspot.com",
+            messagingSenderId: "301918006971",
+            appId: "1:301918006971:web:07bda0880c7c8eff25439e",
+            measurementId: "G-JC8937W2MN"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+        </script>
+
+
+        <script>
+  window.onload = function() {     
+
+
+        firebase.auth().languageCode = 'it';
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('get-code-form-submit', {
+          'size': 'invisible',
+          'callback': (response) => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+
+            console.log('aaaafff');
+            onSignInSubmit();
+          }
+        });
+
+  };
+
+
+
+        $( "#get-code-form-submit" ).click(function()
+        //function onSignInSubmit()
+        {
+            const phoneNumber = $('#get-code-form-number').val();
+            const appVerifier = window.recaptchaVerifier;
+            firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+                .then((confirmationResult) => {
+                  // SMS sent. Prompt user to type the code from the message, then sign the
+                  // user in with confirmationResult.confirm(code).
+                  window.confirmationResult = confirmationResult;
+                  alert("check your phone");
+                  // ...
+                }).catch((error) => {
+                    console.log(error);
+                  console.log("SMS not sent");
+                });
+        });
+
+
+
+
+
+        $( "#vcode-form-submit" ).click(function()
+        //function onSignInSubmit()
+        {
+            const code = $('#vcode-form-vcode').val();
+            confirmationResult.confirm(code).then((result) => {
+              // User signed in successfully.
+              const user = result.user;
+              console.log("phone number verfied");
+
+                $.ajax({
+                url:        "{{route('loginuser')}}",
+                method:     'GET',
+                dataType:   'text',
+                data: {countryCode:'+996',
+                    phone:'01124985128'}   ,
+                success : function(response)
+                         {
+                            if(response == 'failure')
+                            {
+                                alert('Oops Something went wrong');
+                            }else if (response == 'success'){
+                                console.log('redirect to home');
+                                window.location.replace("{{route('welcome')}}");
+                            }
+                         }
+            });
+              // ...
+            }).catch((error) => {
+              console.log(error);
+              console.log("bad verification code?");
+            });
+        });
+
+
+        </script>
+
 
 
         <script>

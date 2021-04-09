@@ -106,7 +106,88 @@ class CustomersController extends Controller
         return redirect(route('customers.index'));
     }
 
-    /**
+
+
+    public function profileUpdate(Request $request)
+    {
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')){
+
+            $api_token = $request->session()->get('api_token');
+            $data = array(  
+                'name' => $request->post('username'),
+                'email'  =>$request->post('email'),
+                'dateOfBirth' => $request->post('birthdate'),
+                'gender'  =>$request->post('gender')
+                            );
+
+           $data_string = json_encode($data);
+            $ch = curl_init('https://armasoftware.com/demo/almuzna_api/api/v1/user/profile');
+
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(          
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string),
+                'x-api-password: ase1iXcLAxanvXLZcgh6tk',
+                'auth-token:'.$api_token
+            )                                                                       
+                        );
+
+            $response = curl_exec($ch);
+            $err = curl_error($ch);
+
+            curl_close($ch);
+
+
+            if ($err) {
+                return response()->json([
+                    'status' => 'true',
+                    'msg' => 'Oops Something went wrong'
+                ]) ;
+            }else {
+                $user = json_decode($response, true);
+                if(isset($user['message'])){
+                 if ($user['message'] == 'Unauthenticated.'){
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => 'Oops Something went wrong'
+                    ]) ;
+                 }
+                     
+                               
+                }
+                if(!$user['status']){
+                    if( $user['msg'] == "Unauthenticated user"){
+                        $request->session()->forget(['user_id', 'api_token']);
+                        return response()->json([
+                            'status' => 'false'
+                                        ]) ;
+                    }
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg']
+                    ]) ;
+                    
+                }
+              
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg']
+                    ]) ;
+
+            }
+
+        }else{
+            return response()->json([
+                'status' => 'false'
+                            ]) ;
+        }
+    }
+        /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

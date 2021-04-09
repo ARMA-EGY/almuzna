@@ -195,24 +195,24 @@
 
 					<div class="row grid-6 content-103 justify-content-center">
 
-						@if ($products->count() > 0)
-
-                            @foreach ($products as $product)
+						@if ($products['total'] > 0)
+<?php 
+$i =1;
+?>
+                            @foreach ($products['data'] as $product)
+                            	@if($i < 5)
                                 <div class="col-md-3 col-6 px-product">
                                     <div class="product">
                                         <div class="product-image">
-                                            <img src="{{ asset('storage/'.$product->photo)}}">
+                                            <img src="{{ asset('storage/'.$product['photo'])}}">
                                         </div>
-                                       @if ($product->on_sale == 1) <div class="sale-flash badge badge-danger p-2">{{__('core.SALE')}}</div> @endif
+
                                         <div class="product-desc">
-                                            <div class="product-title mb-1"><h3> {{$product->name}}</h3></div>
+                                            <div class="product-title mb-1"><h3> {{$product['name_en']}}</h3></div>
                                             <div class="product-price font-primary">
-                                                @if ($product->on_sale == 1) 
-                                                    <del class="mr-1">{{$product->price}} {{__('core.SAR')}}</del>
-                                                    <ins>{{$product->sale_price}} {{__('core.SAR')}}</ins></div>
-                                                @else
-                                                    <ins>{{$product->price}} {{__('core.SAR')}}</ins></div>
-                                                @endif
+ 
+                                                    <ins>{{$product['price']}} {{__('core.SAR')}}</ins></div>
+                                           
                                             <div class="mt-3 order-section {{$inverse_text}}">
                                                 <a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i></a>
                                             </div>
@@ -220,6 +220,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php $i++ ?>
+                                @endif
                             @endforeach
 
                         @else 

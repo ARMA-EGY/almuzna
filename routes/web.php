@@ -30,6 +30,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/contact', 'CoreController@contact')->name('contact');
     Route::get('/profile', 'CoreController@profile')->name('profile');
     Route::get('/checkout', 'CoreController@checkout')->name('checkout');
+
+    Route::get('/loginuser', 'Customers\AuthController@login')->name('loginuser');
+    Route::post('/profileUpdate', 'Customers\CustomersController@profileUpdate')->name('profileUpdate');
+
     
 });
 

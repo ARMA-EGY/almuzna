@@ -36,76 +36,311 @@ use LaravelLocalization;
 class CoreController extends Controller
 {
     //======== Home Page ======== 
-    public function index()
+    public function index(Request $request)
     {
         $page                         = Page::where('name','Home')->first();
         $seo                          = Seo::where('page_token',$page->token)->first();
         $socials                      = Social::all();
-        $products                     = Product::select('id', 'on_sale', 'sale_price', 'price', 'photo', 'name_'.LaravelLocalization::getCurrentLocale(). ' as name' )->orderBy('id','desc')->limit(4)->get();
+       // $products                     = Product::select('id', 'on_sale', 'sale_price', 'price', 'photo', 'name_'.LaravelLocalization::getCurrentLocale(). ' as name' )->orderBy('id','desc')->limit(4)->get();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/product",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+
+        if ($err) {
+            abort(500);
+        } else {
+            $products = json_decode($response, true);
+            if(isset($products['message'])){
+             if ($products['message'] == 'Unauthenticated.')
+                abort(500);               
+            }
+            if(!$products['status'])
+                abort(500);
+        }
         
-        $data = [
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
+            
+            $user = userProfile($request);
+
+            $data = [
             'page_token'=>$page->token,
             'seo'=>$seo,
             'socials'=>$socials,
             'products'=>$products,
+            'user'=>$user,
         ];
+
+        }else{
+
+            $data = [
+                'page_token'=>$page->token,
+                'seo'=>$seo,
+                'socials'=>$socials,
+                'products'=>$products,
+            ];   
+
+        }
+
+
 
         return view('welcome')->with($data);     
     }
 
 
     //======== Products Page ======== 
-    public function products()
+    public function products(Request $request)
     {
         $page                         = Page::where('name','Products')->first();
         $seo                          = Seo::where('page_token',$page->token)->first();
         $socials                      = Social::all();
-        $products                     = Product::select('id', 'on_sale', 'sale_price', 'price', 'photo', 'name_'.LaravelLocalization::getCurrentLocale(). ' as name' )-> get();
+        //$products                     = Product::select('id', 'on_sale', 'sale_price', 'price', 'photo', 'name_'.LaravelLocalization::getCurrentLocale(). ' as name' )-> get();
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/product",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+
+        if ($err) {
+            abort(500);
+        } else {
+            $products = json_decode($response, true);
+            if(isset($products['message'])){
+             if ($products['message'] == 'Unauthenticated.')
+                abort(500);               
+            }
+            if(!$products['status'])
+                abort(500);
+        }
         
-        $data = [
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
+            
+            $user = userProfile($request);
+
+            $data = [
             'page_token'=>$page->token,
             'seo'=>$seo,
             'socials'=>$socials,
             'products'=>$products,
+            'user'=>$user,
         ];
+
+        }else{
+
+            $data = [
+            'page_token'=>$page->token,
+            'seo'=>$seo,
+            'socials'=>$socials,
+            'products'=>$products,
+            ];   
+
+        }
+
 
         return view('products')->with($data);     
     }
 
 
     //======== Coupons Page ======== 
-    public function coupons()
+    public function coupons(Request $request)
     {
-        $coupons                      = Coupon::where('private',0)->get();
+        //$coupons                      = Coupon::where('private',0)->get();
         $page                         = Page::where('name','Coupons')->first();
         $seo                          = Seo::where('page_token',$page->token)->first();
         $socials                      = Social::all();
+ 
+if ($request->session()->has('user_id') && $request->session()->has('api_token')){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/coupon/",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+
+        if ($err) {
+            abort(500);
+        } else {
+                $coupons = json_decode($response, true);
+                if(isset($coupons['message'])){
+                 if ($coupons['message'] == 'Unauthenticated.'){
+                    abort(500);
+                 }
+                     
+                               
+                }
+                if(!$coupons['status']){
+                    if( $coupons['msg'] == "Unauthenticated user"){
+                        $request->session()->forget(['user_id', 'api_token']);
+                        return response()->json([
+                            'status' => 'false'
+                                        ]) ;
+                    }
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $coupons['msg']
+                    ]) ;
+                    
+                }
+              
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $coupons['msg']
+                    ]) ;
+
+            }
+        }
         
-        $data = [
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
+            
+            $user = userProfile($request);
+
+            $data = [
             'page_token'=>$page->token,
             'seo'=>$seo,
             'socials'=>$socials,
             'coupons'=>$coupons,
+            'user'=>$user,
         ];
 
-        return view('coupons')->with($data);     
+        }else{
+
+            $data = [
+            'page_token'=>$page->token,
+            'seo'=>$seo,
+            'socials'=>$socials,
+            'coupons'=>$coupons,
+            ];   
+
+        }
+
+
+        return view('coupons')->with($data);  
+        else{
+            return redirect(route('welcome'));
+        }   
     }
 
 
     //======== Offers Page ======== 
-    public function offers()
+    public function offers(Request $request)
     {
         $page                         = Page::where('name','Offers')->first();
         $seo                          = Seo::where('page_token',$page->token)->first();
         $socials                      = Social::all();
-        $offers                       = Offer::select('id', 'old_price', 'price', 'image', 'name_'.LaravelLocalization::getCurrentLocale(). ' as name' )-> get();
+        //$offers                       = Offer::select('id', 'old_price', 'price', 'image', 'name_'.LaravelLocalization::getCurrentLocale(). ' as name' )-> get();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/offers",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+
+        if ($err) {
+            abort(500);
+        } else {
+            $products = json_decode($response, true);
+            if(isset($products['message'])){
+             if ($products['message'] == 'Unauthenticated.')
+                abort(500);               
+            }
+            if(!$products['status'])
+                abort(500);
+        }
         
-        $data = [
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
+            
+            $user = userProfile($request);
+
+            $data = [
             'page_token'=>$page->token,
             'seo'=>$seo,
             'socials'=>$socials,
-            'offers'=>$offers,
+            'products'=>$products,
+            'user'=>$user,
         ];
+
+        }else{
+
+            $data = [
+            'page_token'=>$page->token,
+            'seo'=>$seo,
+            'socials'=>$socials,
+            'products'=>$products,
+            ];   
+
+        }
+
 
         return view('offers')->with($data);     
     }
@@ -129,14 +364,31 @@ class CoreController extends Controller
 
 
     //======== Profile Page ======== 
-    public function profile()
+    public function profile(Request $request)
     {
         $socials                      = Social::all();
-        
-        $data = [
+      
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
+            
+            $user = userProfile($request);
+
+            $data = [
             'page_token'=>'',
             'socials'=>$socials,
+            'user'=>$user,
         ];
+
+        }else{
+
+            $data = [
+            'page_token'=>'',
+            'socials'=>$socials,
+            ];   
+
+        }
+
+
 
         return view('profile')->with($data);     
     }

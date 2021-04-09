@@ -34,25 +34,22 @@
 
 					<div class="row grid-6 content-103 justify-content-center">
 
-                        @if ($offers->count() > 0)
+                        @if ($products['total'] > 0)
 
-                            @foreach ($offers as $offer)
+                            @foreach ($products['data'] as $product)
                                 
                                 <div class="col-md-4 col-6">
                                     <div class="product rounded-10">
                                         <div class="product-image">
-                                            <a href="#"><img src="{{ asset('storage/'.$offer->image)}}"></a>
+                                            <a href="#"><img src="{{ asset('storage/')}}"></a>
                                         </div>
                                         <div class="sale-flash badge badge-warning p-2">{{__('core.OFFER')}}</div>
                                         <div class="product-desc">
-                                            <div class="product-title mb-1"><h3>{{$offer->name}}</h3></div>
+                                            <div class="product-title mb-1"><h3>{{$product['name_en']}}</h3></div>
                                             <div class="product-price font-primary">
-                                                @if ($offer->old_price != '') 
-                                                    <del class="mr-1">{{$offer->old_price}} {{__('core.SAR')}}</del>
-                                                    <ins>{{$offer->price}} {{__('core.SAR')}}</ins></div>
-                                                @else
-                                                    <ins>{{$offer->price}} {{__('core.SAR')}}</ins></div>
-                                                @endif
+
+                                                    <ins>{{$product['price']}} {{__('core.SAR')}}</ins></div>
+                                            
                                             <div class="mt-3 order-section">
                                                 <a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i> Add to cart</a>
                                             </div>
