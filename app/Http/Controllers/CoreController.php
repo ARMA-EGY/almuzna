@@ -187,91 +187,106 @@ class CoreController extends Controller
         $seo                          = Seo::where('page_token',$page->token)->first();
         $socials                      = Social::all();
  
-if ($request->session()->has('user_id') && $request->session()->has('api_token')){
-        $curl = curl_init();
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')){
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/coupon/",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "x-api-password: ase1iXcLAxanvXLZcgh6tk",
-            ),
-        ));
+                $api_token = $request->session()->get('api_token');
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/coupon/",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => array(
+                        "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+                        'auth-token:'.$api_token
+                    ),
+                ));
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
 
-        curl_close($curl);
+                curl_close($curl);
 
 
-        if ($err) {
-            abort(500);
-        } else {
-                $coupons = json_decode($response, true);
-                if(isset($coupons['message'])){
-                 if ($coupons['message'] == 'Unauthenticated.'){
+                if ($err) {
                     abort(500);
-                 }
-                     
-                               
-                }
-                if(!$coupons['status']){
-                    if( $coupons['msg'] == "Unauthenticated user"){
-                        $request->session()->forget(['user_id', 'api_token']);
-                        return response()->json([
-                            'status' => 'false'
-                                        ]) ;
-                    }
-                    return response()->json([
-                        'status' => 'true',
-                        'msg' => $coupons['msg']
-                    ]) ;
-                    
-                }
-              
-                    return response()->json([
-                        'status' => 'true',
-                        'msg' => $coupons['msg']
-                    ]) ;
+                }else{
 
-            }
-        }
-        
+                        $coupons = json_decode($response, true);
+                        if(isset($coupons['message'])){
+                         if ($coupons['message'] == 'Unauthenticated.'){
+                            abort(500);
+                         }             
+                        }
 
-        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
-            
-            $user = userProfile($request);
+                        if(!$coupons['status']){
+                            if( $coupons['msg'] == "Unauthenticated user"){
+                                $request->session()->forget(['user_id', 'api_token']);
+                                return redirect(route('welcome'));
+                            }
+                            abort(500);
+                            
+                        }
+                      
+                        $user = userProfile($request);
 
-            $data = [
-            'page_token'=>$page->token,
-            'seo'=>$seo,
-            'socials'=>$socials,
-            'coupons'=>$coupons,
-            'user'=>$user,
-        ];
+                        $data = [
+                        'page_token'=>$page->token,
+                        'seo'=>$seo,
+                        'socials'=>$socials,
+                        'coupons'=>$coupons,
+                        'user'=>$user,
+                        ];
 
+                     }
         }else{
+                $curl = curl_init();
 
-            $data = [
-            'page_token'=>$page->token,
-            'seo'=>$seo,
-            'socials'=>$socials,
-            'coupons'=>$coupons,
-            ];   
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/coupon/pblc",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_ENCODING => "",
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 30,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_HTTPHEADER => array(
+                        "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+                    ),
+                ));
 
-        }
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+
+                curl_close($curl);
 
 
-        return view('coupons')->with($data);  
-        else{
-            return redirect(route('welcome'));
-        }   
+                if ($err) {
+                    abort(500);
+                } else {
+                    $coupons = json_decode($response, true);
+                    if(isset($coupons['message'])){
+                     if ($coupons['message'] == 'Unauthenticated.')
+                        abort(500);               
+                    }
+                    if(!$coupons['status'])
+                        abort(500);
+                }
+
+                $data = [
+                'page_token'=>$page->token,
+                'seo'=>$seo,
+                'socials'=>$socials,
+                'coupons'=>$coupons,
+                ];
+        } 
+
+        return view('coupons')->with($data);    
     }
 
 
@@ -377,20 +392,16 @@ if ($request->session()->has('user_id') && $request->session()->has('api_token')
             'page_token'=>'',
             'socials'=>$socials,
             'user'=>$user,
-        ];
+            ];
 
-        }else{
-
-            $data = [
-            'page_token'=>'',
-            'socials'=>$socials,
-            ];   
-
+            return view('profile')->with($data); 
         }
 
+        return redirect(route('welcome'));
 
 
-        return view('profile')->with($data);     
+
+            
     }
 
 

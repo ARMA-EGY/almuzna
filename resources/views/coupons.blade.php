@@ -91,7 +91,7 @@
 
 					<div class="row grid-6 content-103 justify-content-center">
 
-                        @if ($coupons->['total'] > 0)
+                        @if ($coupons['total'] > 0)
 
                         @foreach ($coupons['data'] as $coupon)
                             <div class="col-md-4">
