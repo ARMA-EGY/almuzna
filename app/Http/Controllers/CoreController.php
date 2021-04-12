@@ -378,31 +378,7 @@ class CoreController extends Controller
     }
 
 
-    //======== Profile Page ======== 
-    public function profile(Request $request)
-    {
-        $socials                      = Social::all();
-      
 
-        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
-            
-            $user = userProfile($request);
-
-            $data = [
-            'page_token'=>'',
-            'socials'=>$socials,
-            'user'=>$user,
-            ];
-
-            return view('profile')->with($data); 
-        }
-
-        return redirect(route('welcome'));
-
-
-
-            
-    }
 
 
     //======== Checkout Page ======== 

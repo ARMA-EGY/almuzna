@@ -28,11 +28,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/coupons', 'CoreController@coupons')->name('coupons');
     Route::get('/offers', 'CoreController@offers')->name('offers');
     Route::get('/contact', 'CoreController@contact')->name('contact');
-    Route::get('/profile', 'CoreController@profile')->name('profile');
+    Route::get('/profile', 'Customers\CustomersController@profile')->name('profile');
     Route::get('/checkout', 'CoreController@checkout')->name('checkout');
 
     Route::get('/loginuser', 'Customers\AuthController@login')->name('loginuser');
     Route::post('/profileUpdate', 'Customers\CustomersController@profileUpdate')->name('profileUpdate');
+    Route::get('/cancelOrder', 'Customers\CustomersController@cancelOrder')->name('cancelOrder');
+    Route::get('/singleOrder', 'Customers\CustomersController@singleOrder')->name('singleOrder');
+    
 
     
 });

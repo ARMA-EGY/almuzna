@@ -281,8 +281,16 @@
                                         </div>
                                         <!-- List -->
                                         <div class="nav flex-column nav-pills nav-locations" id="v-pills-tab2" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active" id="v-pills-order1-tab" data-toggle="pill" href="#v-pills-order1" role="tab" aria-controls="v-pills-order1" aria-selected="true">{{__('core.ORDER')}} #70</a>
-                                            <a class="nav-link" id="v-pills-order2-tab" data-toggle="pill" href="#v-pills-order2" role="tab" aria-controls="v-pills-order2" aria-selected="false">{{__('core.ORDER')}} #72</a>
+                                            @if(isset($orders))
+                                                @foreach($orders as $orderlst)
+
+                                                <a class="nav-link active getorder" data-id="{{$orderlst['id']}}" id="v-pills-order1-tab" data-toggle="pill" href="#v-pills-order1" role="tab" aria-controls="v-pills-order1" aria-selected="true">{{__('core.ORDER')}} #{{$orderlst['id']}}</a>
+                                                
+
+                                                @endforeach
+
+                                                <a class="nav-link" id="v-pills-order2-tab" data-toggle="pill" href="#v-pills-order2" role="tab" aria-controls="v-pills-order2" aria-selected="false">{{__('core.ORDER')}} #54</a>
+                                            @endif    
                                         </div>
                                         
                                     </div>
@@ -294,10 +302,11 @@
                                     <div class="tab-content {{$text}}" dir="{{ $dir }}" id="v-pills-tabContent2">
 
                                         <div class="tab-pane fade show active" id="v-pills-order1" role="tabpanel" aria-labelledby="v-pills-order1-tab">
-                                            <div class="card profile-card is-auto order-list-card animated preFadeInUp fadeInUp">
+                                            <div class="card profile-card is-auto order-list-card order-list animated preFadeInUp fadeInUp">
+                                                @if(isset($order))
                                                 <div class="progress-block">
                                                     <!-- Title -->
-                                                    <h3>ORDER 46895</h3>
+                                                    <h3>ORDER {{$order['id']}}</h3>
                                                 </div>
         
                                                 <div class="row">
@@ -309,7 +318,7 @@
                                                             </div>
                                                             <div class="status">
                                                                 <div>Status</div>
-                                                                <div><span class="tag primary-tag">Shipping</span></div>
+                                                                <div><span class="tag primary-tag order_status">{{$order['status']}}</span></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -322,12 +331,51 @@
                                                             </div>
                                                             <div class="date">
                                                                 <div>Date</div>
-                                                                <div class="is-date">mar 23 2018</div>
+                                                                <?php     
+                                                    $timedv = strtotime($order['delivery_date']);
+                                                    $delivery_date = date('M d Y',$timedv);
+                                                                ?>
+                                                                <div class="is-date">{{$delivery_date}}</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                         
                                                 </div>
+
+
+                                                @if(isset($order['drivers']))
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <!-- Order status -->
+                                                        <div class="order-block">
+                                                            <div class="order-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="8"></line></svg>
+                                                            </div>
+                                                            <div class="status">
+                                                                <div>Driver Name</div>
+                                                                <div><span class="tag primary-tag">{{$order['drivers']['name']}}</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+        
+                                                    <div class="col-md-6">
+                                                        <!-- Order date -->
+                                                        <div class="order-block">
+                                                            <div class="order-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                            </div>
+                                                            <div class="date">
+                                                                <div>Driver Number</div>
+ 
+                                                                <div class="is-date">{{$order['drivers']['phone']}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </div>
+                                                @endif
+
                                                 
                                                 <!-- Order details -->
                                                 <div class="table-block">
@@ -335,30 +383,19 @@
                                                         <thead>
                                                             <tr>
                                                                 <th scope="col">Product</th>
-                                                                <th scope="col">SKU</th>
                                                                 <th scope="col">Quantity</th>
                                                                 <th scope="col">Total</th>
                                                             </tr>
                                                         </thead>
+                                                        
                                                         <tbody>
+                                                            @foreach($order['order_itemsmodel'] as $item)
                                                             <tr>
-                                                                <td data-label="Product">Shipping A1</td>
-                                                                <td data-label="SKU">-</td>
-                                                                <td data-label="Quantity">1</td>
-                                                                <td data-label="Total">$39,00</td>
+                                                                <td data-label="Product">{{$item['productsmodel']['name_en']}}</td>
+                                                                <td data-label="Quantity">{{$item['quantity']}}</td>
+                                                                <td data-label="Total">{{$item['total']}}</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td data-label="Product">Conqueror</td>
-                                                                <td data-label="SKU">587</td>
-                                                                <td data-label="Quantity">1</td>
-                                                                <td data-label="Total">$295,00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td data-label="Product">Gentleman</td>
-                                                                <td data-label="SKU">029</td>
-                                                                <td data-label="Quantity">1</td>
-                                                                <td data-label="Total">$349,99</td>
-                                                            </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -371,20 +408,35 @@
                                                         <table class="table table-sm sub-table text-right my-4">
                                                             <tbody><tr>
                                                                 <td><span class="subtotal">Subtotal</span></td>
-                                                                <td class="text-right"><span class="subtotal-value">481,90</span></td>
+                                                                <td class="text-right"><span class="subtotal-value">{{$order['subtotal']}}</span></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><span class="vat">VAT (20%)</span></td>
-                                                                <td class="text-right"><span class="vat-value">96,38</span></td>
+                                                                <td><span class="vat">VAT</span></td>
+                                                                <td class="text-right"><span class="vat-value">{{$order['sales_tax']}}</span></td>
                                                             </tr>
+
+                                                            <tr>
+                                                                <td><span class="vat">Delivery Fees</span></td>
+                                                                <td class="text-right"><span class="vat-value">{{$order['delivery_fees']}}</span></td>
+                                                            </tr>                                                           
                                                             <tr>
                                                                 <td><span class="total">Total</span></td>
-                                                                <td class="text-right"><span class="total-value">578,28</span></td>
+                                                                <td class="text-right"><span class="total-value">{{$order['total']}}</span></td>
                                                             </tr>
                                                         </tbody></table>
                                                     </div>
                                                 </div>
-        
+
+                                                <div class="row order_actions">
+                                                    @if($order['status'] == 'delivered')
+                                                        <button>Reorder</button>
+                                                    @elseif($order['status'] == 'pending')   
+                                                        <button class="order_cancel" data-id="{{$order['id']}}">Cancel</button>
+                                                        <br>
+                                                        <button class="order_track">Track</button>
+                                                    @endif
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -482,6 +534,8 @@
         
                                             </div>
                                         </div>
+
+
                                     </div>
         
                                     
@@ -684,7 +738,111 @@
             })
 
 
-    });    
+    }); 
+
+
+
+    $('.order_cancel').click(function(){
+            $.ajax({
+                url:        "{{route('cancelOrder')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {order_id:$(this).attr("data-id")}   ,
+                success:function(data)
+                {
+                if(data.status == 'false')
+                {
+                    window.location.replace("{{route('welcome')}}");
+                } else if (data.status == 'true')
+                {
+                    console.log(data.msg);
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                    Toast.fire({
+                      type: 'success',
+                      title: data.msg
+                    }) 
+                    if(data.msg == 'order is cancelled successfully')
+                    {
+                        $('.order_actions').empty();
+                        $('.order_status').html('Cancelled');
+
+                    }
+                    
+                } 
+                   
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+
+
+    }); 
+
+
+
+
+    $('.getorder').click(function(){
+            $.ajax({
+                url:        "{{route('singleOrder')}}",
+                method:     'GET',
+                dataType:'text',
+                data: {order_id:$(this).attr("data-id")}   ,
+                success:function(data)
+                {
+                if(data == 'false')
+                {
+                    window.location.replace("{{route('welcome')}}");
+                } else if (data == 'false pop')
+                {
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                    Toast.fire({
+                      type: 'success',
+                      title: 'Woops something went'
+                    }) 
+
+                    
+                }else
+                {
+                    $('.order-list').html(data);
+                } 
+                   
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+
+
+    }); 
+
+
+
 });
 </script>
 @endsection

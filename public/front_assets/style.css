@@ -95,6 +95,18 @@
 
 /*===================  Start Scroll Bar   ======================*/
 
+
+.phn::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.phn {
+  -moz-appearance: textfield;
+}
+
 /* width */
 ::-webkit-scrollbar {
 	width: 5px;

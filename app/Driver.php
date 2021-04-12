@@ -14,7 +14,7 @@ class Driver extends Model
     ];
 
     public function Order(){
-        return $this->hasMany('App\Order','user_id');
+        return $this->hasMany('App\Order','driver_id');
     }     
 
 }

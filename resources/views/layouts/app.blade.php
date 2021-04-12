@@ -102,7 +102,7 @@
 
                     
                                 <div class="col-12">
-                                    <input type="text" id="get-code-form-number" name="get-code-form-number" value="" class="form-control not-dark" placeholder="{{__('core.PHONE-NUMBER')}}">
+                                    <input type="number" id="get-code-form-number" name="get-code-form-number" value="" class="form-control phn not-dark" placeholder="05x-xxx-xxxx" pattern="[0-9]{11}"  maxlength="11">
                                 </div>
 
                                 <div class="col-12">
@@ -503,7 +503,9 @@
         $( "#get-code-form-submit" ).click(function()
         //function onSignInSubmit()
         {
-            const phoneNumber = $('#get-code-form-number').val();
+            const phoneNumber = '+20-'+$('#get-code-form-number').val().substring(1).replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+            
+            console.log(phoneNumber);
             const appVerifier = window.recaptchaVerifier;
             firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
                 .then((confirmationResult) => {
@@ -536,7 +538,7 @@
                 method:     'GET',
                 dataType:   'text',
                 data: {countryCode:'+996',
-                    phone:'01124985128'}   ,
+                    phone:$('#get-code-form-number').val()}   ,
                 success : function(response)
                          {
                             if(response == 'failure')
