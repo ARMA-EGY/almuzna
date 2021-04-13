@@ -49,7 +49,6 @@
 
     <title>@isset($seo) @if($seo->title != '') {{$seo->title}} @else ALMUZNA @endif @else ALMUZNA @endisset</title>
 
-    @yield('style')
     
     <!-- Template CSS -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Montserrat:300,400,500,600,700|Merriweather:300,400,300i,400i&display=swap" rel="stylesheet" type="text/css" />
@@ -77,6 +76,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+    @yield('style')
 
 </head>
 <body class="stretched">
@@ -482,7 +484,7 @@
 
 
         <script>
-  window.onload = function() {     
+        window.onload = function() {     
 
 
         firebase.auth().languageCode = 'it';
