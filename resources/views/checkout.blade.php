@@ -496,7 +496,7 @@
                                                             </div>
                                                         </div>
                                 
-                                                        <div class="col-lg-5 text-right">
+                                                        <div class="col-lg-5 text-right pt-4">
                                                             <a href="#" class="btn btn-primary btn-sm btn-rounded px-lg-5">APPLY</a>
                                                         </div>
                                 

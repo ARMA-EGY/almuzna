@@ -77,6 +77,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+	<script src="https://unpkg.com/cart-localstorage@1.1.4/dist/cart-localstorage.min.js" type="text/javascript"></script>
 
     @yield('style')
 
@@ -199,49 +200,17 @@
                                             <div class="top-cart-title">
                                                 <h4> {{__('core.MY-CART')}}</h4>
                                             </div>
-                                            <div class="top-cart-items">
+                                            <form class="top-cart-items">
 
-                                                {{-- <div class="top-cart-item">
-                                                    <div class="top-cart-item-image mx-2">
-                                                        <a href="#"><img src="{{ asset('front_assets/demos/shop/images/items/4.png')}}"  /></a>
-                                                    </div>
-                                                    <div class="top-cart-item-desc">
-                                                        <div class="top-cart-item-desc-title">
-                                                            <a href="#">Water Bottle 1 Liter</a>
-                                                            <div class=" d-flex justify-content-between align-items-center actions-section-cart">
-                                                                <i class="fa main-color pointer stepper_down fa-trash-alt text-danger remove_item"></i>
-                                                                <p class="quantity m-0">1</p>
-                                                                <i class="fa fa-plus main-color pointer stepper_up"></i>
-                                                            </div>
-                                                            <span class="top-cart-item-price d-block">35.00 {{__('core.SAR')}}</span>
-                                                        </div>
-                                                    </div>
+                                                <div class="cart">
+                                                    <img src="{{ asset('front_assets/images/empty-cart.svg')}}" alt="Image" class="mb-0">
+                                                    <h4 class="text-center mt-4">{{__('core.EMPTY-CART')}}</h4>
                                                 </div>
 
-                                                <div class="top-cart-item">
-                                                    <div class="top-cart-item-image mx-2">
-                                                        <a href="#"><img src="{{ asset('front_assets/demos/shop/images/items/1.png')}}"  /></a>
-                                                    </div>
-                                                    <div class="top-cart-item-desc">
-                                                        <div class="top-cart-item-desc-title">
-                                                            <a href="#">Water Bottle 500ml</a>
-                                                            <div class=" d-flex justify-content-between align-items-center actions-section-cart">
-                                                                <i class="fa main-color pointer stepper_down fa-minus"></i>
-                                                                <p class="quantity m-0">2</p>
-                                                                <i class="fa fa-plus main-color pointer stepper_up"></i>
-                                                            </div>
-                                                            <span class="top-cart-item-price d-block">30.00 {{__('core.SAR')}}</span>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
-
-                                                <img src="{{ asset('front_assets/images/empty-cart.svg')}}" alt="Image" class="mb-0">
-                                                <h4 class="text-center mt-4">{{__('core.EMPTY-CART')}}</h4>
-
-                                            </div>
-                                            <div class="top-cart-action justify-content-center">
-                                                <a href="{{route('products')}}" class="button button-3d button-small m-0">{{__('core.GO-SHOPPING')}}</a>
-                                            </div>
+                                                <div class="top-cart-action justify-content-center">
+                                                    <a href="{{route('products')}}" class="button button-3d button-small m-0">{{__('core.GO-SHOPPING')}}</a>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div><!-- #top-cart end -->
 
@@ -279,6 +248,8 @@
                     @yield('content')
                 </div>
                 <!-- end: Main content -->
+
+                
 
                 <!-- Footer
                 ============================================= -->
@@ -632,6 +603,35 @@
                 });
 
             });
+
+            function renderCart(items) {
+			const $cart = document.querySelector(".cart")
+			const $cart_action = document.querySelector(".top-cart-action")
+
+            $cart.innerHTML = items.map((item) => `
+            <div class="top-cart-item">
+                <div class="top-cart-item-image mx-2">
+                    <a href="#"><img src="${item.image}"  /></a>
+                </div>
+                <div class="top-cart-item-desc">
+                    <div class="top-cart-item-desc-title">
+                        <input type="hidden" name="id" value="${item.id}">
+                        <a href="#">${item.name}</a>
+                        <div class=" d-flex justify-content-between align-items-center actions-section-cart">
+                            <i class="fa main-color pointer stepper_down fa-minus" data-id="${item.id}"></i>
+                            <p class="quantity m-0">${item.quantity}</p>
+                            <i class="fa fa-plus main-color pointer stepper_up" data-id="${item.id}"></i>
+                        </div>
+                        <span class="top-cart-item-price d-block">${item.price}</span>
+                    </div>
+                </div>
+            </div>`).join("")
+
+            $cart_action.innerHTML = '<a href="/checkout" class="button button-3d button-small m-0">Checkout</a>'
+		}
+		
+		renderCart(cartLS.list())
+		cartLS.onChange(renderCart)
 
 
         </script>

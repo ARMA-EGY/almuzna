@@ -214,7 +214,7 @@ $i =1;
                                                     <ins>{{$product['price']}} {{__('core.SAR')}}</ins></div>
                                            
                                             <div class="mt-3 order-section {{$inverse_text}}">
-                                                <a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i></a>
+                                                <a class="btn btn-cart add-order mx-2" data-id="{{$product['id']}}" onClick="cartLS.add({id: '{{$product['id']}}', name: '{{$product['name_en']}}', price: '{{$product['price']}} {{__('core.SAR')}}', image: '{{ asset('storage/'.$product['photo'])}}'})"><i class="icon-shopping-basket"></i></a>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>

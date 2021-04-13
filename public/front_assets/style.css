@@ -135,6 +135,10 @@ input::-webkit-inner-spin-button {
 	Card Edits
 -----------------------------------------------------------------*/
 
+.top-cart-items .actions-section-cart {
+    width: unset;
+}
+
 .actions-section
 {
 	padding: 10px 20px;

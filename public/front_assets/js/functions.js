@@ -2234,6 +2234,8 @@ var SEMICOLON = SEMICOLON || {};
 	$(document).on('click', '.stepper_down', function() {
 		
 		var val = $(this).next('p').html();
+		var id 	= $(this).attr('data-id');
+		cartLS.quantity(id, -1);
 		
 		if (val == 1)
 		{
@@ -2257,8 +2259,10 @@ var SEMICOLON = SEMICOLON || {};
 	$(document).on('click', '.stepper_up', function() {
 		
 		var val = $(this).prev('p').html();
+		var id 	= $(this).attr('data-id');
 		
 		var res = ++val;
+		cartLS.quantity(id, 1);
 		
 		$(this).prev('p').html(res);
 		$(this).siblings('.fa-trash-alt').addClass('fa-minus');
@@ -2267,11 +2271,14 @@ var SEMICOLON = SEMICOLON || {};
 	});
 
 	$(document).on('click', '.remove_item', function() {
+		var id 	= $(this).attr('data-id');
+		cartLS.quantity(id, -1);
 		$(this).parents('.order-section').html('<a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i></a>');
 	});
 
 	$(document).on('click', '.add-order', function() {
-		$(this).parents('.order-section').html('<div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer stepper_down fa-trash-alt text-danger remove_item"></i><p class="quantity m-0">1</p><i class="fa fa-plus main-color pointer stepper_up"></i></div>');
+		var id 	= $(this).attr('data-id');
+		$(this).parents('.order-section').html('<div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer stepper_down fa-trash-alt text-danger remove_item" data-id="'+id+'"></i><p class="quantity m-0">1</p><i class="fa fa-plus main-color pointer stepper_up" data-id="'+id+'"></i></div>');
 	});
 
 })(jQuery);
