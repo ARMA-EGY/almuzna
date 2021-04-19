@@ -30,11 +30,114 @@ use App\Offer;
 use App\Coupon;
 use App\Contact;
 use App\Blog;
-
+use App\Configuration;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use LaravelLocalization;
 
 class CoreController extends Controller
 {
+
+
+    public function distanceCalculator(Request $request)
+    {
+
+
+        $lat = $request->get('lat');
+        $lng = $request->get('lng');
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://maps.googleapis.com/maps/api/distancematrix/json?origins=29.9713333,30.9560137&destinations=".$lat.",".$lng."&key=AIzaSyBNno9sBFWOmpTFRXSDu6C2IskdQfo329Q",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+               
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+
+        if ($err) {
+            abort(500);
+        } else {
+
+            $distancematrix = json_decode($response, true);
+            $distance = $distancematrix['rows'][0]['elements'][0]['distance']['value'];
+            $kilometeres = $distance * 0.001;
+            $deliveryFee = $kilometeres * 5;
+            
+            return $deliveryFee;
+        }
+
+    }
+
+    
+    public function itemRemove(Request $request)
+    {
+
+       $rowId = $request->get('rowId');
+
+       Cart::remove($rowId);
+       
+       $subtotal = Cart::subtotal();
+
+       $sales_perc = Configuration::select('decimal_value')->where('name','sales_tax')->first();
+       $sales_tax = $subtotal * ($sales_perc->decimal_value/100);
+
+       $totalTax = $subtotal + $sales_tax;
+
+       $Data = [
+            'subtotal'=>$subtotal,
+            'totalTax'=>$totalTax,
+            ];
+
+       return response()->json($Data, 200);
+
+    }
+
+    public function updatCart(Request $request)
+    {
+       $rowId = $request->get('rowId');
+       $qty = $request->get('qty');
+       Cart::update($rowId, $qty);
+
+       $subtotal = Cart::subtotal();
+
+       $sales_perc = Configuration::select('decimal_value')->where('name','sales_tax')->first();
+       $sales_tax = $subtotal * ($sales_perc->decimal_value/100);
+
+       $totalTax = $subtotal + $sales_tax;
+
+       $Data = [
+            'subtotal'=>$subtotal,
+            'totalTax'=>$totalTax,
+            ];
+
+       return response()->json($Data, 200);
+
+    }
+
+    public function addcart(Request $request)
+    {
+       // Cart::destroy();
+       $id = $request->get('id');
+       $name = $request->get('name');
+       $price = $request->get('price'); 
+       $cartItem = Cart::add($id,  $name , 1, $price, 10);
+       Cart::associate($cartItem->rowId, 'App\Product');
+       return $cartItem;
+
+    }
     //======== Home Page ======== 
     public function index(Request $request)
     {
@@ -381,18 +484,6 @@ class CoreController extends Controller
 
 
 
-    //======== Checkout Page ======== 
-    public function checkout()
-    {
-        $socials                      = Social::all();
-        
-        $data = [
-            'page_token'=>'',
-            'socials'=>$socials,
-        ];
-
-        return view('checkout')->with($data);     
-    }
 
     //======== Single Blog Page ======== 
     public function singleblog($url)

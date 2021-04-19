@@ -29,12 +29,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/offers', 'CoreController@offers')->name('offers');
     Route::get('/contact', 'CoreController@contact')->name('contact');
     Route::get('/profile', 'Customers\CustomersController@profile')->name('profile');
-    Route::get('/checkout', 'CoreController@checkout')->name('checkout');
+    Route::get('/checkout', 'Customers\CustomersController@checkout')->name('checkout');
 
     Route::get('/loginuser', 'Customers\AuthController@login')->name('loginuser');
     Route::post('/profileUpdate', 'Customers\CustomersController@profileUpdate')->name('profileUpdate');
     Route::get('/cancelOrder', 'Customers\CustomersController@cancelOrder')->name('cancelOrder');
     Route::get('/singleOrder', 'Customers\CustomersController@singleOrder')->name('singleOrder');
+    Route::get('/addcart', 'CoreController@addcart')->name('addcart');
+    Route::get('/updatCart', 'CoreController@updatCart')->name('updatCart');
+    Route::get('/itemRemove', 'CoreController@itemRemove')->name('itemRemove');
+    Route::get('/distanceCalculator', 'CoreController@distanceCalculator')->name('distanceCalculator');
+    Route::post('/placeOrder', 'Customers\CustomersController@placeOrder')->name('placeOrder');
+    
+    
     
 
     

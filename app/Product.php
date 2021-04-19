@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\ProductCategory;
 use App\ProductImages;
 use App\Visit;
+//use digital-bird\shoppingcart\src\Contracts\Buyable;
 
 class Product extends Model
 {
