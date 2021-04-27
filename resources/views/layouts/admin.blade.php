@@ -52,7 +52,7 @@
                 <li class="nav-item">
                 <a class="nav-link {{request()->routeIs('home') ? 'active' : '' }}" href="{{route('home')}}">
                     <i class="fas fa-th-large"></i>
-                    <span class="nav-link-text">الرئيسية</span>
+                    <span class="nav-link-text">{{__('admin.NAV-HOME')}}</span>
                 </a>
                 </li>
 
@@ -61,7 +61,7 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
                           <i class="fa fa-users text-primary"></i>
-                          <span class="nav-link-text">المستخدمين</span>
+                          <span class="nav-link-text">{{__('admin.NAV-USERS')}}</span>
                         </a>
                         <div class="collapse" id="navbar-components" style="">
                           <ul class="nav nav-sm flex-column">
@@ -69,21 +69,21 @@
                             <li class="nav-item">
                               <a href="{{route('admin-members')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-members') ? 'active' : '' }}">
                                 <i class="fas fa-user-secret"></i>
-                                <span class="sidenav-normal"> الاعضاء </span>
+                                <span class="sidenav-normal"> {{__('admin.NAV-MEMEBERS')}} </span>
                               </a>
                             </li>
     
                             <li class="nav-item">
                               <a href="{{route('customers.index')}}" class="nav-link nav-link-sub {{request()->routeIs('customers.index') ? 'active' : '' }}">
                                 <i class="fas fa-user-tie"></i>
-                                <span class="sidenav-normal"> العملاء </span>
+                                <span class="sidenav-normal"> {{__('admin.NAV-CUSTOMERS')}} </span>
                               </a>
                             </li>
     
                             <li class="nav-item">
                               <a href="{{route('drivers.index')}}" class="nav-link nav-link-sub {{request()->routeIs('drivers.index') ? 'active' : '' }}">
                                 <i class="fas fa-user-astronaut"></i>
-                                <span class="sidenav-normal"> السائقين </span>
+                                <span class="sidenav-normal"> {{__('admin.NAV-DRIVERS')}} </span>
                               </a>
                             </li>
                             
@@ -137,28 +137,28 @@
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('products.index') ? 'active' : '' }}" href="{{route('products.index')}}">
                         <i class="fa fa-cubes text-info"></i>
-                        <span class="nav-link-text">المنتجات</span>
+                        <span class="nav-link-text">{{__('admin.NAV-PRODUCTS')}}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('offers.index') ? 'active' : '' }}" href="{{route('offers.index')}}">
                         <i class="fas fa-bullhorn text-warning"></i>
-                        <span class="nav-link-text">العروض</span>
+                        <span class="nav-link-text">{{__('admin.NAV-OFFERS')}}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('coupons.index') ? 'active' : '' }}" href="{{route('coupons.index')}}">
                         <i class="fa fa-tags text-yellow"></i>
-                        <span class="nav-link-text">الكوبونات</span>
+                        <span class="nav-link-text">{{__('admin.NAV-COUPONS')}}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#navbar-orders" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
                       <i class="ni ni-cart text-purple"></i>
-                      <span class="nav-link-text">الطلبات</span>
+                      <span class="nav-link-text">{{__('admin.NAV-ORDERS')}}</span>
                     </a>
                     <div class="collapse" id="navbar-orders" style="">
                       <ul class="nav nav-sm flex-column">
@@ -166,42 +166,42 @@
                         <li class="nav-item">
                           <a href="{{route('admin-orders-pending')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-pending') ? 'active' : '' }}">
                             <i class="fas fa-cube text-yellow"></i>
-                            <span class="sidenav-normal"> متعلق </span>
+                            <span class="sidenav-normal">{{__('admin.NAV-ORDERS-PENDING')}}</span>
                           </a>
                         </li>
 
                         <li class="nav-item">
                           <a href="{{route('admin-orders-accepted')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-accepted') ? 'active' : '' }}">
                             <i class="fas fa-cube text-info"></i>
-                            <span class="sidenav-normal"> مقبول </span>
+                            <span class="sidenav-normal">{{__('admin.NAV-ORDERS-ACCEPTED')}}</span>
                           </a>
                         </li>
 
                         <li class="nav-item">
                           <a href="{{route('admin-orders-ontheway')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-ontheway') ? 'active' : '' }}">
                             <i class="fas fa-cube text-primary"></i>
-                            <span class="sidenav-normal"> في الطريق </span>
+                            <span class="sidenav-normal">{{__('admin.NAV-ORDERS-ONTHEWAY')}}</span>
                           </a>
                         </li>
 
                         <li class="nav-item">
                           <a href="{{route('admin-orders-delivered')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-delivered') ? 'active' : '' }}">
                             <i class="fas fa-cube text-success"></i>
-                            <span class="sidenav-normal"> تم الاستلام </span>
+                            <span class="sidenav-normal">{{__('admin.NAV-ORDERS-DELIVERED')}}</span>
                           </a>
                         </li>
 
                         <li class="nav-item">
                           <a href="{{route('admin-orders-cancelled')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders-cancelled') ? 'active' : '' }}">
                             <i class="fas fa-cube text-red"></i>
-                            <span class="sidenav-normal"> الغاء </span>
+                            <span class="sidenav-normal">{{__('admin.NAV-ORDERS-CANCELLED')}}</span>
                           </a>
                         </li>
 
                         <li class="nav-item">
                           <a href="{{route('admin-orders')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-orders') ? 'active' : '' }}">
                             <i class="fas fa-cubes"></i>
-                            <span class="sidenav-normal"> جميع الطلبات </span>
+                            <span class="sidenav-normal">{{__('admin.NAV-ORDERS-ALL')}}</span>
                           </a>
                         </li>
                         
@@ -212,7 +212,7 @@
                 <li class="nav-item">
                     <a class="nav-link " href="#">
                         <i class="fas fa-exchange-alt"></i>
-                        <span class="nav-link-text">عمليات الدفع الالكتروني</span>
+                        <span class="nav-link-text">  {{__('admin.NAV-TRANSACTIONS')}}</span>
                     </a>
                 </li>
 
@@ -233,35 +233,35 @@
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('city.index') ? 'active' : '' }}" href="{{route('city.index')}}">
                         <i class="ni ni-delivery-fast text-cyan"></i>
-                        <span class="nav-link-text">قيمة التوصيل</span>
+                        <span class="nav-link-text">{{__('admin.NAV-DELIVERYFEE')}}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('admin-configuration') ? 'active' : '' }}" href="{{route('admin-configuration')}}">
                         <i class="ni ni-ui-04 text-info"></i>
-                        <span class="nav-link-text">الاعدادات</span>
+                        <span class="nav-link-text">{{__('admin.NAV-configuration')}}</span>
                     </a>
                 </li>
                 
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('admin-messages') ? 'active' : '' }}" href="{{route('admin-messages')}}">
                         <i class="ni ni-email-83 text-pink"></i>
-                        <span class="nav-link-text">الرسائل</span>
+                        <span class="nav-link-text">{{__('admin.NAV-MESSAGES')}}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('admin-pages') ? 'active' : '' }}" href="{{route('admin-pages')}}">
                         <i class="ni ni-single-copy-04 text-orange"></i>
-                        <span class="nav-link-text">الصفحات</span>
+                        <span class="nav-link-text">{{__('admin.NAV-PAGES')}}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link " href="#">
                         <i class="far fa-chart-bar"></i>
-                        <span class="nav-link-text">التقارير</span>
+                        <span class="nav-link-text">{{__('admin.NAV-REPORTS')}}</span>
                     </a>
                 </li>
                 
@@ -277,7 +277,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#navbar-setting" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
                       <i class="ni ni-settings"></i>
-                      <span class="nav-link-text">ضبط البيانات</span>
+                      <span class="nav-link-text">{{__('admin.NAV-SETTINGS')}}</span>
                     </a>
                     <div class="collapse" id="navbar-setting" style="">
                       <ul class="nav nav-sm flex-column">
@@ -285,14 +285,14 @@
                         <li class="nav-item">
                           <a href="{{route('admin-socialmedia')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-socialmedia') ? 'active' : '' }}">
                             <i class="fa fa-share"></i>
-                            <span class="sidenav-normal"> وسائل التواصل الاجتماعي </span>
+                            <span class="sidenav-normal"> {{__('admin.NAV-SETTINGS-SOCIALMEDIA')}}</span>
                           </a>
                         </li>
 
                         <li class="nav-item">
                           <a href="{{route('admin-logo')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-logo') ? 'active' : '' }}">
                             <i class="ni ni-planet"></i>
-                            <span class="sidenav-normal"> اللوجو </span>
+                            <span class="sidenav-normal">{{__('admin.NAV-SETTINGS-LOGO')}}  </span>
                           </a>
                         </li>
                         
@@ -305,7 +305,7 @@
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                     <i class="ni ni-user-run"></i>
-                    <span class="nav-link-text">تسجيل الخروج</span>
+                    <span class="nav-link-text">{{__('admin.NAV-LOGOUT')}} </span>
                 </a>
                 </li>
             </ul>

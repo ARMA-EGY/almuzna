@@ -11,13 +11,13 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">الاعضاء</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.NAV-MEMEBERS')}}</li>
                 </ol>
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-left">
-              <a href="/register" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة عضو جديد</a>
+              <a href="/register" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.MEMBERS-ADDNEW')}}</a>
             </div>
           </div>
         </div>
@@ -32,18 +32,18 @@
         <div class="col-xl-12">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">اجمالي الاعضاء <span class="badge badge-primary p-2">{{$users->total()}}</span></h3>
+              <h3 class="text-white mb-0">{{__('admin.MEMBERS-TOTALMEMEBERS')}}<span class="badge badge-primary p-2">{{$users->total()}}</span></h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-dark table-flush">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">الاعضاء</th>
-                    <th scope="col">الوظيفة</th>
-                    <th scope="col">البريد الالكتروني</th>
-                    <th scope="col">الهاتف</th>
-                    <th scope="col">الحالة</th>
+                    <th scope="col">{{__('admin.MEMBERS-TABLE-MEMBERS')}}</th>
+                    <th scope="col">{{__('admin.MEMBERS-TABLE-ROLE')}}</th>
+                    <th scope="col">{{__('admin.MEMBERS-TABLE-EMAIL')}}</th>
+                    <th scope="col">{{__('admin.MEMBERS-TABLE-PHONE')}}</th>
+                    <th scope="col">{{__('admin.MEMBERS-TABLE-STATUS')}}</th>
                   </tr>
                 </thead>
                 <tbody class="list">

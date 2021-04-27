@@ -40,6 +40,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/itemRemove', 'CoreController@itemRemove')->name('itemRemove');
     Route::get('/distanceCalculator', 'CoreController@distanceCalculator')->name('distanceCalculator');
     Route::post('/placeOrder', 'Customers\CustomersController@placeOrder')->name('placeOrder');
+    Route::get('/applyCode', 'Customers\CustomersController@applyCode')->name('applyCode');
+    
     
     
     
@@ -71,7 +73,7 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => ['auth']], function () 
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () 
 {
     Route::get('/home', 'AdminController@index')->name('home');
     Route::get('/pages', 'AdminController@pages')->name('admin-pages');
@@ -106,7 +108,7 @@ Route::group(['middleware' => ['auth']], function ()
     Route::get('/orders-cancelled', 'Orders\OrdersController@cancelled')->name('admin-orders-cancelled');
 });
 
-Route::group(['middleware' => ['auth','admin']], function () 
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'auth' , 'admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () 
 {
     Route::get('/members', 'AdminController@members')->name('admin-members'); 
 });
@@ -166,7 +168,9 @@ Route::post('/removecategory', 'Blogs\CategoriesController@removecategory')->nam
 Route::post('/removetag', 'Blogs\TagsController@removetag')->name('remove-tag');
 Route::post('/removeblog', 'Blogs\BlogsController@removeblog')->name('remove-blog');
 Route::post('/removeproduct', 'Products\ProductsController@removeproduct')->name('remove-product');
-Route::post('/removeproductcategory', 'Products\CategoriesController@removecategory')->name('remove-product-category');
+Route::post('/removeproductcategory', 
+
+'Products\CategoriesController@removecategory')->name('remove-product-category');
 Route::post('/removeoffer', 'Offers\OffersController@removeoffer')->name('remove-offer');
 
 

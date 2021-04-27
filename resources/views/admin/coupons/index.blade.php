@@ -18,14 +18,14 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">الكوبونات</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.NAV-COUPONS')}}</li>
                 </ol>
               </nav>
             </div>
 
             <div class="col-lg-6 col-5 text-left">
-              <a href="{{ route('coupons.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة كوبون</a>
+              <a href="{{ route('coupons.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.COUPONS-ADDNEW')}}</a>
             </div>
 
             @if(session()->has('success'))	
@@ -52,7 +52,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">اجمالي الكوبونات  <span class="badge badge-primary p-2">{{$coupons_count}}</span></h3>
+                  <h3 class="mb-0">{{__('admin.COUPONS-TOTALCOUPONS')}}<span class="badge badge-primary p-2">{{$coupons_count}}</span></h3>
                 </div>
               </div>
             </div>
@@ -65,13 +65,13 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >كود الكوبون</th>
-                    <th scope="col" class="sort" >تاريخ الابتداء</th>
-                    <th scope="col" class="sort" >تاريخ الانتهاء</th>
-                    <th scope="col" class="sort" >الخصم</th>
-                    <th scope="col" class="sort" >عدد الاستخدامات للعميل</th>
-                    <th scope="col" class="sort" >عدد استخدامات الكوبون</th>
-                    <th scope="col" class="sort" >نوع الكوبون</th>
+                    <th scope="col" class="sort" >{{__('admin.COUPONS-TABLE-CODE')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.COUPONS-TABLE-START')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.COUPONS-TABLE-EXPIRE')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.COUPONS-TABLE-DISCOUNT')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.COUPONS-TABLE-CLIENTUSAGE')}} </th>
+                    <th scope="col" class="sort" >{{__('admin.COUPONS-TABLE-USAGE')}}  </th>
+                    <th scope="col" class="sort" >{{__('admin.COUPONS-TABLE-TYPE')}} </th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -91,7 +91,7 @@
                     <td>{{ $coupon->used }}</td>
                     <td>@if ($coupon->private == 0) عام @elseif ($coupon->private == 1) خاص @endif</td>
                     <td>
-                      <a href="{{ route('coupons.edit', $coupon->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i> تعديل</a>
+                      <a href="{{ route('coupons.edit', $coupon->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i>{{__('admin.COUPONS-TABLE-EDIT')}} </a>
                     </td>
                   </tr>
 

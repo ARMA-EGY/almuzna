@@ -18,8 +18,8 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">جميع الطلبات</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.ALLORDERS-ALLORDERS')}}</li>
                 </ol>
               </nav>
             </div>
@@ -51,7 +51,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">اجمالي الطلبات  <span class="badge badge-primary p-2">{{$orders_count}}</span></h3>
+                  <h3 class="mb-0">{{__('admin.ALLORDERS-TOTALORDERS')}}  <span class="badge badge-primary p-2">{{$orders_count}}</span></h3>
                 </div>
               </div>
             </div>
@@ -64,9 +64,9 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >كود الطلب</th>
-                    <th scope="col" class="sort" >اجمالي المطلوب</th>
-                    <th scope="col" class="sort" > حالة الطلب</th>
+                    <th scope="col" class="sort" >{{__('admin.ALLORDERS-TABLE-CODE')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.ALLORDERS-TABLE-TOTAL')}}</th>
+                    <th scope="col" class="sort" > {{__('admin.ALLORDERS-TABLE-state')}}</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -99,7 +99,7 @@
                       @endif
                     </td>
                     <td>
-                      <a href="#" class="btn btn-warning btn-sm mx-1 get_order_details" data-id="{{  $order->id }}"><i class="fa fa-eye"></i> مشاهدة الطلب</a>
+                      <a href="#" class="btn btn-warning btn-sm mx-1 get_order_details" data-id="{{  $order->id }}"><i class="fa fa-eye"></i>{{__('admin.ALLORDERS-TABLE-VIEW')}}</a>
                     </td>
                   </tr>
 

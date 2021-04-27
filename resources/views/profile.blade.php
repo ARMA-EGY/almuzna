@@ -755,7 +755,7 @@
                     window.location.replace("{{route('welcome')}}");
                 } else if (data.status == 'true')
                 {
-                    console.log(data.msg);
+                    
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',

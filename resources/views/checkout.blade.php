@@ -443,7 +443,7 @@
                                     <input type="hidden" name="orderlong" id="orderlong" value="">
                                     <input type="hidden" name="sales_tax" id="sales_tax" value="{{$sales_perc}}">
                                     <input type="hidden" name="delivery_address" id="delivery_address" value="">
-                                    <input type="hidden" name="promo_code" id="promo_code" value="0.00">
+                                    <input type="hidden" name="couponDiscount" id="couponDiscount" value="{{$couponDiscount}}">
 
                                     <h6>Checkout</h6>
                                     <section class="my-4">
@@ -507,7 +507,7 @@
                                                         </div>
                                 
                                                         <div class="col-lg-5 text-right pt-4">
-                                                            <a href="#" class="btn btn-primary btn-sm btn-rounded px-lg-5">APPLY</a>
+                                                            <a href="#" class="btn btn-primary btn-sm btn-rounded px-lg-5 applycode">APPLY</a>
                                                         </div>
                                 
                                                     </div>
@@ -743,7 +743,9 @@
                                                         </tr>                                                           
                                                         <tr>
                                                             <td><span class="total">Total</span></td>
-                                                            <td class="text-right"><span class="total-value">{{$totalTax}} SAR</span></td>
+
+                                                             <?php $totalWithcoupon = $totalTax - $couponDiscount;  ?>
+                                                            <td class="text-right"><span class="total-value">{{$totalWithcoupon}} SAR</span></td>
                                                         </tr>
                                                     </tbody></table>
                                                 </div>

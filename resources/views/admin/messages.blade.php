@@ -344,13 +344,13 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">الرسائل</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.MESSAGES-MESSAGES')}}</li>
                 </ol>
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-left">
-              <a href="#" class="btn btn-sm btn-neutral get_receiver_email"> البريد الالكتروني المتلقي للرسائل</a>
+              <a href="#" class="btn btn-sm btn-neutral get_receiver_email">{{__('admin.MESSAGES-Emailrecipientofmessages')}} </a>
             </div>
           </div>
         </div>
@@ -368,14 +368,14 @@
               <div class="row">
                 <!-- BEGIN INBOX MENU -->
                 <div class="col-md-3 text-right">
-                  <h2 class="grid-title"><i class="fa fa-inbox"></i> صندوق الوارد</h2>
+                  <h2 class="grid-title"><i class="fa fa-inbox"></i>{{__('admin.MESSAGES-Inbox')}} </h2>
                   
 
                   <hr>
 
                   <div>
                     <ul class="nav nav-pills nav-stacked">
-                      <li class="active"><a href="#"><i class="fa fa-inbox"></i> عدد الرسائل ({{$messages->total()}})</a></li>
+                      <li class="active"><a href="#"><i class="fa fa-inbox"></i>{{__('admin.MESSAGES-MSGNUM')}}   ({{$messages->total()}})</a></li>
                     </ul>
                   </div>
                 </div>

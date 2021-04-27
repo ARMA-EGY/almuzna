@@ -75,6 +75,16 @@ class CoreController extends Controller
             $distance = $distancematrix['rows'][0]['elements'][0]['distance']['value'];
             $kilometeres = $distance * 0.001;
             $deliveryFee = $kilometeres * 5;
+
+            foreach(Cart::content() as $item)
+            {
+
+                $option = $item->options->merge(['deliveryFee' => $deliveryFee , 'couponDiscount' => $item->options->couponDiscount]);
+                Cart::update($item->rowId, ['options' => $option]);
+                
+            }
+            
+
             
             return $deliveryFee;
         }
@@ -133,7 +143,7 @@ class CoreController extends Controller
        $id = $request->get('id');
        $name = $request->get('name');
        $price = $request->get('price'); 
-       $cartItem = Cart::add($id,  $name , 1, $price, 10);
+       $cartItem = Cart::add($id,  $name , 1, $price, 10 , ['deliveryFee' => 0.00 , 'couponDiscount' => 0.00]);
        Cart::associate($cartItem->rowId, 'App\Product');
        return $cartItem;
 
@@ -141,6 +151,7 @@ class CoreController extends Controller
     //======== Home Page ======== 
     public function index(Request $request)
     {
+
         $page                         = Page::where('name','Home')->first();
         $seo                          = Seo::where('page_token',$page->token)->first();
         $socials                      = Social::all();

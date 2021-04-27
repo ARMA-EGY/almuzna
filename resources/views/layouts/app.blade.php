@@ -504,7 +504,7 @@
         window.onload = function() {     
 
 
-        firebase.auth().languageCode = 'it';
+        firebase.auth().languageCode = 'en';
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('get-code-form-submit', {
           'size': 'invisible',
           'callback': (response) => {
@@ -653,6 +653,68 @@
 
 
 $(document).ready(function(){
+
+
+
+        $(document).on('click', '.applycode', function()
+        {
+            var code = $('#couponcode').val(); 
+            console.log(code);     
+
+            $.ajax({
+                url:        "{{route('applyCode')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {code:code}   ,
+                success:function(data)
+                {
+                
+                    if(data.status == 'false')
+                    {
+                        window.location.replace("{{route('welcome')}}");
+                    } else if (data.status == 'true')
+                    {
+                        
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                                                   });
+                        Toast.fire({
+                          type: 'success',
+                          title: data.msg
+                        }) 
+                        if(data.msg == 'Coupon is Applied')
+                        {
+                            $('#couponDiscount').val(data.couponDiscount);
+                            
+                            var tl = (parseFloat(data.totalTax) + parseFloat($('#shippingFee').val())) - parseFloat($('#couponDiscount').val());
+                            var total = (parseFloat(tl) - parseFloat($('#couponDiscount').val()));
+console.log(total);
+                            $('.total-value').html(total+' SAR');
+                            $('#total').val(total);
+
+                        }
+                        
+                    } 
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+        });
+
+
+
+
         $(document).on('click', '.stepper_up', function()
         {
             var val = $(this).prev('p').html();
@@ -693,7 +755,7 @@ $(document).ready(function(){
                     $('.subtotal-value').html(parseFloat(data.subtotal).toFixed(2)+' SAR');
                     $('#subtotal').val(parseFloat(data.subtotal).toFixed(2));
 
-                    var total = parseFloat(data.totalTax) + parseFloat($('#shippingFee').val());
+                    var total = (parseFloat(data.totalTax) + parseFloat($('#shippingFee').val())) - parseFloat($('#couponDiscount').val());
 
                     $('.total-value').html(total+' SAR');
                     $('#total').val(total); 
@@ -711,7 +773,7 @@ $(document).ready(function(){
                         toastr.error('Woops something went');
                 }
             })
-         });    
+        });    
 
   });
 
@@ -827,7 +889,7 @@ $(document).ready(function(){
                     $('.subtotal-value').html(parseFloat(data.subtotal).toFixed(2)+' SAR');
                     $('#subtotal').val(parseFloat(data.subtotal).toFixed(2));
 
-                    var total = parseFloat(data.totalTax) + parseFloat($('#shippingFee').val());
+                    var total = (parseFloat(data.totalTax) + parseFloat($('#shippingFee').val())) - parseFloat($('#couponDiscount').val());
 
                     $('.total-value').html(total+' SAR');
                     $('#total').val(total); 

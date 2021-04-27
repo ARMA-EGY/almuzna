@@ -6,6 +6,7 @@ use Gloudemans\Shoppingcart\Traits\CartHelper;
 use Illuminate\Contracts\Support\Arrayable;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Support\Arr;
 
 class CartItem implements Arrayable, Jsonable
 {
@@ -250,12 +251,13 @@ class CartItem implements Arrayable, Jsonable
 	 */
 	public function updateFromArray(array $attributes)
 	{
-		$this->id       = array_get($attributes, 'id', $this->id);
-		$this->qty      = array_get($attributes, 'qty', $this->qty);
-		$this->name     = array_get($attributes, 'name', $this->name);
-		$this->price    = array_get($attributes, 'price', $this->price);
+		//dd($attributes);
+		$this->id       = Arr::get($attributes, 'id', $this->id);
+		$this->qty      = Arr::get($attributes, 'qty', $this->qty);
+		$this->name     = Arr::get($attributes, 'name', $this->name);
+		$this->price    = Arr::get($attributes, 'price', $this->price);
 		$this->priceTax = $this->price + $this->tax;
-		$this->options  = new CartItemOptions(array_get($attributes, 'options', $this->options));
+		$this->options  = new CartItemOptions(Arr::get($attributes, 'options', $this->options));
 
 		$this->rowId = $this->generateRowId($this->id, $this->options->all());
 	}
