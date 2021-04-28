@@ -11,8 +11,8 @@
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                   <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">الرئيسية</li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}} </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{__('admin.NAV-HOME')}}</li>
                   </ol>
                 </nav>
               </div>
@@ -26,7 +26,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">اجمالي الزيارات</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{__('admin.HOME-VISITS')}}</h5>
                         <span class="h2 font-weight-bold mb-0">{{number_format($traffic)}}</span>
                       </div>
                       <div class="col-auto order-1">
@@ -47,7 +47,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">المنتجات</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{__('admin.HOME-PRODUCTS')}}</h5>
                         <span class="h2 font-weight-bold mb-0">{{number_format($products_count)}}</span>
                       </div>
                       <div class="col-auto order-1">
@@ -68,7 +68,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">اجمالي الطلبات</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{__('admin.HOME-TOTALORDERS')}} </h5>
                         <span class="h2 font-weight-bold mb-0">0</span>
                       </div>
                       <div class="col-auto order-1">
@@ -89,7 +89,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">العروض</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{__('admin.HOME-OFFERS')}}</h5>
                         <span class="h2 font-weight-bold mb-0">{{number_format($offers_count)}}</span>
                       </div>
                       <div class="col-auto order-1">
@@ -110,7 +110,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">العملاء</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{__('admin.HOME-CUSTOMERS')}}</h5>
                         <span class="h2 font-weight-bold mb-0">{{number_format($customers_count)}}</span>
                       </div>
                       <div class="col-auto order-1">
@@ -131,7 +131,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">السائقين</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{__('admin.HOME-DRIVERS')}}</h5>
                         <span class="h2 font-weight-bold mb-0">{{number_format($drivers_count)}}</span>
                       </div>
                       <div class="col-auto order-1">
@@ -152,7 +152,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">الرسائل</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">{{__('admin.HOME-MESSAGES')}}</h5>
                         <span class="h2 font-weight-bold mb-0">{{number_format($messages_count)}}</span>
                       </div>
                       <div class="col-auto order-1">

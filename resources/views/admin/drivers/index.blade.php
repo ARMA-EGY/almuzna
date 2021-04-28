@@ -18,14 +18,14 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">السائقين</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.HOME-DRIVERS')}}</li>
                 </ol>
               </nav>
             </div>
 
             <div class="col-lg-6 col-5 text-left">
-              <a href="{{ route('drivers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة سائق</a>
+              <a href="{{ route('drivers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.DRIVERS-ADDNEW')}}</a>
             </div>
 
             @if(session()->has('success'))	
@@ -52,7 +52,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">اجمالي السائقين  <span class="badge badge-primary p-2">{{$drivers_count}}</span></h3>
+                  <h3 class="mb-0">{{__('admin.DRIVERS-TOTALDRIVERS')}}<span class="badge badge-primary p-2">{{$drivers_count}}</span></h3>
                 </div>
               </div>
             </div>
@@ -65,9 +65,9 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >الاسم</th>
-                    <th scope="col" class="sort" >الهاتف</th>
-                    <th scope="col" class="sort" >البريد الالكتروني</th>
+                    <th scope="col" class="sort" >{{__('admin.DRIVERS-TABLE-NAME')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.DRIVERS-TABLE-PHONE')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.DRIVERS-TABLE-EMAIL')}}</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -83,7 +83,7 @@
                     <td>{{ $driver->phone }}</td>
                     <td>{{ $driver->email }}</td>
                     <td>
-                      <a href="{{ route('drivers.edit', $driver->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i> تعديل</a>
+                      <a href="{{ route('drivers.edit', $driver->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i>{{__('admin.DRIVERS-TABLE-EDIT')}} </a>
                     </td>
                   </tr>
 

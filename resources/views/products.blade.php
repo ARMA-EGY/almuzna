@@ -34,10 +34,11 @@
 
 					<div class="row grid-6 content-103 justify-content-center">
 
+
                         @if ($products['total'] > 0)
 
                             @foreach ($products['data'] as $product)
-                                
+                               
                                 <div class="col-md-3 col-6 px-product">
                                     <div class="product">
                                         <div class="product-image">
@@ -49,9 +50,32 @@
                                             <div class="product-price font-primary">
  
                                                     <ins>{{$product['price']}} {{__('core.SAR')}}</ins></div>
-                                           
-                                            <div class="mt-3 order-section {{$inverse_text}}">
-                                                <a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i></a>
+                                           <?php
+
+                                           $found = Cart::search(function ($cartItem, $rowId) use($product){
+                                                return $cartItem->id === (string)$product['id'];
+                                            });
+
+                                           ?>
+                                            <div class="mt-3 order-section {{$inverse_text}}" id="prd_{{$product['id']}}">
+                                                @if($found->isNotEmpty())
+                                                <?php foreach ($found as $its) {
+                                                $qty = $its->qty;
+                                                $rowId = $its->rowId;
+
+                                                if($qty > 1){
+                                                    $minCls = 'fa-minus stepper_down';
+                                                }else{
+                                                    $minCls = 'fa-trash-alt text-danger remove_item';
+                                                }
+                                                  
+
+                                                } ?>
+<div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer  {{$minCls}}" id="min_card_{{$product['id']}}" data-rowId="{{$rowId}}" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="{{$product['photo']}}"></i><p class="quantity m-0" id="card_{{$product['id']}}"> {{$qty}}</p><i class="fa fa-plus main-color pointer stepper_up"  data-rowId="{{$rowId}}" data-id="{{$product['id']}}"></i></div>
+                                                @else
+                                      <a class="btn btn-cart add-order mx-2 crtbtn" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="http://localhost:8000/storage/images/product/{{$product['photo']}}"><i class="icon-shopping-basket"></i></a>
+                                                @endif
+          
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -59,6 +83,7 @@
                                 </div>
                                 
                                
+                               <?php unset($found); ?>
                             @endforeach
 
                         @else 

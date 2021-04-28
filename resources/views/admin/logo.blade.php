@@ -12,8 +12,8 @@
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                   <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">اللوجو</li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{__('admin.LOGO-LOGO')}}</li>
                   </ol>
                 </nav>
               </div>
@@ -29,7 +29,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">اللوجو</div>
+                <div class="card-header">{{__('admin.LOGO-LOGO')}}</div>
 
                 <div class="card-body">
                     <form method="post" action="{{route('changelogo')}}" enctype="multipart/form-data">
@@ -42,7 +42,7 @@
                         @endif
 
                         <div class="form-group text-right">
-                          <label for="change_logo">تغيير اللوجو</label>
+                          <label for="change_logo">{{__('admin.LOGO-CHANGELOGO')}}</label>
                           <input id="change_logo" type="file" name="logo" class=" form-control" required>
                         </div>
 
@@ -55,7 +55,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary submit">
-                                    تحميل
+                                {{__('admin.LOGO-LOAD')}}
                                 </button>
                             </div>
                         </div>

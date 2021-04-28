@@ -414,7 +414,7 @@
 @endsection
 
 @section('content')
-
+        
         <!-- Content
 		============================================= -->
 		<section id="content">
@@ -430,7 +430,20 @@
                         <div class="panel">
                           <div class="panel-body wizard-content">
 
-                                <form id="example-form" action="#" class="tab-wizard wizard-circle wizard clearfix">
+                                <form id="example-form" class="tab-wizard wizard-circle wizard clearfix placeOrder">
+                                    @csrf
+
+                                    <input type="hidden" name="shippingFee" id="shippingFee" value="0.00">
+                                    <input type="hidden" name="subtotal" id="subtotal" value="{{Cart::subtotal()}}">
+                                    <input type="hidden" name="total" id="total" value="0.00">
+                                     <input type="hidden" name="totalTax" id="totalTax" value="{{$totalTax}}">
+                                    
+
+                                    <input type="hidden" name="orderlat" id="orderlat" value="">
+                                    <input type="hidden" name="orderlong" id="orderlong" value="">
+                                    <input type="hidden" name="sales_tax" id="sales_tax" value="{{$sales_perc}}">
+                                    <input type="hidden" name="delivery_address" id="delivery_address" value="">
+                                    <input type="hidden" name="couponDiscount" id="couponDiscount" value="{{$couponDiscount}}">
 
                                     <h6>Checkout</h6>
                                     <section class="my-4">
@@ -440,49 +453,46 @@
                                 
                                                 <h3 class="pre-label font-size-base">Cart Items</h3>
 
-                                
-                                                <div class="bg-white shadow-sm rounded mb-3 p-3 alert alert-dismissible" role="alert">
+                        
+                                                @if(Cart::count() > 0) 
+                                                  @foreach(Cart::content() as $item)
+
+                                                    <?php 
+                                                        if($item->qty > 1){
+                                                            $minCls = 'fa-minus stepper_down';
+                                                        }else{
+                                                            $minCls = 'fa-trash-alt text-danger remove_item';
+                                                        }
+                                                    ?>
+
+
+
+                                                <div class="bg-white shadow-sm rounded mb-3 p-3 alert alert-dismissible" role="alert" id="item_checkout_{{$item->model->id}}">
                                                     <div class="row align-items-center no-gutters p-md-2">
                                                         <div class="col-lg-2">
                                                             <img src="{{ asset('front_assets/demos/shop/images/items/1.png')}}" alt="" class="img-fluid" />
                                                         </div>
                                                         <div class="col-lg-5 pl-lg-3 mb-2 mb-lg-0">
-                                                            <h5 class="mb-0">Water Bottle 500ml</h5>
+                                                            <h5 class="mb-0">{{$item->model->name_en}}</h5>
                                                         </div>
                                                         <div class="col-6 col-lg-2">
                                                             <div class=" d-flex justify-content-between align-items-center actions-section-cart" style="width: unset">
-                                                                <i class="fa main-color pointer stepper_down fa-minus"></i>
-                                                                <p class="quantity m-0">2</p>
-                                                                <i class="fa fa-plus main-color pointer stepper_up"></i>
+                                                               <i class="fa main-color pointer  {{$minCls}}" id="min_card_{{$item->model->id}}" data-rowId="{{$item->rowId}}" data-id="{{$item->model->id}}" data-name="{{$item->model->name_en}}" data-price="{{$item->model->price}}" data-photo="{{$item->model->photo}}"></i>
+                                                               <p class="quantity m-0" id="card_{{$item->model->id}}"> {{$item->qty}}</p><i class="fa fa-plus main-color pointer stepper_up"  data-rowId="{{$item->rowId}}" data-id="{{$item->model->id}}"></i>
                                                             </div>
                                                         </div>
                                                         <div class="col-6 col-lg-3 text-right">
-                                                            <div class="h5 mb-0">30.00 {{__('core.SAR')}}</div>
-                                                            <small class="text-muted"><s>45.00 {{__('core.SAR')}}</s></small>
+                                                            <div class="h5 mb-0">{{$item->model->price}} {{__('core.SAR')}}</div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                
-                                                <div class="bg-white shadow-sm rounded mb-3 p-3 alert alert-dismissible" role="alert">
-                                                    <div class="row align-items-center no-gutters p-md-2">
-                                                        <div class="col-lg-2">
-                                                            <img src="{{ asset('front_assets/demos/shop/images/items/4.png')}}" alt="" class="img-fluid" />
-                                                        </div>
-                                                        <div class="col-lg-5 pl-lg-3 mb-2 mb-lg-0">
-                                                            <h5 class="mb-0">Water Bottle 1 Liter</h5>
-                                                        </div>
-                                                        <div class="col-6 col-lg-2">
-                                                            <div class=" d-flex justify-content-between align-items-center actions-section-cart" style="width: unset">
-                                                                <i class="fa main-color pointer stepper_down fa-trash-alt text-danger remove_item"></i>
-                                                                <p class="quantity m-0">1</p>
-                                                                <i class="fa fa-plus main-color pointer stepper_up"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6 col-lg-3 text-right">
-                                                            <div class="h5 mb-0">35.00 {{__('core.SAR')}}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                                  @endforeach
+                                                @endif
+
+
+
+                            
                                                 
                                                 <!-- Discount and promocode -->
                                 
@@ -497,7 +507,7 @@
                                                         </div>
                                 
                                                         <div class="col-lg-5 text-right pt-4">
-                                                            <a href="#" class="btn btn-primary btn-sm btn-rounded px-lg-5">APPLY</a>
+                                                            <a href="#" class="btn btn-primary btn-sm btn-rounded px-lg-5 applycode">APPLY</a>
                                                         </div>
                                 
                                                     </div>
@@ -526,7 +536,7 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
-                                                                        <input type="radio" id="customRadio11" name="customRadio" class="custom-control-input" data-toggle="collapse" data-target="#collapseOne1" aria-controls="collapseOne1">
+                                                                        <input type="radio" id="customRadio11" name="customRadio11" class="custom-control-input" data-toggle="collapse" data-target="#collapseOne1" aria-controls="collapseOne1">
                                                                         <label class="custom-control-label pl-2 pl-lg-4" for="customRadio11">
                                                                             <span class="h6 m-0">Location #1</span><br />
                                                                         </label>
@@ -568,13 +578,20 @@
 
 
                                                 <a href="javascript:void(0);" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#LocationModal"> Add New Location</a>
+
+                                                
+
+                                                <div class="form-group">
+                                                    <label>Location</label>
+                                                    <input type="text" class="form-control" id="search_input" placeholder="Type address...">
+                                                </div>
                                                    
                                                 <hr>
 
                                                 <!-- Date -->
                                                 <h3>Choose Delivery Date</h3>
                                                 
-                                                <input type="date" class="form-control">
+                                                <input type="date" class="form-control" name="delivery_date">
 
 
                                             </div>
@@ -598,7 +615,7 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
-                                                                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input form-radio" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
+                                                                        <input type="radio" id="customRadio1" name="payment_method" class="custom-control-input form-radio" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
                                                                         <label class="custom-control-label pl-2 pl-lg-4" for="customRadio1">
                                                                             <span class="h6 m-0">Credit cart</span> <br />
                                                                         </label>
@@ -713,20 +730,22 @@
                                                     <table class="table table-sm sub-table text-right my-4">
                                                         <tbody><tr>
                                                             <td><span class="subtotal">Subtotal</span></td>
-                                                            <td class="text-right"><span class="subtotal-value">180.00 SAR</span></td>
+                                                            <td class="text-right"><span class="subtotal-value">{{Cart::subtotal()}} SAR</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td><span class="vat">VAT</span></td>
-                                                            <td class="text-right"><span class="vat-value">15%</span></td>
+                                                            <td class="text-right"><span class="vat-value">{{$sales_perc}}%</span></td>
                                                         </tr>
 
                                                         <tr>
                                                             <td><span class="vat">Shipping</span></td>
-                                                            <td class="text-right"><span class="vat-value">10.00 SAR</span></td>
+                                                            <td class="text-right"><span class="Shipping-value">0.00 SAR</span></td>
                                                         </tr>                                                           
                                                         <tr>
                                                             <td><span class="total">Total</span></td>
-                                                            <td class="text-right"><span class="total-value">217.00 SAR</span></td>
+
+                                                             <?php $totalWithcoupon = $totalTax - $couponDiscount;  ?>
+                                                            <td class="text-right"><span class="total-value">{{$totalWithcoupon}} SAR</span></td>
                                                         </tr>
                                                     </tbody></table>
                                                 </div>
@@ -886,8 +905,80 @@
         headerTag: "h6",
         bodyTag: "section",
         transitionEffect: "fade",
-    titleTemplate: '<span class="step">#index#</span> #title#'
+    titleTemplate: '<span class="step">#index#</span> #title#',
+            onFinished: function (event, currentIndex)
+        {
+            var form = $(this);
+
+            // Submit form input
+
+            form.submit();
+        }
     });
 </script>
+
+
+
+
+<script>
+
+            $("#example-form").submit(function(e)
+            {
+                e.preventDefault();
+
+
+                var head1   = 'Thank You';
+                var title1  = 'Your Message Has Been Sent Successfully, We will contact you ASAP. ';
+                var head2   = 'Oops...';
+                var title2  = 'Something went wrong, please try again later.';
+
+                $.ajax({
+                    url:        "{{route('placeOrder')}}",
+                    method:     'POST',
+                    dataType:   'json',
+                    data:       $(this).serialize() ,
+                    success:function(data)
+                    {
+
+                    if(data.status == 'false')
+                    {
+                        window.location.replace("{{route('welcome')}}");
+                    } else if (data.status == 'true')
+                    {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                                                   });
+                        Toast.fire({
+                          type: 'success',
+                          title: data.msg
+                        }) 
+                       /* if(data.msg == 'Profile is updated successfully')
+                        {
+                            $('#AccountDetailsModal').modal('hide'); 
+                        }*/
+                        
+                    } 
+                       
+
+                    },error:function(data)
+                    {
+                           const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                                                   });
+                            toastr.error('Woops something went');
+                    }
+                    
+                    
+                });
+
+            });
+
+</script>    
 
 @endsection

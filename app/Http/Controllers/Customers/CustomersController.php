@@ -10,6 +10,8 @@ use App\Http\Requests\UpdateCustomerRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Social;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Configuration;
 
 class CustomersController extends Controller
 {
@@ -18,6 +20,10 @@ class CustomersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+
     public function index()
     {
 		
@@ -27,6 +33,307 @@ class CustomersController extends Controller
             'customers' => $customers,
             'customers_count' => Customer::all()->count(),
         ]);
+
+    }
+
+
+
+
+    public function applyCode(Request $request)
+    {
+
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')){
+
+            $api_token = $request->session()->get('api_token');
+
+            $code = $request->get('code');
+           
+            $ch = curl_init('https://armasoftware.com/demo/almuzna_api/api/v1/coupon/apply/'.$code);
+
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(          
+                'Content-Type: application/json',
+                'x-api-password: ase1iXcLAxanvXLZcgh6tk',
+                'auth-token:'.$api_token
+            )                                                                       
+                        );
+
+            $response = curl_exec($ch);
+            $err = curl_error($ch);
+
+            curl_close($ch);
+
+
+            if ($err) {
+                return response()->json([
+                    'status' => 'true',
+                    'msg' => 'Oops Something went wrong'
+                ]) ;
+            }else {
+                $user = json_decode($response, true);
+
+                if(isset($user['message'])){
+                 if ($user['message'] == 'Unauthenticated.'){
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => 'Oops Something went wrong'
+                    ]) ;
+                 }
+                     
+                               
+                }
+                if(!$user['status']){
+                    if( $user['msg'] == "Unauthenticated user"){
+                        $request->session()->forget(['user_id', 'api_token']);
+                        return response()->json([
+                            'status' => 'false'
+                                        ]) ;
+                    }
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg']
+                    ]) ;
+                    
+                }
+              
+
+              if($user['msg'] == "Coupon is Applied")
+              {
+                    if($user['data']['type'] == "percentage")
+                    {
+                        $subtotal = Cart::subtotal();
+
+                        $sales_perc = Configuration::select('decimal_value')->where('name','sales_tax')->first();
+                        $sales_tax = $subtotal * ($sales_perc->decimal_value/100);
+
+                        $totalTax = $subtotal + $sales_tax;
+
+                        $couponDiscount = $totalTax * ($user['data']['discount']/100);
+
+                        foreach(Cart::content() as $item)
+                        {
+
+                            $option = $item->options->merge(['couponDiscount' => $couponDiscount , 'deliveryFee' => $item->options->deliveryFee]);
+                            $iteme = Cart::update($item->rowId, ['options' => $option]);
+                            
+                        }                        
+
+                        return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg'],
+                        'couponDiscount'=> $couponDiscount
+                        ]) ;
+                    }else{
+
+                
+                        foreach(Cart::content() as $item)
+                        {
+                            
+                            $option = $item->options->merge(['couponDiscount' => $user['data']['discount'] , 'deliveryFee' => $item->options->deliveryFee]);
+                            $iteme = Cart::update($item->rowId, ['options' => $option]);
+                            
+                        }                      
+
+                        return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg'],
+                        'couponDiscount'=> $user['data']['discount']
+                        ]) ;   
+
+                    }
+
+
+              }else{
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg']
+                    ]) ;
+              }
+
+
+            }
+
+        }else{
+            return response()->json([
+                'status' => 'false'
+                            ]) ;
+        }
+
+
+
+
+
+    }
+
+
+
+    public function placeOrder(Request $request)
+    {
+
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')){
+
+            $api_token = $request->session()->get('api_token');
+            $products = array();
+
+            $deliveryFee;
+
+            foreach(Cart::content() as $item)
+            {
+                
+                array_push($products, ["id"=>$item->model->id,"quantity"=>$item->qty]);
+                $deliveryFee = $cartItem->options['deliveryFee'];
+            }
+
+            $subtotal = Cart::subtotal();
+            $sales_perc = Configuration::select('decimal_value')->where('name','sales_tax')->first();
+            $sales_tax = $subtotal * ($sales_perc->decimal_value/100);
+            $totalTax = $subtotal + $sales_tax;
+            $total = $totalTax + $deliveryFee;
+
+
+            $data = array( 
+
+
+                'payment_method' => 'cash',
+                'delivery_date'  =>$request->post('delivery_date'),
+                'delivery_address' => $request->post('delivery_address'),
+                'orderlat'  =>$request->post('orderlat'),
+                'orderlong' => $request->post('orderlong'),
+                'sales_tax'  =>$sales_perc->decimal_value,
+                'delivery_fees' => $request->post('shippingFee'),
+                'subtotal'  => $subtotal,
+                'total'  =>$total
+
+
+                            );
+
+           $data['products']=$products;
+
+           $data_string = json_encode($data);
+
+           
+            $ch = curl_init('https://armasoftware.com/demo/almuzna_api/api/v1/user/order');
+
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(          
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string),
+                'x-api-password: ase1iXcLAxanvXLZcgh6tk',
+                'auth-token:'.$api_token
+            )                                                                       
+                        );
+
+            $response = curl_exec($ch);
+            $err = curl_error($ch);
+
+            curl_close($ch);
+
+
+            if ($err) {
+                return response()->json([
+                    'status' => 'true',
+                    'msg' => 'Oops Something went wrong'
+                ]) ;
+            }else {
+                $user = json_decode($response, true);
+                if(isset($user['message'])){
+                 if ($user['message'] == 'Unauthenticated.'){
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => 'Oops Something went wrong'
+                    ]) ;
+                 }
+                     
+                               
+                }
+                if(!$user['status']){
+                    if( $user['msg'] == "Unauthenticated user"){
+                        $request->session()->forget(['user_id', 'api_token']);
+                        return response()->json([
+                            'status' => 'false'
+                                        ]) ;
+                    }
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg']
+                    ]) ;
+                    
+                }
+              
+                    return response()->json([
+                        'status' => 'true',
+                        'msg' => $user['msg']
+                    ]) ;
+
+            }
+
+        }else{
+            return response()->json([
+                'status' => 'false'
+                            ]) ;
+        }
+
+
+
+
+
+    }
+
+
+    //======== Checkout Page ======== 
+    public function checkout(Request $request)
+    {
+
+
+        if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
+            
+            $user = userProfile($request);
+
+            $socials  = Social::all();
+
+           $subtotal = Cart::subtotal();
+
+           $sales_perc = Configuration::select('decimal_value')->where('name','sales_tax')->first();
+           $sales_tax = $subtotal * ($sales_perc->decimal_value/100);
+           $totalTax = $subtotal + $sales_tax;
+
+           $couponDiscount;
+           foreach(Cart::content() as $item) {
+
+
+              $couponDiscount = $item->options['couponDiscount'];
+              break;
+           }
+
+            $data = [
+            'page_token'=>'',
+            'socials'=>$socials,
+            'user'=>$user,
+            'totalTax'=>$totalTax,
+            'sales_perc'=>$sales_perc->decimal_value,
+            'couponDiscount'=>$couponDiscount
+            ];
+        
+
+             return view('checkout')->with($data);   
+        }
+
+        return redirect(route('welcome'));
+
+
+
+
 
     }
     
@@ -128,7 +435,7 @@ class CustomersController extends Controller
             }
             $order = order($request, $orders[0]['id']);
 
-//dd($order['data'][0]);
+
 
             $data = [
             'page_token'=>'',

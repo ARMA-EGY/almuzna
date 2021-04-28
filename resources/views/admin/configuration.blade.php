@@ -11,8 +11,8 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">الاعدادات</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.CONFIG-CONFIG')}}</li>
                 </ol>
               </nav>
             </div>
@@ -32,7 +32,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">الاعدادات </h3>
+                  <h3 class="mb-0">{{__('admin.CONFIG-CONFIG')}} </h3>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
               <form class="configuration_form">
                 @csrf
 
-                <h6 class="heading-small text-muted text-right mb-4"> قيمة الحد الادنى للطلب </h6>
+                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-MINIORDERVALUE')}}  </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -58,7 +58,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4"> أقصى قيمة للطلب للتوصيل في نفس اليوم </h6>
+                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-MAXORDERVALUEDAY')}}  </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -76,7 +76,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4"> ضريبة المبيعات</h6>
+                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-SALESTAX')}} </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -94,7 +94,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4"> قيمة التوصيل الافتراضية</h6>
+                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-DFLTDELIVVALUE')}} </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -112,7 +112,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4"> الحد الاقصى لتوصيل الطلبات للسائقين في اليوم</h6>
+                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-MAXORDERSPERDAY')}} </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -133,7 +133,7 @@
 
                 <!-- Save -->
                 <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-primary submit">حفظ التغيرات</button>
+                  <button type="submit" class="btn btn-sm btn-primary submit">{{__('admin.CONFIG-SAVECHANGES')}}</button>
                 </div>
               </form>
             </div>

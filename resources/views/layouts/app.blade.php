@@ -78,6 +78,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<script src="https://unpkg.com/cart-localstorage@1.1.4/dist/cart-localstorage.min.js" type="text/javascript"></script>
+    
 
     @yield('style')
 
@@ -201,15 +202,59 @@
                                                 <h4> {{__('core.MY-CART')}}</h4>
                                             </div>
                                             <form class="top-cart-items">
-
+                                                    @if(Cart::count() > 0)
+                                                    <input type="hidden" id="state" value="full">
+                                                    @else
+                                                    <input type="hidden" id="state" value="empty">
+                                                    @endif
                                                 <div class="cart">
+                                                @if(Cart::count() > 0) 
+                                                  @foreach(Cart::content() as $item)
+
+                                                    <?php 
+                                                        if($item->qty > 1){
+                                                            $minCls = 'fa-minus stepper_down';
+                                                        }else{
+                                                            $minCls = 'fa-trash-alt text-danger remove_item';
+                                                        }
+                                                    ?>
+
+                                                    <div class="top-cart-item" id="item_{{$item->model->id}}">
+                                                        <div class="top-cart-item-image mx-2">
+                                                            <a href="#">
+                                                                <img src="{{$item->model->photo}}"  />
+                                                            </a>
+                                                        </div>
+                                                        <div class="top-cart-item-desc">
+                                                            <div class="top-cart-item-desc-title">
+                                                                <input type="hidden" name="id" value="{{$item->model->id}}"><a href="#">{{$item->model->name_en}}</a>
+                                                            <div class=" d-flex justify-content-between align-items-center actions-section-cart">
+                                                             <i class="fa main-color pointer  {{$minCls}}" id="min_cart_item_{{$item->model->id}}" data-id="{{$item->model->id}}" data-rowId="{{$item->rowId}}" data-name="{{$item->model->name_en}}" data-price="{{$item->model->price}}" data-photo="{{$item->model->photo}}"></i> 
+                                                             <p class="quantity m-0" id="cart_item_{{$item->model->id}}">{{$item->qty}}</p> 
+                                                             <i class="fa fa-plus main-color pointer stepper_up" data-id="{{$item->model->id}}" data-rowId="{{$item->rowId}}"></i>
+                                                            </div>
+                                                            <span class="top-cart-item-price d-block">{{$item->model->price}}</span>
+                                                        </div> </div> 
+                                                    </div>
+                                                  @endforeach
+                                                @else
+                                                    
                                                     <img src="{{ asset('front_assets/images/empty-cart.svg')}}" alt="Image" class="mb-0">
                                                     <h4 class="text-center mt-4">{{__('core.EMPTY-CART')}}</h4>
+                                                @endif
+                                                    
                                                 </div>
 
                                                 <div class="top-cart-action justify-content-center">
+                                                    @if(Cart::count() > 0)
+                                                    <a href="/checkout" class="button button-3d button-small m-0">Checkout</a>
+                                                    @else
                                                     <a href="{{route('products')}}" class="button button-3d button-small m-0">{{__('core.GO-SHOPPING')}}</a>
+                                                    @endif
+                                                    
                                                 </div>
+                                                
+
                                             </form>
                                         </div>
                                     </div><!-- #top-cart end -->
@@ -435,6 +480,7 @@
              https://firebase.google.com/docs/web/setup#available-libraries -->
         <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNno9sBFWOmpTFRXSDu6C2IskdQfo329Q&libraries=places"></script>
 
         <script>
           // Your web app's Firebase configuration
@@ -458,7 +504,7 @@
         window.onload = function() {     
 
 
-        firebase.auth().languageCode = 'it';
+        firebase.auth().languageCode = 'en';
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('get-code-form-submit', {
           'size': 'invisible',
           'callback': (response) => {
@@ -604,38 +650,369 @@
 
             });
 
-            function renderCart(items) {
-			const $cart = document.querySelector(".cart")
-			const $cart_action = document.querySelector(".top-cart-action")
-
-            $cart.innerHTML = items.map((item) => `
-            <div class="top-cart-item">
-                <div class="top-cart-item-image mx-2">
-                    <a href="#"><img src="${item.image}"  /></a>
-                </div>
-                <div class="top-cart-item-desc">
-                    <div class="top-cart-item-desc-title">
-                        <input type="hidden" name="id" value="${item.id}">
-                        <a href="#">${item.name}</a>
-                        <div class=" d-flex justify-content-between align-items-center actions-section-cart">
-                            <i class="fa main-color pointer stepper_down fa-minus" data-id="${item.id}"></i>
-                            <p class="quantity m-0">${item.quantity}</p>
-                            <i class="fa fa-plus main-color pointer stepper_up" data-id="${item.id}"></i>
-                        </div>
-                        <span class="top-cart-item-price d-block">${item.price}</span>
-                    </div>
-                </div>
-            </div>`).join("")
-
-            $cart_action.innerHTML = '<a href="/checkout" class="button button-3d button-small m-0">Checkout</a>'
-		}
-		
-		renderCart(cartLS.list())
-		cartLS.onChange(renderCart)
 
 
+$(document).ready(function(){
+
+
+
+        $(document).on('click', '.applycode', function()
+        {
+            var code = $('#couponcode').val(); 
+            console.log(code);     
+
+            $.ajax({
+                url:        "{{route('applyCode')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {code:code}   ,
+                success:function(data)
+                {
+                
+                    if(data.status == 'false')
+                    {
+                        window.location.replace("{{route('welcome')}}");
+                    } else if (data.status == 'true')
+                    {
+                        
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                                                   });
+                        Toast.fire({
+                          type: 'success',
+                          title: data.msg
+                        }) 
+                        if(data.msg == 'Coupon is Applied')
+                        {
+                            $('#couponDiscount').val(data.couponDiscount);
+                            
+                            var tl = (parseFloat(data.totalTax) + parseFloat($('#shippingFee').val())) - parseFloat($('#couponDiscount').val());
+                            var total = (parseFloat(tl) - parseFloat($('#couponDiscount').val()));
+console.log(total);
+                            $('.total-value').html(total+' SAR');
+                            $('#total').val(total);
+
+                        }
+                        
+                    } 
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+        });
+
+
+
+
+        $(document).on('click', '.stepper_up', function()
+        {
+            var val = $(this).prev('p').html();
+            var id  = $(this).attr('data-id');
+            var rowId   = $(this).attr('data-rowId');
+            
+            var res = ++val;
+
+            if( $(this).prev('p').html() == 1)
+            {
+                $('#min_card_'+id).removeClass('fa-trash-alt text-danger remove_item');
+                $('#min_card_'+id).addClass('fa-minus stepper_down');
+
+                $('#min_cart_item_'+id).removeClass('fa-trash-alt text-danger remove_item');
+                $('#min_cart_item_'+id).addClass('fa-minus stepper_down');
+            }        
+            
+            //$(this).prev('p').html(res);
+            //$(this).siblings('.fa-trash-alt').addClass('fa-minus');
+            //$(this).siblings('.fa-minus').removeClass('fa-trash-alt text-danger remove_item');
+
+
+
+            $('#card_'+id).html(res);
+            $('#cart_item_'+id).html(res);
+
+
+
+            $.ajax({
+                url:        "{{route('updatCart')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {rowId:rowId,
+                    qty:res}   ,
+                success:function(data)
+                {
+                
+                    $('.subtotal-value').html(parseFloat(data.subtotal).toFixed(2)+' SAR');
+                    $('#subtotal').val(parseFloat(data.subtotal).toFixed(2));
+
+                    var total = (parseFloat(data.totalTax) + parseFloat($('#shippingFee').val())) - parseFloat($('#couponDiscount').val());
+
+                    $('.total-value').html(total+' SAR');
+                    $('#total').val(total); 
+
+                    $('#totalTax').val(parseFloat(data.totalTax).toFixed(2));  
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+        });    
+
+  });
+
+       $(document).on('click', '.add-order', function() 
+        {
+            var id = $(this).attr("data-id");
+            var name = $(this).attr("data-name");
+            var price = $(this).attr("data-price");
+            var photo = $(this).attr("data-photo");
+
+           $(this).parents('.order-section').html('<div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer fa-trash-alt text-danger remove_item"  id="min_card_'+id+'"  data-id="'+id+'"></i><p class="quantity m-0" id="card_'+id+'">1</p><i class="fa fa-plus main-color pointer stepper_up" id="pls_card_'+id+'"  data-id="'+id+'"></i></div>');
+
+     
+            
+
+            $.ajax({
+                url:        "{{route('addcart')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {id:id,
+                       name:name,
+                       price:price }   ,
+                success:function(data)
+                {
+
+                    $('#min_card_'+id).attr('data-rowId', data.rowId);
+                    $('#pls_card_'+id).attr('data-rowId', data.rowId);
+
+                    $('#min_card_'+id).attr('data-name', data.name);
+                    $('#min_card_'+id).attr('data-price', data.price);
+                    $('#min_card_'+id).attr('data-photo', data.photo);
+
+                    
+
+
+
+                    var state = $('#state').val();
+                    if(state == 'empty')
+                    {
+                        $('.cart').html('<div class="top-cart-item" id="item_'+id+'"><div class="top-cart-item-image mx-2"><a href="#"><img src="'+photo+'"  /></a></div><div class="top-cart-item-desc"><div class="top-cart-item-desc-title"><input type="hidden" name="id" value="'+id+'"><a href="#">'+name+'</a> <div class=" d-flex justify-content-between align-items-center actions-section-cart"><i class="fa main-color pointer  fa-trash-alt text-danger remove_item" data-id="'+id+'" id="min_cart_item_'+id+'" data-rowId="'+data.rowId+'" data-name="'+data.name+'" data-price="'+data.price+'" data-photo="'+data.photo+'"></i> <p class="quantity m-0" id="cart_item_'+id+'">1</p> <i class="fa fa-plus main-color pointer  stepper_up" data-rowId="'+data.rowId+'" data-id="'+id+'"></i></div><span class="top-cart-item-price d-block">'+price+'</span></div> </div> </div>');
+
+                        $('.top-cart-action').html('<a href="/checkout" class="button button-3d button-small m-0">Checkout</a>');
+                        $('#state').val('full');
+                    }else if(state == 'full')
+                    {
+                        var row = '<div class="top-cart-item" id="item_'+id+'"><div class="top-cart-item-image mx-2"><a href="#"><img src="'+photo+'"  /></a></div><div class="top-cart-item-desc"><div class="top-cart-item-desc-title"><input type="hidden" name="id" value="'+id+'"><a href="#">'+name+'</a> <div class=" d-flex justify-content-between align-items-center actions-section-cart"><i class="fa main-color pointer  fa-trash-alt text-danger remove_item" data-id="'+id+'" id="min_cart_item_'+id+'" data-rowId="'+data.rowId+'" data-name="'+data.name+'" data-price="'+data.price+'" data-photo="'+data.photo+'"></i> <p class="quantity m-0" id="cart_item_'+id+'">1</p> <i class="fa fa-plus main-color pointer  stepper_up" data-rowId="'+data.rowId+'" data-id="'+id+'"></i></div><span class="top-cart-item-price d-block">'+price+'</span></div> </div> </div>';
+                        $('.cart').append(row);
+                    }
+
+
+ 
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+
+        });
+
+
+
+
+        $(document).on('click', '.stepper_down', function()
+        {
+            var val = $(this).next('p').html();
+            var id  = $(this).attr('data-id');
+            var rowId   = $(this).attr('data-rowId');
+
+            
+            if (val == 1)
+            {
+                var res = val;
+            }
+            else
+            {
+                var res = val -1;
+            }
+            
+            if(res == 1)
+            {
+                $(this).removeClass('fa-minus');
+                $(this).addClass('fa-trash-alt text-danger remove_item');
+
+                $('#min_card_'+id).removeClass('fa-minus stepper_down');
+                $('#min_card_'+id).addClass('fa-trash-alt text-danger remove_item');
+
+                $('#min_cart_item_'+id).removeClass('fa-minus stepper_down');
+                $('#min_cart_item_'+id).addClass('fa-trash-alt text-danger remove_item');
+            }
+            
+            $(this).next('p').html(res);
+
+
+            $('#card_'+id).html(res);
+            $('#cart_item_'+id).html(res);
+
+            $.ajax({
+                url:        "{{route('updatCart')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {rowId:rowId,
+                    qty:res}   ,
+                success:function(data)
+                {
+
+                    $('.subtotal-value').html(parseFloat(data.subtotal).toFixed(2)+' SAR');
+                    $('#subtotal').val(parseFloat(data.subtotal).toFixed(2));
+
+                    var total = (parseFloat(data.totalTax) + parseFloat($('#shippingFee').val())) - parseFloat($('#couponDiscount').val());
+
+                    $('.total-value').html(total+' SAR');
+                    $('#total').val(total); 
+
+                    $('#totalTax').val(parseFloat(data.totalTax).toFixed(2));                   
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+         });    
+
+
+
+        $(document).on('click', '.remove_item', function() {
+            var id  = $(this).attr('data-id');
+            var rowId   = $(this).attr('data-rowId');
+
+            var name = $(this).attr('data-name');
+            var price = $(this).attr('data-price');
+            var photo = $(this).attr('data-photo');
+
+
+            $(this).parents('.order-section').html('<a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i></a>');
+            $('#item_'+id).remove();
+            $('#item_checkout_'+id).remove();
+            $('#prd_'+id).html('<a class="btn btn-cart add-order mx-2" data-id="'+id+'" data-name="'+name+'" data-price="'+price+'" data-photo="'+photo+'"><i class="icon-shopping-basket"></i></a>');
+
+            if($('.cart').is(':empty'))
+             {
+                $('.top-cart-items').html('<input type="hidden" id="state" value="empty"><div class="cart"><img src="http://localhost:8000/front_assets/images/empty-cart.svg" alt="Image" class="mb-0"><h4 class="text-center mt-4">Your cart is empty.</h4></div><div class="top-cart-action justify-content-center"><a href="http://localhost:8000/en/products" class="button button-3d button-small m-0">Go Shopping</a></div>');
+             }
+
+            $.ajax({
+                url:        "{{route('itemRemove')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {rowId:rowId}   ,
+                success:function(data)
+                {
+
+                   
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+
+        });
         </script>
+<script>
 
+    $(document).ready(function(){
+
+
+        const searchInput = document.getElementById("search_input");
+        const options = {
+          componentRestrictions: { country: "EG" },
+          fields: ["geometry", "name" ,"icon", "address_components" , "formatted_address"],
+          strictBounds: true,
+          types: [],
+        };
+        const autocomplete = new google.maps.places.Autocomplete(searchInput, options);
+        google.maps.event.addListener(autocomplete , 'place_changed' , function(){
+
+            var near_place = autocomplete.getPlace();
+            console.log(near_place);
+
+            var lat = near_place.geometry.location.lat();
+            var lng = near_place.geometry.location.lng();
+            $('#orderlat').val(lat);
+            $('#orderlong').val(lng);
+            $('#delivery_address').val(near_place.formatted_address);
+
+
+            $.ajax({
+                url:        "{{route('distanceCalculator')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {lat:lat,
+                       lng:lng },
+                success:function(data)
+                {
+                    
+                    console.log(data);
+                    $('.Shipping-value').html(data+' SAR');
+                    $('#shippingFee').val(data);
+
+                    var dstotal = parseFloat($('#totalTax').val())+parseFloat(data);
+                    $('.total-value').html(parseFloat(dstotal).toFixed(2)+' SAR');
+                    $('#total').val(parseFloat(dstotal).toFixed(2)); 
+                    
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+
+        });
+
+    });
+</script>
         @yield('script')
 
 </body>

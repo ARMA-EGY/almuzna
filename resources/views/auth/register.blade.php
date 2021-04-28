@@ -12,9 +12,9 @@
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                   <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('admin-members')}}">الاعضاء</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">اضافة عضو جديد</li>
+                    <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin-members')}}">{{__('admin.NAV-MEMEBERS')}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{__('admin.REGISTER-ADDNEW')}}</li>
                   </ol>
                 </nav>
               </div>
@@ -33,7 +33,7 @@
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">اضافة عضو جديد </h3>
+                    <h3 class="mb-0">{{__('admin.REGISTER-ADDNEW')}}  </h3>
                   </div>
                 </div>
               </div>
@@ -45,7 +45,7 @@
 
                       <div class="col-lg-6">
                         <div class="form-group text-right">
-                          <label class="form-control-label" for="input-username">الاسم</label>
+                          <label class="form-control-label" for="input-username">{{__('admin.REGISTER-NAME')}}</label>
                           <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                           @error('name')
@@ -58,7 +58,7 @@
 
                       <div class="col-lg-6">
                         <div class="form-group text-right">
-                          <label class="form-control-label" for="input-email">البريد الالكتروني</label>
+                          <label class="form-control-label" for="input-email">{{__('admin.REGISTER-EMAIL')}} </label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                             @error('email')
@@ -75,14 +75,14 @@
   
                         <div class="col-lg-6">
                           <div class="form-group text-right">
-                            <label class="form-control-label" for="input-phone">الهاتف</label>
-                            <input type="number" name="phone" id="input-phone" class="form-control" placeholder="رقم الهاتف"  >
+                            <label class="form-control-label" for="input-phone">{{__('admin.REGISTER-PHONE')}}</label>
+                            <input type="number" name="phone" id="input-phone" class="form-control" placeholder="{{__('admin.REGISTER-PHONEPLC')}}"  >
                           </div>
                         </div>
 
                         <div class="col-lg-6">
                           <div class="form-group text-right">
-                              <label class="form-control-label" for="input-gender">النوع</label>
+                              <label class="form-control-label" for="input-gender">{{__('admin.REGISTER-GENDER')}}</label>
                               <select class="form-control" name="gender" id="input-gender" required>
                                   <option value="Female">انثى</option>
                                   <option value="Male">ذكر</option>
@@ -96,7 +96,7 @@
 
                       <div class="col-lg-6">
                         <div class="form-group text-right">
-                          <label class="form-control-label" for="input-phone">كلمة المرور</label>
+                          <label class="form-control-label" for="input-phone">{{__('admin.REGISTER-PASSWORD')}}</label>
                           <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                           @error('password')
@@ -109,7 +109,7 @@
 
                       <div class="col-lg-6">
                         <div class="form-group text-right">
-                            <label for="password-confirm" class="form-control-label">تأكيد كلمة المرور</label>
+                            <label for="password-confirm" class="form-control-label">{{__('admin.REGISTER-CONFIRMPASSWORD')}} </label>
                              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
                       </div>
@@ -120,7 +120,7 @@
   
                           <div class="col-lg-6">
                             <div class="form-group text-right">
-                              <label class="form-control-label" for="input-role">الوظيفة</label>
+                              <label class="form-control-label" for="input-role">{{__('admin.REGISTER-JOB')}}</label>
                               <select class="form-control" name="role" id="input-role" required>
                                 <option>Admin</option>
                                 <option>Moderator</option>
@@ -134,7 +134,7 @@
                   <hr class="my-4" />
                   <!-- Save -->
                   <div class="col-12 text-right">
-                    <button type="submit" class="btn btn-success submit">اضافة</button>
+                    <button type="submit" class="btn btn-success submit">{{__('admin.REGISTER-ADD')}}</button>
                   </div>
                 </form>
               </div>

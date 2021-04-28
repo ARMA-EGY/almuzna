@@ -18,14 +18,14 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">المنتجات</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.NAV-PRODUCTS')}}</li>
                 </ol>
               </nav>
             </div>
 
             <div class="col-lg-6 col-5 text-left">
-              <a href="{{ route('products.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة منتج</a>
+              <a href="{{ route('products.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.PRODUCT-ADDNEW')}}</a>
             </div>
 
             @if(session()->has('success'))	
@@ -52,7 +52,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">اجمالي المنتجات  <span class="badge badge-primary p-2">{{$products_count}}</span></h3>
+                  <h3 class="mb-0">{{__('admin.PRODUCT-TOTALPRODUCTs')}}<span class="badge badge-primary p-2">{{$products_count}}</span></h3>
                 </div>
               </div>
             </div>
@@ -65,9 +65,9 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >الاسم</th>
-                    <th scope="col" class="sort" >السعر</th>
-                    <th scope="col" class="sort" >نوع المنتج</th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-NAME')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-PRICE')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-TYPE')}} </th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -82,8 +82,8 @@
                     <td>{{ $product->price }} ريال سعودي</td>
                     <td> @if ($product->refill == 0) جديد @elseif ($product->refill == 1) اعادة تعبئة @endif </td>
                     <td>
-                      <a href="{{ route('products.edit', $product->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i> تعديل</a>
-                      <span class="btn btn-sm btn-warning remove_item" data-id="{{$product->id}}" data-url="{{route('remove-product')}}"><i class="fa fa-trash-alt"></i> حذف</span>
+                      <a href="{{ route('products.edit', $product->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i>{{__('admin.PRODUCT-TABLE-EDIT')}} </a>
+                      <span class="btn btn-sm btn-warning remove_item" data-id="{{$product->id}}" data-url="{{route('remove-product')}}"><i class="fa fa-trash-alt"></i>{{__('admin.PRODUCT-TABLE-DELET')}} </span>
                     </td>
                   </tr>
 

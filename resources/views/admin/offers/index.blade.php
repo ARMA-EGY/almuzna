@@ -18,14 +18,14 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">العروض</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.NAV-OFFERS')}}</li>
                 </ol>
               </nav>
             </div>
 
             <div class="col-lg-6 col-5 text-left">
-              <a href="{{ route('offers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة عرض</a>
+              <a href="{{ route('offers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.OFFERS-ADDNEW')}}</a>
             </div>
 
             @if(session()->has('success'))	
@@ -52,7 +52,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">اجمالي العروض <span class="badge badge-primary p-2">{{$offers_count}}</span></h3>
+                  <h3 class="mb-0">{{__('admin.OFFERS-TOTALOFFERS')}}<span class="badge badge-primary p-2">{{$offers_count}}</span></h3>
                 </div>
               </div>
             </div>
@@ -65,8 +65,8 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >الاسم</th>
-                    <th scope="col" class="sort" >السعر</th>
+                    <th scope="col" class="sort" >{{__('admin.OFFERS-TABLE-NAME')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.OFFERS-TABLE-PRICE')}}</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -80,8 +80,8 @@
                     <td>{{ $offer->description_ar }}</td>
                     <td>{{ $offer->price }} ريال سعودي</td>
                     <td>
-                      <a href="{{ route('offers.edit', $offer->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i> تعديل</a>
-                      <span class="btn btn-sm btn-warning remove_item" data-id="{{$offer->id}}" data-url="{{route('remove-offer')}}"><i class="fa fa-trash-alt"></i> حذف</span>
+                      <a href="{{ route('offers.edit', $offer->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i>{{__('admin.OFFERS-TABLE-EDIT')}} </a>
+                      <span class="btn btn-sm btn-warning remove_item" data-id="{{$offer->id}}" data-url="{{route('remove-offer')}}"><i class="fa fa-trash-alt"></i> {{__('admin.OFFERS-TABLE-DELET')}}</span>
                     </td>
                   </tr>
 
