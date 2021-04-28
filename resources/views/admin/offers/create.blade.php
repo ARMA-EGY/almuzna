@@ -81,6 +81,32 @@
                                 @enderror
             
                             </div>
+
+                        <!--=================  Description  =================-->
+        
+                            <div class="form-group col-md-6 mb-2 text-right">
+                                <label class="font-weight-bold text-uppercase">الوصف بالانجليزية</label>
+                                <input type="text" name="description_en" class="@error('description_en') is-invalid @enderror form-control" placeholder="Description" value="{{ isset($offer) ? $offer->description_en : old('description_en') }}" >
+                            
+                                @error('description_en')
+                                    <div>
+                                        <span class="text-danger">{{ $message }}</span>
+                                    </div>
+                                @enderror
+            
+                            </div>
+        
+                            <div class="form-group col-md-6 mb-2 text-right">
+                                <label class="font-weight-bold text-uppercase">الوصف بالعربية</label>
+                                <input type="text" name="description_ar" class="@error('description_ar') is-invalid @enderror form-control text-right" placeholder="وصف المنتج" value="{{ isset($offer) ? $offer->description_ar : old('description_ar') }}" >
+                            
+                                @error('description_ar')
+                                    <div>
+                                        <span class="text-danger">{{ $message }}</span>
+                                    </div>
+                                @enderror
+            
+                            </div>
             
                             
                         </div>
@@ -131,7 +157,7 @@
         
                         <div class="form-group text-right">
                             <label for="image">الصورة</label>
-                            <input id="image" type="file" name="image" accept="image/*" class="@error('image') is-invalid @enderror form-control" >
+                            <input id="image" type="file" name="image" accept="image/*" class="@error('image') is-invalid @enderror form-control form-control-sm" >
                         
                             @error('image')
                                 <div>

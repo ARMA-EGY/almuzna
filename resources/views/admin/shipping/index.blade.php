@@ -19,13 +19,12 @@
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
                   <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">العروض</li>
+                  <li class="breadcrumb-item active" aria-current="page">قيمة التوصيل</li>
                 </ol>
               </nav>
             </div>
 
             <div class="col-lg-6 col-5 text-left">
-              <a href="{{ route('offers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i> اضافة عرض</a>
             </div>
 
             @if(session()->has('success'))	
@@ -52,12 +51,12 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">اجمالي العروض <span class="badge badge-primary p-2">{{$offers_count}}</span></h3>
+                  <h3 class="mb-0">اجمالي الشرائح  <span class="badge badge-primary p-2">{{$shipping_count}}</span></h3>
                 </div>
               </div>
             </div>
 
-            @if ($offers->count() > 0)
+            @if ($shipping->count() > 0)
 
             <div class="table-responsive">
               <!-- Projects table -->
@@ -65,23 +64,21 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >الاسم</th>
-                    <th scope="col" class="sort" >السعر</th>
+                    <th scope="col" class="sort" >المسافة</th>
+                    <th scope="col" class="sort" >قيمة التوصيل</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  @foreach ($offers as $offer)
+                  @foreach ($shipping as $ship)
 
                   <tr class="parent">
                     <td>{{ $loop->iteration }}</td>
-                    <td><b> {{  $offer->name_ar }} </b></td>
-                    <td>{{ $offer->description_ar }}</td>
-                    <td>{{ $offer->price }} ريال سعودي</td>
+                    <td><b> {{  $ship->distance }} كيلو</b></td>
+                    <td>{{ $ship->price }} ريال سعودي</td>
                     <td>
-                      <a href="{{ route('offers.edit', $offer->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i> تعديل</a>
-                      <span class="btn btn-sm btn-warning remove_item" data-id="{{$offer->id}}" data-url="{{route('remove-offer')}}"><i class="fa fa-trash-alt"></i> حذف</span>
+                      <a href="{{ route('shipping.edit', $ship->id)}}" class="btn btn-primary float-left btn-sm mx-1"><i class="fa fa-edit"></i> تعديل بيانات</a>
                     </td>
                   </tr>
 
@@ -93,7 +90,7 @@
 
 
             @else 
-                <p class="text-center"> لا يوجد عروض</p>
+                <p class="text-center"> لا يوجد شرائح توصيل متاحة</p>
             @endif
 
             <!-- Card footer -->

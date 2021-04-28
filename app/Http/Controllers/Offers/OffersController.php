@@ -56,8 +56,9 @@ class OffersController extends Controller
         $offer = Product::create([
             'name_en' => $request->name_en,
             'name_ar' => $request->name_ar,
+            'description_en' => $request->description_en,
+            'description_ar' => $request->description_ar,
             'type' => 'offer',
-            'old_price' => $request->old_price,
             'price' => $request->price,
             'image' => $request->image->store('images/offers', 'public'),
         ]);
@@ -102,11 +103,11 @@ class OffersController extends Controller
     public function update(UpdateProductRequest $request, Product $offer)
     {
 
-        $data = $request->only(['name_en', 'name_ar', 'old_price', 'price']);
+        $data = $request->only(['name_en', 'name_ar', 'description_en', 'description_ar', 'price']);
        
         if($request->hasfile('image'))
         {
-            $image = $request->image->store('images/bloffersogs', 'public');
+            $image = $request->image->store('images/offers', 'public');
             Storage::disk('public')->delete($offer->image);
 
             $data['image'] = $image;

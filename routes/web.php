@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth']], function ()
     Route::resource('/drivers', 'Drivers\DriversController'); 
     Route::resource('/coupons', 'Coupons\CouponsController'); 
     Route::resource('/city', 'City\CityController'); 
+    Route::resource('/shipping', 'Shipping\ShippingController'); 
     Route::get('/orders', 'Orders\OrdersController@index')->name('admin-orders');
     Route::get('/orders-pending', 'Orders\OrdersController@pending')->name('admin-orders-pending');
     Route::get('/orders-accepted', 'Orders\OrdersController@accepted')->name('admin-orders-accepted');

@@ -231,7 +231,7 @@
                 </li> --}}
 
                 <li class="nav-item">
-                    <a class="nav-link {{request()->routeIs('city.index') ? 'active' : '' }}" href="{{route('city.index')}}">
+                    <a class="nav-link {{request()->routeIs('shipping.index') ? 'active' : '' }}" href="{{route('shipping.index')}}">
                         <i class="ni ni-delivery-fast text-cyan"></i>
                         <span class="nav-link-text">قيمة التوصيل</span>
                     </a>

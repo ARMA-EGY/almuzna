@@ -58,6 +58,8 @@ class ProductsController extends Controller
             $product2 = Product::create([
                 'name_en' => $request->name_en,
                 'name_ar' => $request->name_ar,
+                'description_en' => $request->description_en,
+                'description_ar' => $request->description_ar,
                 'price' => $request->price,
                 'type' => 'product',
                 'refill' => $request->refill,
@@ -70,6 +72,8 @@ class ProductsController extends Controller
             $product = Product::create([
                 'name_en' => $request->name_en,
                 'name_ar' => $request->name_ar,
+                'description_en' => $request->description_en,
+                'description_ar' => $request->description_ar,
                 'price' => $request->price,
                 'type' => 'product',
                 'refill' => 0,
@@ -121,7 +125,7 @@ class ProductsController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
 
-        $data = $request->only(['name_en', 'name_ar', 'price', 'refill', 'refill_price']);
+        $data = $request->only(['name_en', 'name_ar', 'description_en', 'description_ar', 'price', 'refill', 'refill_price']);
         
         if($request->hasfile('photo'))
         {

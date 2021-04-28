@@ -77,9 +77,8 @@
 
                   <tr class="parent">
                     <td>{{ $loop->iteration }}</td>
-                    <td>
-                     <b> {{  $product->name_ar }} </b>
-                    </td>
+                    <td><b> {{  $product->name_ar }} </b></td>
+                    <td>{{ $product->description_ar }}</td>
                     <td>{{ $product->price }} ريال سعودي</td>
                     <td> @if ($product->refill == 0) جديد @elseif ($product->refill == 1) اعادة تعبئة @endif </td>
                     <td>
