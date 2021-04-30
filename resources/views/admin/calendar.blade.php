@@ -1,3 +1,19 @@
+@if (LaravelLocalization::getCurrentLocale() == 'ar')
+    @php
+    $dir   = 'rtl';
+    $text  = 'text-right';
+    $inverse_text  = 'text-left';
+    $lang  = 'ar';
+    @endphp
+@elseif (LaravelLocalization::getCurrentLocale() == 'en')  
+    @php
+    $dir    = 'ltr';
+    $text   = '';
+    $inverse_text  = 'text-right';
+    $lang   = 'en';
+    @endphp
+@endif
+
 @extends('layouts.admin')
 
 

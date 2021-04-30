@@ -1,3 +1,19 @@
+@if (LaravelLocalization::getCurrentLocale() == 'ar')
+    @php
+    $dir   = 'rtl';
+    $text  = 'text-right';
+    $inverse_text  = 'text-left';
+    $lang  = 'ar';
+    @endphp
+@elseif (LaravelLocalization::getCurrentLocale() == 'en')  
+    @php
+    $dir    = 'ltr';
+    $text   = '';
+    $inverse_text  = 'text-right';
+    $lang   = 'en';
+    @endphp
+@endif
+
 @extends('layouts.admin')
 
 @section('content')
@@ -7,7 +23,7 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7 text-right">
+            <div class="col-lg-6 col-7 {{$text}}">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
@@ -16,8 +32,8 @@
                 </ol>
               </nav>
             </div>
-            <div class="col-lg-6 col-5 text-left">
-              <a href="/register" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.MEMBERS-ADDNEW')}}</a>
+            <div class="col-lg-6 col-5 {{$inverse_text}}">
+              <a href="{{route('register2')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.MEMBERS-ADDNEW')}}</a>
             </div>
           </div>
         </div>
@@ -32,7 +48,7 @@
         <div class="col-xl-12">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">{{__('admin.MEMBERS-TOTALMEMEBERS')}}<span class="badge badge-primary p-2">{{$users->total()}}</span></h3>
+              <h3 class="text-white mb-0">{{__('admin.MEMBERS-TOTALMEMEBERS')}}<span class="badge badge-primary p-2 mx-2">{{$users->total()}}</span></h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-dark table-flush">

@@ -213,4 +213,14 @@ return [
     "CUTOMERSCREATE-GENDER" => "Gender",       
     "CUTOMERSCREATE-ADD" => "Add",
 
+    "MALE" => "Male",       
+    "FEMALE" => "Female",
+    "LANGUAGE" => "Language",
+    "ENGLISH" => "English",
+    "ARABIC" => "Arabic",
+    "PROFILE" => "Profile",
+    "LOGOUT" => "Logout",
+    "WELCOME" => "Welcome",
+    "DATE" => "Date",
+
 ];

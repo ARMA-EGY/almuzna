@@ -36,6 +36,7 @@
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
                   <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item"><a href="#">{{__('admin.NAV-REPORTS')}}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{{__('admin.ALLORDERS-ALLORDERS')}}</li>
                 </ol>
               </nav>
@@ -95,9 +96,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col" class="sort" >{{__('admin.ALLORDERS-TABLE-CODE')}}</th>
+                    <th scope="col" class="sort" > {{__('admin.DATE')}}</th>
                     <th scope="col" class="sort" >{{__('admin.ALLORDERS-TABLE-TOTAL')}}</th>
-                    <th scope="col" class="sort" > {{__('admin.ALLORDERS-TABLE-state')}}</th>
-                    <th scope="col" class="sort" > Order Date</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -110,26 +110,8 @@
                     <td>
                      <b> # {{  $order->id }} </b>
                     </td>
-                    <td>{{ $order->total }} ريال سعودي</td>
-                    <td>
-                      @if ($order->status == 'pending' && $order->driver_id == '')
-                          <span class="text-warning">  معلق </span>
-
-                      @elseif ($order->status == 'pending' && $order->driver_id != '')
-                      <span class="text-info">  مقبول </span>
-
-                      @elseif ($order->status == 'on the way' )
-                      <span class="text-primary">  في الطريق </span>
-
-                      @elseif ($order->status == 'delivered' )
-                      <span class="text-success">  تم الاستلام </span>
-
-                      @elseif ($order->status == 'cancelled' )
-                      <span class="text-danger">  ملغي</span>
-
-                      @endif
-                    </td>
                     <td>{{ $order->created_at->format('Y/m/d') }}</td>
+                    <td>{{ $order->total }}</td>
                     <td>
                       <a href="#" class="btn btn-warning btn-sm mx-1 get_order_details" data-id="{{  $order->id }}"><i class="fa fa-eye"></i>{{__('admin.ALLORDERS-TABLE-VIEW')}}</a>
                     </td>
@@ -141,6 +123,7 @@
               </table>
             </div>
 
+            
 
             @else 
                 <p class="text-center"> لا يوجد طلبات</p>
@@ -148,6 +131,20 @@
 
             <!-- Card footer -->
             <div class="card-footer py-2">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="row">
+
+            <div class="col-md-4">
+              <button class="btn btn-primary btn-sm total">Show Total</button>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+              <h3 id="totals"></h3>
             </div>
 
           </div>
@@ -169,6 +166,7 @@
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/datetime/1.0.3/js/dataTables.dateTime.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
 
 
 <script>
@@ -180,7 +178,7 @@ $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var min = minDate.val();
         var max = maxDate.val();
-        var date = new Date( data[4] );
+        var date = new Date( data[2] );
  
         if (
             ( min === null && max === null ) ||
@@ -212,6 +210,12 @@ $(document).ready(function() {
     $('#min, #max').on('change', function () {
         table.draw();
     });
+
+    $('.total').on('click', function () {
+      console.log(table.rows( { search: 'applied' }).data().pluck(3).sum());
+      $('#totals').text(table.rows( { search: 'applied' }).data().pluck(3).sum());
+    })
+
 });
 
 

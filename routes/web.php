@@ -44,6 +44,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     
     
     
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register2');
     
 
     
@@ -107,6 +108,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'a
     Route::get('/orders-ontheway', 'Orders\OrdersController@ontheway')->name('admin-orders-ontheway');
     Route::get('/orders-delivered', 'Orders\OrdersController@delivered')->name('admin-orders-delivered');
     Route::get('/orders-cancelled', 'Orders\OrdersController@cancelled')->name('admin-orders-cancelled');
+    Route::get('/reports-orders', 'Reports\ReportsController@orders')->name('admin-reports-orders');
 });
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'auth' , 'admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () 

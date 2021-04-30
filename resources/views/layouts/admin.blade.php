@@ -1,3 +1,22 @@
+@if (LaravelLocalization::getCurrentLocale() == 'ar')
+    @php
+    $dir   = 'rtl';
+    $text  = 'text-right';
+    $inverse_text  = 'text-left';
+    $lang  = 'ar';
+    $margin  = 'mr-auto';
+    @endphp
+@elseif (LaravelLocalization::getCurrentLocale() == 'en')  
+    @php
+    $dir    = 'ltr';
+    $text   = '';
+    $inverse_text  = 'text-right';
+    $lang   = 'en';
+    $margin  = 'ml-auto';
+    @endphp
+@endif
+
+
 <!DOCTYPE html>
 <html>
 
@@ -24,8 +43,11 @@
   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
   <!-- JQUERY UI -->
   <link rel="stylesheet" href="{{ asset('admin_assets/css/jquery-ui.css') }}" type="text/css">
-  <!-- RTL CSS -->
-  <link rel="stylesheet" href="{{ asset('admin_assets/css/rtl.css') }}" type="text/css">
+
+    @if (LaravelLocalization::getCurrentLocale() == 'ar')
+        <!-- RTL CSS -->
+        <link rel="stylesheet" href="{{ asset('admin_assets/css/rtl.css') }}" type="text/css">
+    @endif
 
 
   @yield('style')
@@ -93,46 +115,6 @@
 
                 @endif
                 
-
-                {{-- <li class="nav-item">
-                    <a class="nav-link collapsed" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
-                      <i class="fa fa-book text-green"></i>
-                      <span class="nav-link-text">Blogs</span>
-                    </a>
-                    <div class="collapse" id="navbar-components" style="">
-                      <ul class="nav nav-sm flex-column">
-
-                        <li class="nav-item">
-                          <a href="{{route('categories.index')}}" class="nav-link nav-link-sub {{request()->routeIs('categories.index') ? 'active' : '' }}">
-                            <i class="ni ni-chart-pie-35"></i>
-                            <span class="sidenav-normal"> Categories </span>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a href="{{route('tags.index')}}" class="nav-link nav-link-sub {{request()->routeIs('tags.index') ? 'active' : '' }}">
-                            <i class="fa fa-tags"></i>
-                            <span class="sidenav-normal"> Tags </span>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a href="{{route('blogs.index')}}" class="nav-link nav-link-sub {{request()->routeIs('blogs.index') ? 'active' : '' }}">
-                            <i class="fa fa-book"></i>
-                            <span class="sidenav-normal"> Posts </span>
-                          </a>
-                        </li>
-
-                        <li class="nav-item">
-                          <a href="{{route('admin-draft')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-draft') ? 'active' : '' }}">
-                            <i class="fa fa-paste"></i>
-                            <span class="sidenav-normal"> Drafts </span>
-                          </a>
-                        </li>
-                        
-                      </ul>
-                    </div>
-                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('products.index') ? 'active' : '' }}" href="{{route('products.index')}}">
@@ -258,12 +240,47 @@
                     </a>
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
-                        <i class="far fa-chart-bar"></i>
-                        <span class="nav-link-text">{{__('admin.NAV-REPORTS')}}</span>
+                    <a class="nav-link collapsed" href="#navbar-reports" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
+                      <i class="far fa-chart-bar"></i>
+                      <span class="nav-link-text">{{__('admin.NAV-REPORTS')}}</span>
                     </a>
+                    <div class="collapse" id="navbar-reports" style="">
+                      <ul class="nav nav-sm flex-column">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-sub {{request()->routeIs('admin-reports-orders') ? 'active' : '' }}" href="{{route('admin-reports-orders')}}">
+                                <i class="ni ni-cart"></i>
+                                <span class="nav-link-text">{{__('admin.NAV-ORDERS')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-sub" href="">
+                                <i class="fa fa-cubes"></i>
+                                <span class="nav-link-text">{{__('admin.NAV-PRODUCTS')}}</span>
+                            </a>
+                        </li>
+    
+                        <li class="nav-item">
+                          <a href="#" class="nav-link nav-link-sub">
+                            <i class="fas fa-user-tie"></i>
+                            <span class="sidenav-normal"> {{__('admin.NAV-CUSTOMERS')}} </span>
+                          </a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a href="#" class="nav-link nav-link-sub">
+                            <i class="fas fa-user-astronaut"></i>
+                            <span class="sidenav-normal"> {{__('admin.NAV-DRIVERS')}} </span>
+                          </a>
+                        </li>
+                        
+                      </ul>
+                    </div>
                 </li>
+
                 
             </ul>
             <!-- Divider -->
@@ -301,13 +318,59 @@
                 </li>
 
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                    <i class="ni ni-user-run"></i>
-                    <span class="nav-link-text">{{__('admin.NAV-LOGOUT')}} </span>
-                </a>
+                    <a class="nav-link collapsed" href="#navbar-lang" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
+                      <i class="fas fa-language"></i>
+                      <span class="nav-link-text">{{__('admin.LANGUAGE')}}</span>
+                    </a>
+                    <div class="collapse" id="navbar-lang" style="">
+                      <ul class="nav nav-sm flex-column">
+
+                        @if (LaravelLocalization::getCurrentLocale() == 'ar')
+
+                                <li class="nav-item">
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}" class="nav-link nav-link-sub">
+                                    <img class="w-20 mx-2" src="{{ asset('front_assets/images/icons/flags/en.png')}}" alt="English">
+                                    <span class="sidenav-normal"> {{__('admin.ENGLISH')}}</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link nav-link-sub active">
+                                    <img class="w-20 mx-2" src="{{ asset('front_assets/images/icons/flags/ar.png')}}" alt="Arabic">
+                                    <span class="sidenav-normal">{{__('admin.ARABIC')}}  </span>
+                                    </a>
+                                </li>
+
+                        @elseif (LaravelLocalization::getCurrentLocale() == 'en')  
+
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link nav-link-sub active">
+                                    <img class="w-20 mx-2" src="{{ asset('front_assets/images/icons/flags/en.png')}}" alt="English">
+                                    <span class="sidenav-normal"> {{__('admin.ENGLISH')}}</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}" class="nav-link nav-link-sub ">
+                                    <img class="w-20 mx-2" src="{{ asset('front_assets/images/icons/flags/ar.png')}}" alt="Arabic">
+                                    <span class="sidenav-normal">{{__('admin.ARABIC')}}  </span>
+                                    </a>
+                                </li>
+                        @endif
+                        
+                      </ul>
+                    </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                        <i class="ni ni-user-run"></i>
+                        <span class="nav-link-text">{{__('admin.LOGOUT')}} </span>
+                    </a>
+                </li>
+
             </ul>
             </div>
         </div>
@@ -322,7 +385,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Navbar links -->
                 
-                <ul class="navbar-nav align-items-center mr-auto">
+                <ul class="navbar-nav align-items-center {{$margin}}">
 
                     <li class="nav-item">
                         <a class="nav-link" href="#">
@@ -381,27 +444,27 @@
                             </div>
                             </div>
                         </a>
-                    <div class="dropdown-menu  dropdown-menu-right ">
-                        <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">مرحبا</h6>
+                        <div class="dropdown-menu  dropdown-menu-right ">
+                            <div class="dropdown-header noti-title">
+                            <h6 class="text-overflow m-0">{{__('admin.WELCOME')}}</h6>
+                            </div>
+                            <a href="{{route('admin-profile')}}" class="dropdown-item">
+                            <i class="ni ni-circle-08"></i>
+                            <span>{{__('admin.PROFILE')}}</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ route('logout') }}" class="dropdown-item"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                            <i class="ni ni-user-run"></i>
+                            <span>{{__('admin.LOGOUT')}}</span>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+
                         </div>
-                        <a href="{{route('admin-profile')}}" class="dropdown-item">
-                        <i class="ni ni-circle-08"></i>
-                        <span>الصفحة الشخصية</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ route('logout') }}" class="dropdown-item"
-                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                        <i class="ni ni-user-run"></i>
-                        <span>تسجيل الخروج</span>
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-
-                    </div>
                     </li>
                 </ul>
                 </div>

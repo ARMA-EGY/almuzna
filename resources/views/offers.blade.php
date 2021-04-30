@@ -38,20 +38,20 @@
 
                             @foreach ($products['data'] as $product)
                                 
-                                <div class="col-md-4 col-6">
-                                    <div class="product rounded-10">
+                                <div class="col-md-3 col-6 px-product">
+                                    <div class="product">
                                         <div class="product-image">
-                                            <a href="#"><img src="{{ asset('storage/')}}"></a>
+                                            <img src="{{ asset('storage/'.$product['photo'])}}">
                                         </div>
-                                        <div class="sale-flash badge badge-warning p-2">{{__('core.OFFER')}}</div>
+
                                         <div class="product-desc">
-                                            <div class="product-title mb-1"><h3>{{$product['name_en']}}</h3></div>
+                                            <div class="product-title mb-1"><h3> {{$product['name_en']}}</h3></div>
                                             <div class="product-price font-primary">
 
                                                     <ins>{{$product['price']}} {{__('core.SAR')}}</ins></div>
-                                            
-                                            <div class="mt-3 order-section">
-                                                <a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i> Add to cart</a>
+                                        
+                                            <div class="mt-3 order-section {{$inverse_text}}">
+                                                <a class="btn btn-cart add-order mx-2"><i class="icon-shopping-basket"></i></a>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
