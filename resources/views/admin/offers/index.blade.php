@@ -1,3 +1,19 @@
+@if (LaravelLocalization::getCurrentLocale() == 'ar')
+    @php
+    $dir   = 'rtl';
+    $text  = 'text-right';
+    $inverse_text  = 'text-left';
+    $lang  = 'ar';
+    @endphp
+@elseif (LaravelLocalization::getCurrentLocale() == 'en')  
+    @php
+    $dir    = 'ltr';
+    $text   = '';
+    $inverse_text  = 'text-right';
+    $lang   = 'en';
+    @endphp
+@endif
+
 @extends('layouts.admin')
 
 @section('style')
@@ -14,7 +30,7 @@
         <div class="header-body">
           <div class="row align-items-center py-4">
 
-            <div class="col-lg-6 col-7 text-right">
+            <div class="col-lg-6 col-7 {{$text}}">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
@@ -24,7 +40,7 @@
               </nav>
             </div>
 
-            <div class="col-lg-6 col-5 text-left">
+            <div class="col-lg-6 col-5 {{$inverse_text}}">
               <a href="{{ route('offers.create')}}" class="btn btn-sm btn-neutral"><i class="fa fa-plus"></i>{{__('admin.OFFERS-ADDNEW')}}</a>
             </div>
 
@@ -76,9 +92,8 @@
 
                   <tr class="parent">
                     <td>{{ $loop->iteration }}</td>
-                    <td>
-                     <b> {{  $offer->name_ar }} </b>
-                    </td>
+                    <td><b> {{  $offer->name_ar }} </b></td>
+                    <td>{{ $offer->description_ar }}</td>
                     <td>{{ $offer->price }} ريال سعودي</td>
                     <td>
                       <a href="{{ route('offers.edit', $offer->id)}}" class="btn btn-primary btn-sm mx-1"><i class="fa fa-edit"></i>{{__('admin.OFFERS-TABLE-EDIT')}} </a>

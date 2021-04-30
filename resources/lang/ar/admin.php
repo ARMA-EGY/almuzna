@@ -206,6 +206,7 @@ return [
     "REGISTER-JOB" => "تأكيد كلمة المرور",
     "REGISTER-ADD" => "اضافة",   
 
+<<<<<<< HEAD
 
     "CUTOMERSCREATE-ADDNEW" => "اضافة عميل جديد", 
     "CUTOMERSCREATE-EDITDATA" => "تعديل البيانات",    
@@ -218,4 +219,16 @@ return [
     "CUTOMERSCREATE-GENDER" => "النوع",       
     "CUTOMERSCREATE-ADD" => "اضافة",
     "CUTOMERSCREATE-EDIT" => "تعديل",
+=======
+    "MALE" => "ذكر",       
+    "FEMALE" => "انثى",
+    "LANGUAGE" => "اللغة",
+    "ENGLISH" => "الانجليزية",
+    "ARABIC" => "العربية",
+    "PROFILE" => "الصفحة الشخصية",
+    "LOGOUT" => "تسجيل الخروج",
+    "WELCOME" => "مرحباً",
+    "DATE" => "التاريخ",
+
+>>>>>>> main
 ];

@@ -1,3 +1,19 @@
+@if (LaravelLocalization::getCurrentLocale() == 'ar')
+    @php
+    $dir   = 'rtl';
+    $text  = 'text-right';
+    $inverse_text  = 'text-left';
+    $lang  = 'ar';
+    @endphp
+@elseif (LaravelLocalization::getCurrentLocale() == 'en')  
+    @php
+    $dir    = 'ltr';
+    $text   = '';
+    $inverse_text  = 'text-right';
+    $lang   = 'en';
+    @endphp
+@endif
+
 @extends('layouts.admin')
 
 
@@ -340,7 +356,7 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7 text-right">
+            <div class="col-lg-6 col-7 {{$text}}">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
@@ -349,7 +365,7 @@
                 </ol>
               </nav>
             </div>
-            <div class="col-lg-6 col-5 text-left">
+            <div class="col-lg-6 col-5 {{$inverse_text}}">
               <a href="#" class="btn btn-sm btn-neutral get_receiver_email">{{__('admin.MESSAGES-Emailrecipientofmessages')}} </a>
             </div>
           </div>

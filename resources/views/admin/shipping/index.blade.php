@@ -34,8 +34,8 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page"> {{__('admin.CANCELLED-CANCELLEDORDERS')}}</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">قيمة التوصيل</li>
                 </ol>
               </nav>
             </div>
@@ -67,12 +67,12 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">{{__('admin.CANCELLED-TOTALORDERS')}}  <span class="badge badge-primary p-2">{{$orders_count}}</span></h3>
+                  <h3 class="mb-0">اجمالي الشرائح  <span class="badge badge-primary p-2">{{$shipping_count}}</span></h3>
                 </div>
               </div>
             </div>
 
-            @if ($orders->count() > 0)
+            @if ($shipping->count() > 0)
 
             <div class="table-responsive">
               <!-- Projects table -->
@@ -80,23 +80,21 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >{{__('admin.CANCELLED-TABLE-CODE')}}</th>
-                    <th scope="col" class="sort" >{{__('admin.CANCELLED-TABLE-TOTAL')}}</th>
+                    <th scope="col" class="sort" >المسافة</th>
+                    <th scope="col" class="sort" >قيمة التوصيل</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  @foreach ($orders as $order)
+                  @foreach ($shipping as $ship)
 
                   <tr class="parent">
                     <td>{{ $loop->iteration }}</td>
+                    <td><b> {{  $ship->distance }} كيلو</b></td>
+                    <td>{{ $ship->price }} ريال سعودي</td>
                     <td>
-                     <b> # {{  $order->id }} </b>
-                    </td>
-                    <td>{{ $order->total }}</td>
-                    <td>
-                      <a href="#" class="btn btn-warning btn-sm mx-1 get_order_details" data-id="{{  $order->id }}"><i class="fa fa-eye"></i>{{__('admin.CANCELLED-TABLE-VIEW')}}</a>
+                      <a href="{{ route('shipping.edit', $ship->id)}}" class="btn btn-primary float-left btn-sm mx-1"><i class="fa fa-edit"></i> تعديل بيانات</a>
                     </td>
                   </tr>
 
@@ -108,7 +106,7 @@
 
 
             @else 
-                <p class="text-center"> لا يوجد منتجات</p>
+                <p class="text-center"> لا يوجد شرائح توصيل متاحة</p>
             @endif
 
             <!-- Card footer -->

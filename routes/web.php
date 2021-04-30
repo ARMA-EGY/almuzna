@@ -45,6 +45,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     
     
     
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register2');
     
 
     
@@ -101,12 +102,14 @@ Route::group(['middleware' => [ 'auth' ]], function ()
     Route::resource('/drivers', 'Drivers\DriversController'); 
     Route::resource('/coupons', 'Coupons\CouponsController'); 
     Route::resource('/city', 'City\CityController'); 
+    Route::resource('/shipping', 'Shipping\ShippingController'); 
     Route::get('/orders', 'Orders\OrdersController@index')->name('admin-orders');
     Route::get('/orders-pending', 'Orders\OrdersController@pending')->name('admin-orders-pending');
     Route::get('/orders-accepted', 'Orders\OrdersController@accepted')->name('admin-orders-accepted');
     Route::get('/orders-ontheway', 'Orders\OrdersController@ontheway')->name('admin-orders-ontheway');
     Route::get('/orders-delivered', 'Orders\OrdersController@delivered')->name('admin-orders-delivered');
     Route::get('/orders-cancelled', 'Orders\OrdersController@cancelled')->name('admin-orders-cancelled');
+    Route::get('/reports-orders', 'Reports\ReportsController@orders')->name('admin-reports-orders');
 });
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'auth' , 'admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () 
