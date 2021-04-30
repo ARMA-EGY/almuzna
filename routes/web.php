@@ -41,6 +41,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/distanceCalculator', 'CoreController@distanceCalculator')->name('distanceCalculator');
     Route::post('/placeOrder', 'Customers\CustomersController@placeOrder')->name('placeOrder');
     Route::get('/applyCode', 'Customers\CustomersController@applyCode')->name('applyCode');
+    Route::get('/reorder/{id}', 'Customers\CustomersController@reorder')->name('reorder');
     
     
     
@@ -73,7 +74,7 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 
-Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () 
+Route::group(['middleware' => [ 'auth' ]], function () 
 {
     Route::get('/home', 'AdminController@index')->name('home');
     Route::get('/pages', 'AdminController@pages')->name('admin-pages');

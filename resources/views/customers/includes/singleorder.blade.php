@@ -124,11 +124,11 @@
 
                                                 <div class="row order_actions">
                                                     @if($order['status'] == 'delivered')
-                                                        <button>Reorder</button>
+                                                    <a href="{{ route('reorder', $order['id'])}}" class="button button-3d button-small m-0">Reorder</a>
                                                     @elseif($order['status'] == 'pending')   
-                                                        <button class="order_cancel" data-id="{{$order['id']}}">Cancel</button>
+                                                        <button class="order_cancel button button-3d button-small m-0" data-id="{{$order['id']}}">Cancel</button>
                                                         <br>
-                                                        <button class="order_track">Track</button>
+                                                        <!--<button class="order_track button button-3d button-small m-0">Track</button>-->
                                                     @endif
                                                 </div>
                                                 @endif

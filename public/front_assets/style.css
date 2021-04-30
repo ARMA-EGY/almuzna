@@ -88,6 +88,14 @@
 	- Youtube Video Backgrounds
 
 ---------------------------------------------------------------- */
+.modal-backdrop {
+    z-index: 999;
+}
+
+.modal {
+    z-index: 1000;
+}
+
 
  html {scroll-behavior: smooth;}
 

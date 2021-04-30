@@ -95,7 +95,7 @@
 
                             <!--=================  Gender  =================-->
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">{__('admin.CUTOMERSCREATE-GENDER')}}</label>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.CUTOMERSCREATE-GENDER')}}</label>
 
                                 <select class="form-control" name="gender" id="input-gender" required>
                                     <option value="Female" @isset($customer) @if ($customer->gender == 'Femail') selected  @endif @endisset >انثى</option>
@@ -115,7 +115,7 @@
                           
         
                         <div class="form-group">
-                        <button type="submit" class="btn btn-success">{{ isset($customer) ? 'حفظ' : 'اضافة' }}</button>
+                        <button type="submit" class="btn btn-success">{{ isset($customer) ?   __('admin.CUTOMERSCREATE-EDIT'):__('admin.CUTOMERSCREATE-ADD')}}</button>
                         </div>
         
                     </form>

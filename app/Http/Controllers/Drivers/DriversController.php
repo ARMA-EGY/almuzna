@@ -97,7 +97,7 @@ class DriversController extends Controller
     public function update(UpdateDriverRequest $request, Driver $driver)
     {
 
-        $driver = $request->only(['name', 'phone', 'email', 'gender']);
+        $data = $request->only(['name', 'phone', 'email', 'gender']);
         
         $driver->update($data);
 

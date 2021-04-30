@@ -210,7 +210,9 @@ return [
     "CUTOMERSCREATE-PHONE" => "Phone",
     "CUTOMERSCREATE-PHONEPLC" => "Phone Number", 
     "CUTOMERSCREATE-EMAIL" => "Email",
+    "CUTOMERSCREATE-EMAILPLC" => "Email",
     "CUTOMERSCREATE-GENDER" => "Gender",       
     "CUTOMERSCREATE-ADD" => "Add",
+    "CUTOMERSCREATE-EDIT" => "Edit",
 
 ];

@@ -206,4 +206,16 @@ return [
     "REGISTER-JOB" => "تأكيد كلمة المرور",
     "REGISTER-ADD" => "اضافة",   
 
+
+    "CUTOMERSCREATE-ADDNEW" => "اضافة عميل جديد", 
+    "CUTOMERSCREATE-EDITDATA" => "تعديل البيانات",    
+    "CUTOMERSCREATE-NAME" => "الاسم",
+    "CUTOMERSCREATE-NAMEPLC" => "اسم العميل",
+    "CUTOMERSCREATE-PHONE" => "الهاتف",
+    "CUTOMERSCREATE-PHONEPLC" => "رقم الهاتف", 
+    "CUTOMERSCREATE-EMAIL" => "البريد الالكتروني",
+    "CUTOMERSCREATE-EMAILPLC" => "البريد الالكتروني",
+    "CUTOMERSCREATE-GENDER" => "النوع",       
+    "CUTOMERSCREATE-ADD" => "اضافة",
+    "CUTOMERSCREATE-EDIT" => "تعديل",
 ];

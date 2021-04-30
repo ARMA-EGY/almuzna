@@ -429,11 +429,11 @@
 
                                                 <div class="row order_actions">
                                                     @if($order['status'] == 'delivered')
-                                                        <button>Reorder</button>
+                                                    <a href="{{ route('reorder', $order['id'])}}" class="button button-3d button-small m-0">Reorder</a>
                                                     @elseif($order['status'] == 'pending')   
-                                                        <button class="order_cancel" data-id="{{$order['id']}}">Cancel</button>
+                                                        <button class="order_cancel button button-3d button-small m-0" data-id="{{$order['id']}}">Cancel</button>
                                                         <br>
-                                                        <button class="order_track">Track</button>
+                                                         <!--<button class="order_track button button-3d button-small m-0">Track</button>-->
                                                     @endif
                                                 </div>
                                                 @endif
@@ -518,7 +518,7 @@
                                                         <table class="table table-sm sub-table text-right my-4">
                                                             <tbody><tr>
                                                                 <td><span class="subtotal">Subtotal</span></td>
-                                                                <td class="text-right"><span class="subtotal-value">481,90</span></td>
+                                                                <td class="text-right"><span class="subtotal">481,90</span></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><span class="vat">VAT (20%)</span></td>
@@ -526,7 +526,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td><span class="total">Total</span></td>
-                                                                <td class="text-right"><span class="total-value">578,28</span></td>
+                                                                <td class="text-right"><span class="total">578,28</span></td>
                                                             </tr>
                                                         </tbody></table>
                                                     </div>

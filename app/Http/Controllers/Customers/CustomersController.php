@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Social;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Configuration;
+use App\OrderItemsmodel;
 
 class CustomersController extends Controller
 {
@@ -36,8 +37,20 @@ class CustomersController extends Controller
 
     }
 
+    
+    public function reorder($id)
+    {
+		
+		$items         = OrderItemsmodel::where('order_id',$id)->get();
+        Cart::destroy();
+        foreach($items as $item)
+        {
+            $cartItem = Cart::add($item->product_id,  $item->Product->name_en , $item->quantity, $item->total, 10 , ['deliveryFee' => 0.00 , 'couponDiscount' => 0.00]);
+            Cart::associate($cartItem->rowId, 'App\Product');
+        }
 
-
+        return redirect(route('checkout'));
+    }
 
     public function applyCode(Request $request)
     {
@@ -187,7 +200,7 @@ class CustomersController extends Controller
             {
                 
                 array_push($products, ["id"=>$item->model->id,"quantity"=>$item->qty]);
-                $deliveryFee = $cartItem->options['deliveryFee'];
+                $deliveryFee = $item->options['deliveryFee'];
             }
 
             $subtotal = Cart::subtotal();

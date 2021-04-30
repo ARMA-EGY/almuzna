@@ -992,7 +992,7 @@ console.log(total);
                     $('.Shipping-value').html(data+' SAR');
                     $('#shippingFee').val(data);
 
-                    var dstotal = parseFloat($('#totalTax').val())+parseFloat(data);
+                    var dstotal = parseFloat($('#totalTax').val())+parseFloat(data) - parseFloat($('#couponDiscount').val());
                     $('.total-value').html(parseFloat(dstotal).toFixed(2)+' SAR');
                     $('#total').val(parseFloat(dstotal).toFixed(2)); 
                     

@@ -582,8 +582,7 @@
                                                 
 
                                                 <div class="form-group">
-                                                    <label>Location</label>
-                                                    <input type="text" class="form-control" id="search_input" placeholder="Type address...">
+
                                                 </div>
                                                    
                                                 <hr>
@@ -840,6 +839,8 @@
                 </div>
                 <div class="modal-body">
                     <form>
+
+
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="street">Street</label>
@@ -862,26 +863,22 @@
                           </div>
                         </div>
 
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
-                          </div>
-                          <div class="form-group col-md-6">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
-                              <option>...</option>
-                            </select>
-                          </div>
-                        </div>
+
 
                         <div class="form-group">
-                          <label for="inputAddress">Address</label>
+                          <label for="inputAddress">Address Notes</label>
                           <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                         </div>
                         
-                      </form>
+                    </form>
+               
+               
+                    <div class="form-group">
+                        <label>Location</label>
+                            <input type="text" class="form-control" id="search_input" placeholder="Type address...">
+                        
+                        </div>
+               
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
