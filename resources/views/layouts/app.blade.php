@@ -978,6 +978,11 @@ console.log(total);
             $('#orderlong').val(lng);
             $('#delivery_address').val(near_place.formatted_address);
 
+            $('#orderlat-modal').val(lat);
+            $('#orderlong-modal').val(lng);
+            $('#delivery_address-modal').val(near_place.formatted_address);
+            
+
 
             $.ajax({
                 url:        "{{route('distanceCalculator')}}",

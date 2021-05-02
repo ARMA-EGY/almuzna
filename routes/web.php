@@ -43,7 +43,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/applyCode', 'Customers\CustomersController@applyCode')->name('applyCode');
     Route::get('/reorder/{id}', 'Customers\CustomersController@reorder')->name('reorder');
     
-    
+    Route::post('/addlocation', 'Customers\CustomersController@addlocation')->name('addlocation');
+       
     
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register2');
     

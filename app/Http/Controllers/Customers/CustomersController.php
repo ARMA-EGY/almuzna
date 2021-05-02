@@ -13,6 +13,8 @@ use App\Social;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Configuration;
 use App\OrderItemsmodel;
+use App\Http\Requests\locationValid;
+use App\customer_location;
 
 class CustomersController extends Controller
 {
@@ -23,7 +25,34 @@ class CustomersController extends Controller
      */
 
 
+public function addlocation(locationValid $request)
+{
 
+    if ($request->session()->has('user_id') && $request->session()->has('api_token')){
+
+       
+        $customer_location =  customer_location::create([
+            'customer_id' =>  $request->session()->get('user_id'),
+            'lat' => $request->get('orderlat-modal'),
+            'lng' => $request->get('orderlong-modal'),
+            'delivery_address' => $request->get('delivery_address-modal'),
+            'street' => $request->get('street'),
+            'building' => $request->get('building'),
+            'floor' => $request->get('floor'),
+            'apartment' => $request->get('apartment'),
+            'note' => $request->get('inputAddress'),
+        ]);        
+        return response()->json([
+            'status' => 'true',
+            'msg' => 'Location is Added Successfully'
+        ]) ;
+    }
+
+    return response()->json([
+        'status' => 'false',
+        'msg' => 'Please login'
+    ]) ;
+}
 
     public function index()
     {
@@ -213,7 +242,7 @@ class CustomersController extends Controller
             $data = array( 
 
 
-                'payment_method' => 'cash',
+                'payment_method' => $request->post('paymentmethod'),
                 'delivery_date'  =>$request->post('delivery_date'),
                 'delivery_address' => $request->post('delivery_address'),
                 'orderlat'  =>$request->post('orderlat'),
@@ -311,9 +340,9 @@ class CustomersController extends Controller
 
         if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
             
-            $user = userProfile($request);
+           $user = userProfile($request);
 
-            $socials  = Social::all();
+           $socials  = Social::all();
 
            $subtotal = Cart::subtotal();
 
@@ -329,13 +358,16 @@ class CustomersController extends Controller
               break;
            }
 
+           $locations = customer_location::where('customer_id' , $request->session()->get('user_id'))->get();
+
             $data = [
             'page_token'=>'',
             'socials'=>$socials,
             'user'=>$user,
             'totalTax'=>$totalTax,
             'sales_perc'=>$sales_perc->decimal_value,
-            'couponDiscount'=>$couponDiscount
+            'couponDiscount'=>$couponDiscount,
+            'locations'=>$locations
             ];
         
 

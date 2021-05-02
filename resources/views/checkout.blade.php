@@ -530,21 +530,21 @@
                                                 <h3>Choose Delivery Address</h3>
                                                 <div class="accordion br-sm" id="accordionLocationExample">
                                 
-                                
+                                @foreach($locations as $location)
                                                     <div class="card card-fill mb-3 shadow-sm rounded">
                                                         <div class="card-header p-3">
                                                             <div class="row align-items-center">
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
-                                                                        <input type="radio" id="customRadio11" name="customRadio11" class="custom-control-input" data-toggle="collapse" data-target="#collapseOne1" aria-controls="collapseOne1">
-                                                                        <label class="custom-control-label pl-2 pl-lg-4" for="customRadio11">
-                                                                            <span class="h6 m-0">Location #1</span><br />
+                                                                        <input type="radio" id="{{$location->id}}" name="loationRadio" data-lat="{{$location->lat}}" data-lng="{{$location->lng}}" data-delivery_address="{{$location->delivery_address}}" class="custom-control-input locationRdbtn" data-toggle="collapse" data-target="#collapseOne1" aria-controls="collapseOne1">
+                                                                        <label class="custom-control-label pl-2 pl-lg-4" for="{{$location->id}}">
+                                                                            <span class="h6 m-0">{{$location->delivery_address}}</span><br />
                                                                         </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div id="collapseOne1" class="collapse pt-0" aria-labelledby="customRadio11" data-parent="#accordionLocationExample">
+                                                        <div id="collapseOne1" class="collapse pt-0" aria-labelledby="{{$location->id}}" data-parent="#accordionLocationExample">
                                                             <hr class="m-0">
                                                             <div class="card-body">
                                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -552,26 +552,7 @@
                                                         </div>
                                                     </div>
                                 
-                                                    <div class="card card-fill mb-3 shadow-sm rounded">
-                                                        <div class="card-header p-3">
-                                                            <div class="row align-items-center">
-                                                                <div class="col-9">
-                                                                    <div class="custom-control custom-radio d-flex align-items-center">
-                                                                        <input type="radio" id="customRadio22" name="customRadio" class="custom-control-input" data-toggle="collapse" data-target="#collapseTwo2" aria-controls="collapseTwo2">
-                                                                        <label class="custom-control-label pl-2 pl-lg-4" for="customRadio22">
-                                                                            <span class="h6 m-0">Location #2</span><br />
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="collapseTwo2" class="collapse pt-0" aria-labelledby="customRadio2" data-parent="#accordionLocationExample">
-                                                            <hr class="m-0">
-                                                            <div class="card-body">
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                @endforeach                            
                                 
                                                     
                                                 </div>
@@ -608,7 +589,7 @@
                                                 <!-- Checkout credit card -->
                                 
                                                 <div class="accordion br-sm" id="accordionPaymentExample">
-                                
+                               <!-- 
                                                     <div class="card card-fill mb-3 shadow-sm rounded">
                                                         <div class="card-header p-3">
                                                             <div class="row align-items-center">
@@ -662,11 +643,11 @@
                                 
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>  -->
                                 
                                                     <!-- Checkout Wallet -->
                                 
-                                                    <div class="card card-fill mb-3 shadow-sm rounded">
+                                        <!--            <div class="card card-fill mb-3 shadow-sm rounded">
                                                         <div class="card-header p-3">
                                                             <div class="row align-items-center">
                                                                 <div class="col-9">
@@ -690,7 +671,7 @@
                                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                 
                                                     <!-- Checkout Cash on deliver -->
                                 
@@ -699,7 +680,7 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
-                                                                        <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree">
+                                                                        <input type="radio" id="customRadio3" name="paymentmethod" value="cash" class="custom-control-input" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree" checked>
                                                                         <label class="custom-control-label pl-2 pl-lg-4" for="customRadio3">
                                                                             <span class="h6 m-0">Cash on Deliver </span><br />
                                                                         </label>
@@ -837,28 +818,34 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="add-location">
+
+                    @csrf
+
+                    <input type="hidden" name="orderlat-modal" id="orderlat-modal" value="">
+                    <input type="hidden" name="orderlong-modal" id="orderlong-modal" value="">
+                    <input type="hidden" name="delivery_address-modal" id="delivery_address-modal" value="">
 
 
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="street">Street</label>
-                            <input type="text" class="form-control" id="street">
+                            <input type="text" class="form-control" id="street" name="street">
                           </div>
 
                           <div class="form-group col-md-6">
                             <label for="building">Building</label>
-                            <input type="text" class="form-control" id="building">
+                            <input type="text" class="form-control" id="building" name="building">
                           </div>
 
                           <div class="form-group col-md-6">
                             <label for="floor">Floor</label>
-                            <input type="text" class="form-control" id="floor">
+                            <input type="text" class="form-control" id="floor" name="floor">
                           </div>
 
                           <div class="form-group col-md-6">
                             <label for="apartment">Apartment</label>
-                            <input type="text" class="form-control" id="apartment">
+                            <input type="text" class="form-control" id="apartment" name="apartment">
                           </div>
                         </div>
 
@@ -866,22 +853,23 @@
 
                         <div class="form-group">
                           <label for="inputAddress">Address Notes</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="inputAddress">
                         </div>
-                        
+
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" name="places" id="search_input" placeholder="Type address..." required>
+                        </div>                        
+
                     </form>
                
                
-                    <div class="form-group">
-                        <label>Location</label>
-                            <input type="text" class="form-control" id="search_input" placeholder="Type address...">
-                        
-                        </div>
+
                
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-primary lct-btn">Add</button>
                 </div>
             </div>
             </div>
@@ -938,7 +926,11 @@
 
                     if(data.status == 'false')
                     {
-                        window.location.replace("{{route('welcome')}}");
+                        setTimeout(function () 
+                        {
+                            window.location.replace("{{route('welcome')}}");
+                        }, 3000);
+
                     } else if (data.status == 'true')
                     {
                         const Toast = Swal.mixin({
@@ -951,10 +943,7 @@
                           type: 'success',
                           title: data.msg
                         }) 
-                       /* if(data.msg == 'Profile is updated successfully')
-                        {
-                            $('#AccountDetailsModal').modal('hide'); 
-                        }*/
+
                         
                     } 
                        
@@ -975,6 +964,127 @@
 
             });
 
+
+
+
+    $(".lct-btn").click(function(){        
+        $(".add-location").submit();
+    });
+
+    $('.add-location').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url:"{{route('addlocation')}}",
+                method:'POST',
+                data:new FormData(this),
+                contentType: false,
+                cache: false,
+                processData : false,
+                dataType:'json',
+                success:function(data)
+                {
+
+
+                    if(data.status == 'false')
+                    {
+
+
+                        setTimeout(function () 
+                        {
+                            window.location.replace("{{route('welcome')}}");
+                        }, 3000);
+                        
+                    } else if (data.status == 'true')
+                    {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                                                   });
+                        Toast.fire({
+                          type: 'success',
+                          title: data.msg
+                        }) 
+
+                        $('#LocationModal').modal('hide');
+                    }
+
+                   
+
+                },error:function(data)
+                {
+                  if(data['status'] == 422)
+                  {
+
+                   $.each( data['responseJSON']['errors'], function( key, value ) {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error(value[0])
+
+
+
+                     });
+
+                  }
+                }
+            })
+
+
+    });
+
+
+
+
+    $(".locationRdbtn").click(function(){ 
+
+            var lat = $(this).attr("data-lat");
+            var lng = $(this).attr("data-lng");
+            var delivery_address = $(this).attr("data-delivery_address");
+            $('#orderlat').val(lat);
+            $('#orderlong').val(lng);
+            $('#delivery_address').val(delivery_address);
+
+            $('#orderlat-modal').val(lat);
+            $('#orderlong-modal').val(lng);
+            $('#delivery_address-modal').val(delivery_address);
+            
+
+
+            $.ajax({
+                url:        "{{route('distanceCalculator')}}",
+                method:     'GET',
+                dataType:'json',
+                data: {lat:lat,
+                       lng:lng },
+                success:function(data)
+                {
+                    
+                    console.log(data);
+                    $('.Shipping-value').html(data+' SAR');
+                    $('#shippingFee').val(data);
+
+                    var dstotal = parseFloat($('#totalTax').val())+parseFloat(data) - parseFloat($('#couponDiscount').val());
+                    $('.total-value').html(parseFloat(dstotal).toFixed(2)+' SAR');
+                    $('#total').val(parseFloat(dstotal).toFixed(2)); 
+                    
+
+                },error:function(data)
+                {
+                       const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                                               });
+                        toastr.error('Woops something went');
+                }
+            })
+    });     
 </script>    
 
 @endsection
