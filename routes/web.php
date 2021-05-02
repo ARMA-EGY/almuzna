@@ -43,8 +43,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
     Route::get('/applyCode', 'Customers\CustomersController@applyCode')->name('applyCode');
     Route::get('/reorder/{id}', 'Customers\CustomersController@reorder')->name('reorder');
     
-    Route::post('/addlocation', 'Customers\CustomersController@addlocation')->name('addlocation');
-       
+    
     
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register2');
     
@@ -111,6 +110,11 @@ Route::group(['middleware' => [ 'auth' ]], function ()
     Route::get('/orders-delivered', 'Orders\OrdersController@delivered')->name('admin-orders-delivered');
     Route::get('/orders-cancelled', 'Orders\OrdersController@cancelled')->name('admin-orders-cancelled');
     Route::get('/reports-orders', 'Reports\ReportsController@orders')->name('admin-reports-orders');
+    Route::get('/reports-customer', 'Reports\ReportsController@customers')->name('admin-reports-customers');
+    Route::get('/reports-driver', 'Reports\ReportsController@drivers')->name('admin-reports-drivers');
+    Route::get('/reports-products', 'Reports\ReportsController@products')->name('admin-reports-products');
+    Route::get('/slideshow/{lang}', 'Slider\SliderController@index')->name('admin-show-slider');
+    Route::post('/updateslideshow', 'Slider\SliderController@updatephotos')->name('admin-update-slider');
 });
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'auth' , 'admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () 
@@ -173,10 +177,10 @@ Route::post('/removecategory', 'Blogs\CategoriesController@removecategory')->nam
 Route::post('/removetag', 'Blogs\TagsController@removetag')->name('remove-tag');
 Route::post('/removeblog', 'Blogs\BlogsController@removeblog')->name('remove-blog');
 Route::post('/removeproduct', 'Products\ProductsController@removeproduct')->name('remove-product');
-Route::post('/removeproductcategory', 
-
-'Products\CategoriesController@removecategory')->name('remove-product-category');
+Route::post('/removeproductcategory', 'Products\CategoriesController@removecategory')->name('remove-product-category');
 Route::post('/removeoffer', 'Offers\OffersController@removeoffer')->name('remove-offer');
+
+Route::post('/removeslider', 'Slider\SliderController@removegallery')->name('remove-slider');
 
 
 Route::post('/getorderdetails', 'Orders\OrdersController@getorderdetails')->name('get-order-details');

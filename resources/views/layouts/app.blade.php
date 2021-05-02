@@ -120,7 +120,7 @@
                  
 
 
-                                <div class="col-12">
+                                <div class="col-12 mt-2">
                                     <input type="text" id="vcode-form-vcode" name="vcode-form-vcode" value="" class="form-control not-dark" placeholder="verfication code">
                                 </div>
 
@@ -177,21 +177,25 @@
                                         </ul>
                                     </div>
 
-                                    <!-- Top Search
-                                    ============================================= -->
-                                    <div id="top-account">
-                                        @if(isset($user))
-                                        <a href="{{route('profile')}}" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
-                                            {{$user['name']}}
-                                        </span></a>    
-                                        @else
-                                        <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
-                                            {{__('core.LOGIN')}}
-                                        </span></a>
-                                        @endif
- 
-                                    </div>
-                                    <!-- #top-search end -->
+                                    @if(isset($user))
+                                        <div class="top-links" dir="ltr">
+                                            <ul class="top-links-container">
+                                                <li class="top-links-item">
+                                                    <a href="{{route('profile')}}" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">{{$user['name']}}</span></a>  
+                                                    <ul class="top-links-sub-menu">
+                                                        <li class="top-links-item"><a href="{{route('profile')}}"><i class="fa fa-user-circle mx-1 position-relative"></i> {{__('admin.PROFILE')}}</a></li>
+                                                        <li class="top-links-item"><a href="#"><i class="fas fa-sign-out-alt mx-1 position-relative" style="top: 1px;"></i> {{__('admin.LOGOUT')}}</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div> 
+                                    @else
+                                        <div id="top-account">
+                                            <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
+                                                {{__('core.LOGIN')}}
+                                            </span></a>
+                                        </div>
+                                    @endif
 
                                     <!-- Top Cart
                                     ============================================= -->

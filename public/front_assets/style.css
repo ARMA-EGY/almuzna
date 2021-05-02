@@ -3700,7 +3700,7 @@ html[xmlns] .slider-wrap {
 
 .top-links-item > a {
 	display: block;
-	padding: 12px;
+	padding: 7px;
 	font-size: 0.75rem;
 	line-height: 20px;
 	font-weight: 700;
@@ -3708,7 +3708,7 @@ html[xmlns] .slider-wrap {
 	color: #666;
 }
 
-.top-links-item > a > i { vertical-align: top; }
+/* .top-links-item > a > i { vertical-align: middle; } */
 
 .top-links-item > a > i.icon-angle-down { margin: 0 0 0 5px !important; }
 

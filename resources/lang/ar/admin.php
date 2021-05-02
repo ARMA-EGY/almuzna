@@ -33,6 +33,7 @@ return [
     "NAV-configuration" => "الاعدادات",
     "NAV-MESSAGES" => "الرسائل",
     "NAV-PAGES" => "الصفحات",
+    "NAV-SLIDESHOW" => "عرض الصور",
     "NAV-REPORTS" => "التقارير",
     "NAV-SETTINGS" => "ضبط البيانات",
     "NAV-SETTINGS-SOCIALMEDIA" => " وسائل التواصل الاجتماعي",
@@ -85,6 +86,8 @@ return [
     "PRODUCT-ADDNEW" => "اضافة منتج",
     "PRODUCT-TOTALPRODUCTs" => "اجمالي المنتجات ",
     "PRODUCT-TABLE-NAME" => "الاسم",
+    "PRODUCT-TABLE-DESCRIPTION" => "الوصف",
+    "PRODUCT-TABLE-SOLD" => "المباع",
     "PRODUCT-TABLE-PRICE" => "السعر",
     "PRODUCT-TABLE-TYPE" => "نوع المنتج",
     "PRODUCT-TABLE-EDIT" => "تعديل",
@@ -309,6 +312,10 @@ return [
     "SHIPPINGFEECREATE-ADDNEW" => "اضافة الشريحة جديدة",
     "SHIPPINGFEECREATE-EDITDATA" => "تعديل بيانات الشريحة",
     "SHIPPINGFEECREATE-DILIVERYFEE" => "قيمة التوصيل بالريال",
-    "SHIPPINGFEECREATE-DISTANCEINKILO" => "المسافة بالكيلو",    
+    "SHIPPINGFEECREATE-DISTANCEINKILO" => "المسافة بالكيلو",   
+    
+    
+    "TOTAL-ORDERS" => "اجمالي الطلبات", 
+    "JOIN-DATE" => "تاريخ التسجيل",
 
 ];

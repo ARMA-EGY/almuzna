@@ -33,6 +33,7 @@ return [
     "NAV-configuration" => "Configuration",
     "NAV-MESSAGES" => "Messages",
     "NAV-PAGES" => "Pages",
+    "NAV-SLIDESHOW" => "Slideshow",
     "NAV-REPORTS" => "Reports",
     "NAV-SETTINGS" => "Settings",
     "NAV-SETTINGS-SOCIALMEDIA" => "Social Media",
@@ -66,7 +67,7 @@ return [
     "CUTOMERS-TOTALCUTOMERS" => "Total Customers",
     "CUTOMERS-TABLE-NAME" => "Name",
     "CUTOMERS-TABLE-PHONE" => "Phone",
-    "CUTOMERS-TABLE-STATE" => "State",
+    "CUTOMERS-TABLE-STATE" => "Wallet",
     "CUTOMERS-TABLE-FIRSTORDER" => "First Order",
     "CUTOMERS-TABLE-EDIT" => "Edit Data",
 
@@ -86,6 +87,8 @@ return [
     "PRODUCT-TOTALPRODUCTs" => "Total Products",
     "PRODUCT-TABLE-NAME" => "Name",
     "PRODUCT-TABLE-PRICE" => "Price",
+    "PRODUCT-TABLE-DESCRIPTION" => "Description",
+    "PRODUCT-TABLE-SOLD" => "Sold",
     "PRODUCT-TABLE-TYPE" => "Product Type",
     "PRODUCT-TABLE-EDIT" => "Edit",
     "PRODUCT-TABLE-DELET" => "Delet",
@@ -310,5 +313,7 @@ return [
     "SHIPPINGFEECREATE-DISTANCEINKILO" => "Distance in Kilometers",
     
     
+    "TOTAL-ORDERS" => "Total Orders",
+    "JOIN-DATE" => "Join Date",
 
 ];
