@@ -46,9 +46,9 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item"><a href="{{route('products.index')}}">المنتجات</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ isset($product) ? 'تعديل منتج' : 'اضافة منتج' }}</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('products.index')}}">{{__('admin.NAV-PRODUCTS')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{ isset($product) ? __('admin.PRODUCTSCREATE-EDITDATA') : __('admin.PRODUCTSCREATE-ADDNEW') }}</li>
                 </ol>
               </nav>
             </div>
@@ -66,7 +66,7 @@
       <div class="row">
         <div class="col-xl-12">
             <div class="card card-defualt">
-                <div class="card-header">{{ isset($product) ? 'تعديل منتج' : 'اضافة منتج جديد' }} </div>
+                <div class="card-header">{{ isset($product) ? __('admin.PRODUCTSCREATE-EDITDATA') : __('admin.PRODUCTSCREATE-ADDNEW') }} </div>
         
                 <div class="card-body">
                     <form action="{{ isset($product) ? route('products.update', $product->id) : route('products.store')  }}" method="post" enctype="multipart/form-data">
@@ -80,8 +80,8 @@
                         <!--=================  Name  =================-->
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الاسم بالانجليزية</label>
-                                <input type="text" name="name_en" class="@error('name_en') is-invalid @enderror form-control" placeholder="Product Name" value="{{ isset($product) ? $product->name_en : old('name_en') }}" required>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.PRODUCTSCREATE-NAMEEN')}}</label>
+                                <input type="text" name="name_en" class="@error('name_en') is-invalid @enderror form-control" placeholder="{{__('admin.PRODUCTSCREATE-NAMEPLCEN')}}" value="{{ isset($product) ? $product->name_en : old('name_en') }}" required>
                             
                                 @error('name_en')
                                     <div>
@@ -92,8 +92,8 @@
                             </div>
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الاسم بالعربية</label>
-                                <input type="text" name="name_ar" class="@error('name_ar') is-invalid @enderror form-control text-right" placeholder="اسم المنتج" value="{{ isset($product) ? $product->name_ar : old('name_ar') }}" required>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.PRODUCTSCREATE-NAMEAR')}} </label>
+                                <input type="text" name="name_ar" class="@error('name_ar') is-invalid @enderror form-control text-right" placeholder="{{__('admin.PRODUCTSCREATE-NAMEPLCAR')}}" value="{{ isset($product) ? $product->name_ar : old('name_ar') }}" required>
                             
                                 @error('name_ar')
                                     <div>
@@ -106,8 +106,8 @@
                         <!--=================  Description  =================-->
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الوصف بالانجليزية</label>
-                                <input type="text" name="description_en" class="@error('description_en') is-invalid @enderror form-control" placeholder="Description" value="{{ isset($product) ? $product->description_en : old('description_en') }}" >
+                                <label class="font-weight-bold text-uppercase">{{__('admin.PRODUCTSCREATE-DESRIPTIONEN')}}</label>
+                                <input type="text" name="description_en" class="@error('description_en') is-invalid @enderror form-control" placeholder="{{__('admin.PRODUCTSCREATE-DESRIPTIONPLCEN')}}" value="{{ isset($product) ? $product->description_en : old('description_en') }}" >
                             
                                 @error('description_en')
                                     <div>
@@ -118,8 +118,8 @@
                             </div>
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الوصف بالعربية</label>
-                                <input type="text" name="description_ar" class="@error('description_ar') is-invalid @enderror form-control text-right" placeholder="وصف المنتج" value="{{ isset($product) ? $product->description_ar : old('description_ar') }}" >
+                                <label class="font-weight-bold text-uppercase">{{__('admin.PRODUCTSCREATE-DESRIPTIONAR')}}</label>
+                                <input type="text" name="description_ar" class="@error('description_ar') is-invalid @enderror form-control text-right" placeholder="{{__('admin.PRODUCTSCREATE-DESRIPTIONPLCAR')}}" value="{{ isset($product) ? $product->description_ar : old('description_ar') }}" >
                             
                                 @error('description_ar')
                                     <div>
@@ -143,7 +143,7 @@
                             <!--=================  Kind  =================-->
 
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">النوع</label>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.PRODUCTSCREATE-TYPE')}}</label>
 
                                 <select class="form-control" id="on_sale" name="refill" id="input-gender" required>
                                     <option value="0" @isset($product) @if ($product->refill == '0') selected  @endif @endisset >جديد</option>
@@ -159,8 +159,8 @@
 
                             <!--=================  Price  =================-->
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">السعر</label>
-                                <input type="number" name="price" class="@error('price') is-invalid @enderror form-control" placeholder="سعر المنتج" value="{{ isset($product) ? $product->price : old('price') }}" required>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.PRODUCTSCREATE-PRICE')}}</label>
+                                <input type="number" name="price" class="@error('price') is-invalid @enderror form-control" placeholder="{{__('admin.PRODUCTSCREATE-PRICEPLC')}}" value="{{ isset($product) ? $product->price : old('price') }}" required>
                             
                                 @error('price')
                                     <div>
@@ -177,13 +177,13 @@
         
                         @if (isset($product))
                             <div class="form-group text-right">
-                                <label for="image">الصورة</label>
+                                <label for="image">{{__('admin.PRODUCTSCREATE-IMAGE')}}</label>
                                 <img src="{{ asset('storage/'.$product->photo) }}" alt="" width="100%">
                             </div>
                         @endif
         
                         <div class="form-group text-right">
-                            <label for="image">الصورة</label>
+                            <label for="image">{{__('admin.PRODUCTSCREATE-IMAGE')}}</label>
                             <input id="image" type="file" name="photo" accept="image/*" class="@error('photo') is-invalid @enderror form-control form-control-sm" >
                         
                             @error('photo')
@@ -196,7 +196,7 @@
                         <hr class="my-3">
         
                         <div class="form-group">
-                        <button type="submit" class="btn btn-success">{{ isset($product) ? 'حفظ' : 'اضافة' }}</button>
+                        <button type="submit" class="btn btn-success">{{ isset($product) ?  __('admin.PRODUCTSCREATE-EDIT'):__('admin.PRODUCTSCREATE-ADD') }}</button>
                         </div>
         
                     </form>

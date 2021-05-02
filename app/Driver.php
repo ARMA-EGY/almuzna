@@ -10,7 +10,7 @@ class Driver extends Model
 
     protected $fillable = 
     [
-        'name', 'phone', 'gender', 'email',  'image', 
+        'name', 'phone', 'gender', 'email',  'image', 'fcm_token' , 'fcm_lang'
     ];
 
     public function Order(){

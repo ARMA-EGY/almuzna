@@ -65,9 +65,9 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item"><a href="{{route('coupons.index')}}">الكوبونات</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ isset($coupon) ? 'تعديل الكوبون' : 'اضافة كوبون' }}</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('coupons.index')}}">{{__('admin.NAV-COUPONS')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{ isset($coupon) ? __('admin.COUPONSCREATE-EDITDATA') : __('admin.COUPONSCREATE-ADDNEW') }}</li>
                 </ol>
               </nav>
             </div>
@@ -85,7 +85,7 @@
       <div class="row">
         <div class="col-xl-12">
             <div class="card card-defualt">
-                <div class="card-header">{{ isset($coupon) ? 'تعديل الكوبون' : 'اضافة كوبون جديد' }} </div>
+                <div class="card-header">{{ isset($coupon) ? __('admin.COUPONSCREATE-EDITDATA') : __('admin.COUPONSCREATE-ADDNEW') }} </div>
         
                 <div class="card-body">
                     <form action="{{ isset($coupon) ? route('coupons.update', $coupon->id) : route('coupons.store')  }}" method="post" enctype="multipart/form-data">
@@ -98,8 +98,8 @@
                         <div class="row">
                             <!--=================  Code  =================-->
                             <div class="form-group col-md-4 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الكود</label>
-                                <input type="text" name="code" class="@error('code') is-invalid @enderror form-control" placeholder="كود الكوبون" value="{{ isset($coupon) ? $coupon->code : old('code') }}" >
+                                <label class="font-weight-bold text-uppercase">{{__('admin.COUPONSCREATE-DICOUNTCODE')}}</label>
+                                <input type="text" name="code" class="@error('code') is-invalid @enderror form-control" placeholder="{{__('admin.COUPONSCREATE-DISCOUNTCODEPLC')}}" value="{{ isset($coupon) ? $coupon->code : old('code') }}" >
                             
                                 @error('code')
                                     <div>
@@ -111,7 +111,7 @@
         
                             <!--=================  Type  =================-->
                             <div class="form-group col-md-4 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">نوع الخصم</label>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.COUPONSCREATE-DISCOUNTTYPE')}} </label>
 
                                 <select class="form-control" name="type" required>
                                   <option value="percentage" @isset($coupon) @if ($coupon->type == 'percentage') selected  @endif @endisset >نسبة مئوية</option>
@@ -128,9 +128,9 @@
         
                             <!--=================  Discount  =================-->
                             <div class="form-group col-md-4 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">قيمة الخصم</label>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.COUPONSCREATE-DICOUNTVALUE')}}</label>
                             
-                                <input type="number" name="discount" class="@error('discount') is-invalid @enderror form-control" placeholder="قيمة الخصم" value="{{ isset($coupon) ? $coupon->discount : old('discount') }}" >
+                                <input type="number" name="discount" class="@error('discount') is-invalid @enderror form-control" placeholder="{{__('admin.COUPONSCREATE-DICOUNTVALUEPLC')}} " value="{{ isset($coupon) ? $coupon->discount : old('discount') }}" >
 
                                 @error('discount')
                                     <div>
@@ -149,7 +149,7 @@
 
                           <!--=================  Number of use per customer  =================-->
                           <div class="form-group col-md-4 mb-2 text-right">
-                            <label class="font-weight-bold text-uppercase">عدد الاستخدامات لكل عميل</label>
+                            <label class="font-weight-bold text-uppercase">{{__('admin.COUPONSCREATE-USAGE')}}</label>
                         
                             <select class="form-control" name="use_num" id="input-gender" required>
                               <option value="1" @isset($coupon) @if ($coupon->use_num == '1') selected  @endif @endisset >1</option>
@@ -175,7 +175,7 @@
 
                             <!--================= Start Date  =================-->
                             <div class="form-group col-md-4 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">تاريخ الابتداء</label>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.COUPONSCREATE-STARTDATE')}}</label>
                                 <input type="date" name="start_date" class="@error('start_date') is-invalid @enderror form-control" placeholder="Start Date" value="{{ isset($coupon) ? $coupon->start_date : old('start_date') }}" required>
                             
                                 @error('start_date')
@@ -188,7 +188,7 @@
 
                             <!--================= End Date  =================-->
                             <div class="form-group col-md-4 mb-2 text-right">
-                              <label class="font-weight-bold text-uppercase">تاريخ الانتهاء</label>
+                              <label class="font-weight-bold text-uppercase">{{__('admin.COUPONSCREATE-EXPIREDATE')}}</label>
                               <input type="date" name="end_date" class="@error('end_date') is-invalid @enderror form-control" placeholder="End Date" value="{{ isset($coupon) ? $coupon->end_date : old('end_date') }}" required>
                           
                               @error('end_date')
@@ -208,7 +208,7 @@
         
                           <!--=================  Private  =================-->
                           <div class="form-group col-md-4 mb-2 text-right">
-                              <label class="font-weight-bold text-uppercase">نوع الكوبون</label>
+                              <label class="font-weight-bold text-uppercase">{{__('admin.COUPONSCREATE-TYPE')}} </label>
                           
                               <select class="form-control" name="private" id="private" required>
                                 <option value="0" @isset($coupon) @if ($coupon->type == 0) selected  @endif @endisset >عام</option>
@@ -242,7 +242,7 @@
                           
         
                         <div class="form-group">
-                          <button type="submit" class="btn btn-success">{{ isset($coupon) ? 'حفظ' : 'اضافة' }}</button>
+                          <button type="submit" class="btn btn-success">{{ isset($coupon) ? __('admin.COUPONSCREATE-EDIT'):__('admin.COUPONSCREATE-ADD') }}</button>
                         </div>
         
                     </form>

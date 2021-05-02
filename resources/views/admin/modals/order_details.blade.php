@@ -9,32 +9,56 @@
 
         <form class="edit_status_form text-right assign" data-target="#order_status">
             @csrf
-            <div class="row">
-                <div class="form-group col-md-6 text-right">
-                    <label class="font-weight-bold" for="inputState">السائقين</label>
-                    <select id="inputState" name="edit_order_status" class="form-control form-control-sm">
-
-                    @if(!$order->driver_id) 
-
-                        @foreach($dv_data as $sdv_data)
-                            @if($sdv_data['count'] < $driver_order_limit->decimal_value )
-                                <option value="{{$sdv_data['driver']->id}}" > {{$sdv_data['driver']->name}} </option>
+            @if(!$order->driver_id) 
+                <div class="row">
+                    <div class="form-group col-md-6 text-right">
+                        <label class="font-weight-bold" for="inputState">السائقين</label>
+                        <select id="inputState" name="edit_order_status" class="form-control form-control-sm">
+                            @if(isset($lastdriver))
+                                @foreach($dv_data as $sdv_data)
+                                    @if($sdv_data['count'] < $driver_order_limit->decimal_value )
+                                        <option value="{{$sdv_data['driver']->id}}" {{$sdv_data["driver"]->id == $lastdriver ? "selected" : "" }} > {{$sdv_data['driver']->name}} </option>
+                                    @endif
+                                @endforeach
+                            @else  
+                                @foreach($dv_data as $sdv_data)
+                                        @if($sdv_data['count'] < $driver_order_limit->decimal_value )
+                                            <option value="{{$sdv_data['driver']->id}}" > {{$sdv_data['driver']->name}} </option>
+                                        @endif
+                                @endforeach                          
                             @endif
-                        @endforeach
-                    @else
-                    <option value="s" > {{$order->Driver->name}} </option>
-                    @endif
-                    </select>
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="order_id" value="{{$order->id}}">
+                    
+                    <div class="form-group col-md-6 text-right">
+                        <label class="font-weight-bold d-block" for="inputState"></label>
+                        <button type="submit" class="btn btn-primary btn-sm mb-2 mt-4 submit">ارسال طلب للسائق</button>
+                    </div>
+                    
                 </div>
-                @if(!$order->driver_id) 
-                <input type="hidden" name="order_id" value="{{$order->id}}">
-                @endif
-                <div class="form-group col-md-6 text-right">
-                    <label class="font-weight-bold d-block" for="inputState"></label>
-                    <button type="submit" class="btn btn-primary btn-sm mb-2 mt-4 submit">ارسال طلب للسائق</button>
-                </div>
-                
-            </div>
+            @else
+                <div class="row" style="border: 1px solid #ccc;padding: 10px;margin: 10px 15px;border-radius: 5px;box-shadow: 0 0 5px 1px rgba(204, 204, 204, 0.5);">
+                    <h5 class="col-md-12 mb-2"><i class="fa fa-info-circle"></i> بيانات السائق</h5>
+                    
+                    <div class="col-md-4 my-1 pb-2" style="border-bottom: 1px solid #ccc;">
+                        <label class="font-weight-bold text-dark mb-1"> الاسم </label> 
+                        <h5 class="text-gray"> {{$order->Driver->name}} </h5>
+                    </div>
+                    
+                    <div class="col-md-4 my-1 pb-2" style="border-bottom: 1px solid #ccc;">
+                        <label class="font-weight-bold text-dark mb-1"> الهاتف </label> 
+                        <h5 class="text-gray"> {{$order->Driver->phone}} </h5>
+                    </div>
+                    
+                    <div class="col-md-4 my-1 pb-2" style="border-bottom: 1px solid #ccc;">
+                        <label class="font-weight-bold text-dark mb-1"> البريد الالكتروني </label> 
+                        <h5 class="text-gray"> {{$order->Driver->email}} </h5>
+                    </div>
+                    
+                </div>                   
+            @endif
         </form>        
             
 

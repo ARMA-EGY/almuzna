@@ -41,9 +41,9 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item"><a href="{{route('offers.index')}}">العروض</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ isset($offer) ? 'تعديل عرض' : 'اضافة عرض' }}</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('offers.index')}}">{{__('admin.NAV-OFFERS')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{ isset($offer) ? __('admin.OFFERSCREATE-EDITDATA') : __('admin.OFFERSCREATE-ADDNEW') }}</li>
                 </ol>
               </nav>
             </div>
@@ -61,7 +61,7 @@
       <div class="row">
         <div class="col-xl-12">
             <div class="card card-defualt">
-                <div class="card-header">{{ isset($offer) ? 'تعديل عرض' : 'اضافة عرض جديد' }} </div>
+                <div class="card-header">{{ isset($offer) ? __('admin.OFFERSCREATE-EDITDATA') : __('admin.OFFERSCREATE-ADDNEW') }} </div>
         
                 <div class="card-body">
                     <form action="{{ isset($offer) ? route('offers.update', $offer->id) : route('offers.store')  }}" method="post" enctype="multipart/form-data">
@@ -75,8 +75,8 @@
                         <!--=================  Name  =================-->
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الاسم بالانجليزية</label>
-                                <input type="text" name="name_en" class="@error('name_en') is-invalid @enderror form-control" placeholder="Offer Name" value="{{ isset($offer) ? $offer->name_en : old('name_en') }}" required>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.OFFERSCREATE-NAMEEN')}}</label>
+                                <input type="text" name="name_en" class="@error('name_en') is-invalid @enderror form-control" placeholder="{{__('admin.OFFERSCREATE-NAMEPLCEN')}}" value="{{ isset($offer) ? $offer->name_en : old('name_en') }}" required>
                             
                                 @error('name_en')
                                     <div>
@@ -87,8 +87,8 @@
                             </div>
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الاسم بالعربية</label>
-                                <input type="text" name="name_ar" class="@error('name_ar') is-invalid @enderror form-control text-right" placeholder="اسم العرض" value="{{ isset($offer) ? $offer->name_ar : old('name_ar') }}" required>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.OFFERSCREATE-NAMEAR')}}</label>
+                                <input type="text" name="name_ar" class="@error('name_ar') is-invalid @enderror form-control text-right" placeholder="{{__('admin.OFFERSCREATE-NAMEPLCAR')}}" value="{{ isset($offer) ? $offer->name_ar : old('name_ar') }}" required>
                             
                                 @error('name_ar')
                                     <div>
@@ -101,8 +101,8 @@
                         <!--=================  Description  =================-->
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الوصف بالانجليزية</label>
-                                <input type="text" name="description_en" class="@error('description_en') is-invalid @enderror form-control" placeholder="Description" value="{{ isset($offer) ? $offer->description_en : old('description_en') }}" >
+                                <label class="font-weight-bold text-uppercase">{{__('admin.OFFERSCREATE-DESRIPTIONEN')}}</label>
+                                <input type="text" name="description_en" class="@error('description_en') is-invalid @enderror form-control" placeholder="{{__('admin.OFFERSCREATE-DESRIPTIONPLCEN')}}" value="{{ isset($offer) ? $offer->description_en : old('description_en') }}" >
                             
                                 @error('description_en')
                                     <div>
@@ -113,8 +113,8 @@
                             </div>
         
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الوصف بالعربية</label>
-                                <input type="text" name="description_ar" class="@error('description_ar') is-invalid @enderror form-control text-right" placeholder="وصف المنتج" value="{{ isset($offer) ? $offer->description_ar : old('description_ar') }}" >
+                                <label class="font-weight-bold text-uppercase">{{__('admin.OFFERSCREATE-DESRIPTIONAR')}}</label>
+                                <input type="text" name="description_ar" class="@error('description_ar') is-invalid @enderror form-control text-right" placeholder="{{__('admin.OFFERSCREATE-DESRIPTIONPLCAR')}}" value="{{ isset($offer) ? $offer->description_ar : old('description_ar') }}" >
                             
                                 @error('description_ar')
                                     <div>
@@ -134,8 +134,8 @@
                             <!--=================  Price  =================-->
                                     
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">السعر</label>
-                                <input type="text" name="price" class="@error('price') is-invalid @enderror form-control" placeholder="سعر العرض" value="{{ isset($offer) ? $offer->price : old('price') }}" required>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.OFFERSCREATE-PRICE')}}</label>
+                                <input type="text" name="price" class="@error('price') is-invalid @enderror form-control" placeholder="{{__('admin.OFFERSCREATE-PRICEPLC')}}" value="{{ isset($offer) ? $offer->price : old('price') }}" required>
 
                                 @error('price')
                                     <div>
@@ -166,13 +166,13 @@
         
                         @if (isset($offer))
                             <div class="form-group text-right">
-                                <label for="image">الصورة</label>
+                                <label for="image">{{__('admin.OFFERSCREATE-IMAGE')}}الصورة</label>
                                 <img src="{{ asset('storage/'.$offer->image) }}" alt="" width="100%">
                             </div>
                         @endif
         
                         <div class="form-group text-right">
-                            <label for="image">الصورة</label>
+                            <label for="image">{{__('admin.OFFERSCREATE-IMAGE')}}</label>
                             <input id="image" type="file" name="image" accept="image/*" class="@error('image') is-invalid @enderror form-control form-control-sm" >
                         
                             @error('image')
@@ -185,7 +185,7 @@
                         <hr class="my-3">
         
                         <div class="form-group">
-                        <button type="submit" class="btn btn-success">{{ isset($offer) ? 'حفظ' : 'اضافة' }}</button>
+                        <button type="submit" class="btn btn-success">{{ isset($offer) ?  __('admin.OFFERSCREATE-EDIT'):__('admin.OFFERSCREATE-ADD') }}</button>
                         </div>
         
                     </form>

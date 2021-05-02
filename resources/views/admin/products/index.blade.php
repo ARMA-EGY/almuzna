@@ -85,6 +85,7 @@
                     <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-PRICE')}}</th>
                     <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-TYPE')}} </th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>

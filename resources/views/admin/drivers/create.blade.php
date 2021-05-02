@@ -32,9 +32,9 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item"><a href="{{route('drivers.index')}}">السائقين</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ isset($driver) ? 'تعديل بيانات السائق' : 'اضافة سائق' }}</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('drivers.index')}}">{{__('admin.NAV-DRIVERS')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{ isset($driver) ?    __('admin.DRIVERSCREATE-EDITDATA') : __('admin.DRIVERSCREATE-ADDNEW') }}</li>
                 </ol>
               </nav>
             </div>
@@ -52,7 +52,7 @@
       <div class="row">
         <div class="col-xl-12">
             <div class="card card-defualt">
-                <div class="card-header">{{ isset($driver) ? 'تعديل بيانات سائق' : 'اضافة سائق جديد' }} </div>
+                <div class="card-header">{{ isset($driver) ? __('admin.DRIVERSCREATE-EDITDATA') : __('admin.DRIVERSCREATE-ADDNEW') }} </div>
         
                 <div class="card-body">
                     <form action="{{ isset($driver) ? route('drivers.update', $driver->id) : route('drivers.store')  }}" method="post" enctype="multipart/form-data">
@@ -65,8 +65,8 @@
                         <div class="row">
                             <!--=================  Name  =================-->
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">الاسم</label>
-                                <input type="text" name="name" class="@error('name') is-invalid @enderror form-control" placeholder="اسم السائق" value="{{ isset($driver) ? $driver->name : old('name') }}" >
+                                <label class="font-weight-bold text-uppercase">{{__('admin.DRIVERSCREATE-NAME')}}</label>
+                                <input type="text" name="name" class="@error('name') is-invalid @enderror form-control" placeholder="{{__('admin.DRIVERSCREATE-NAMEPLC')}}" value="{{ isset($driver) ? $driver->name : old('name') }}" >
                             
                                 @error('name')
                                     <div>
@@ -78,8 +78,8 @@
         
                             <!--=================  Phone  =================-->
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">رقم الهاتف</label>
-                                <input type="text" name="phone" class="@error('phone') is-invalid @enderror form-control" placeholder="رقم الهاتف" value="{{ isset($driver) ? $driver->phone : old('phone') }}" required>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.DRIVERSCREATE-PHONE')}}</label>
+                                <input type="text" name="phone" class="@error('phone') is-invalid @enderror form-control" placeholder="{{__('admin.DRIVERSCREATE-PHONEPLC')}}" value="{{ isset($driver) ? $driver->phone : old('phone') }}" required>
                               
                                 @error('phone')
                                     <div>
@@ -98,8 +98,8 @@
 
                             <!--================= Email  =================-->
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">البريد الالكتروني</label>
-                                <input type="text" name="email" class="@error('email') is-invalid @enderror form-control" placeholder="البريد الالكتروني" value="{{ isset($driver) ? $driver->email : old('email') }}" >
+                                <label class="font-weight-bold text-uppercase">{{__('admin.DRIVERSCREATE-EMAIL')}}</label>
+                                <input type="text" name="email" class="@error('email') is-invalid @enderror form-control" placeholder="{{__('admin.DRIVERSCREATE-EMAILPLC')}}" value="{{ isset($driver) ? $driver->email : old('email') }}" >
                             
                                 @error('email')
                                     <div>
@@ -111,7 +111,7 @@
 
                             <!--=================  Gender  =================-->
                             <div class="form-group col-md-6 mb-2 text-right">
-                                <label class="font-weight-bold text-uppercase">النوع</label>
+                                <label class="font-weight-bold text-uppercase">{{__('admin.DRIVERSCREATE-GENDER')}}</label>
 
                                 <select class="form-control" name="gender" id="input-gender" required>
                                     <option value="Female" @isset($driver) @if ($driver->gender == 'Femail') selected  @endif @endisset >انثى</option>
@@ -131,7 +131,7 @@
                           
         
                         <div class="form-group">
-                        <button type="submit" class="btn btn-success">{{ isset($driver) ? 'حفظ' : 'اضافة' }}</button>
+                        <button type="submit" class="btn btn-success">{{ isset($driver) ? __('admin.DRIVERSCREATE-EDIT'):__('admin.DRIVERSCREATE-ADD') }}</button>
                         </div>
         
                     </form>

@@ -34,8 +34,8 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="{{route('home')}}">لوحة التحكم</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">قيمة التوصيل</li>
+                  <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.NAV-DELIVERYFEE')}}</li>
                 </ol>
               </nav>
             </div>
@@ -67,7 +67,7 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">اجمالي الشرائح  <span class="badge badge-primary p-2">{{$shipping_count}}</span></h3>
+                  <h3 class="mb-0">{{__('admin.SHIPPINGFEE-TOTAL')}}  <span class="badge badge-primary p-2">{{$shipping_count}}</span></h3>
                 </div>
               </div>
             </div>
@@ -80,8 +80,8 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >المسافة</th>
-                    <th scope="col" class="sort" >قيمة التوصيل</th>
+                    <th scope="col" class="sort" >{{__('admin.SHIPPINGFEE-DISTANCE')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.SHIPPINGFEE-VALUE')}}</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -94,7 +94,7 @@
                     <td><b> {{  $ship->distance }} كيلو</b></td>
                     <td>{{ $ship->price }} ريال سعودي</td>
                     <td>
-                      <a href="{{ route('shipping.edit', $ship->id)}}" class="btn btn-primary float-left btn-sm mx-1"><i class="fa fa-edit"></i> تعديل بيانات</a>
+                      <a href="{{ route('shipping.edit', $ship->id)}}" class="btn btn-primary float-left btn-sm mx-1"><i class="fa fa-edit"></i>{{__('admin.SHIPPINGFEE-EDITDATA')}}</a>
                     </td>
                   </tr>
 

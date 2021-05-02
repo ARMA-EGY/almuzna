@@ -84,6 +84,7 @@
                     <th scope="col" class="sort" >{{__('admin.OFFERS-TABLE-NAME')}}</th>
                     <th scope="col" class="sort" >{{__('admin.OFFERS-TABLE-PRICE')}}</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>

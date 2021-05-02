@@ -225,4 +225,90 @@ return [
     "WELCOME" => "Welcome",
     "DATE" => "Date",
 
+
+    "DRIVERSCREATE-ADDNEW" => "Add new Driver", 
+    "DRIVERSCREATE-EDITDATA" => "Edit Data",    
+    "DRIVERSCREATE-NAME" => "Name",
+    "DRIVERSCREATE-NAMEPLC" => "Driver Name",
+    "DRIVERSCREATE-PHONE" => "Phone",
+    "DRIVERSCREATE-PHONEPLC" => "Phone Number", 
+    "DRIVERSCREATE-EMAIL" => "Email",
+    "DRIVERSCREATE-EMAILPLC" => "Email",
+    "DRIVERSCREATE-GENDER" => "Gender",       
+    "DRIVERSCREATE-ADD" => "Add",
+    "DRIVERSCREATE-EDIT" => "Edit", 
+    
+    "PRODUCTSCREATE-ADDNEW" => "Add new Product", 
+    "PRODUCTSCREATE-EDITDATA" => "Edit Data",
+    "PRODUCTSCREATE-NAMEAR" => "Arabic Name",
+    "PRODUCTSCREATE-NAMEPLCAR" => "Product Name",
+    "PRODUCTSCREATE-NAMEEN" => "English Name",
+    "PRODUCTSCREATE-NAMEPLCEN" => "Product Name", 
+    "PRODUCTSCREATE-DESRIPTIONAR" => "Arabic Description",
+    "PRODUCTSCREATE-DESRIPTIONPLCAR" => "Description",
+    "PRODUCTSCREATE-DESRIPTIONEN" => "English Description",
+    "PRODUCTSCREATE-DESRIPTIONPLCEN" => "Description",     
+    "PRODUCTSCREATE-PRICE" => "Price",
+    "PRODUCTSCREATE-PRICEPLC" => "Product Price", 
+    "PRODUCTSCREATE-TYPE" => "Type",
+    "PRODUCTSCREATE-IMAGE" => "Image", 
+    "PRODUCTSCREATE-ADD" => "Add",
+    "PRODUCTSCREATE-EDIT" => "Edit", 
+    
+    
+
+    "OFFERSCREATE-ADDNEW" => "Add new Offer", 
+    "OFFERSCREATE-EDITDATA" => "Edit Data",
+    "OFFERSCREATE-NAMEAR" => "Arabic Name",
+    "OFFERSCREATE-NAMEPLCAR" => "Offer Name",
+    "OFFERSCREATE-NAMEEN" => "English Name",
+    "OFFERSCREATE-NAMEPLCEN" => "Offer Name", 
+    "OFFERSCREATE-DESRIPTIONAR" => "Arabic Description",
+    "OFFERSCREATE-DESRIPTIONPLCAR" => "Description",
+    "OFFERSCREATE-DESRIPTIONEN" => "English Description",
+    "OFFERSCREATE-DESRIPTIONPLCEN" => "Description",     
+    "OFFERSCREATE-PRICE" => "Price",
+    "OFFERSCREATE-PRICEPLC" => "Offer Price", 
+    "OFFERSCREATE-IMAGE" => "Image", 
+    "OFFERSCREATE-ADD" => "Add",
+    "OFFERSCREATE-EDIT" => "Edit",    
+    
+    
+    "COUPONSCREATE-ADDNEW" => "Add new Coupon", 
+    "COUPONSCREATE-EDITDATA" => "Edit Data",
+
+    "COUPONSCREATE-DICOUNTVALUE" => "Discount Value", 
+    "COUPONSCREATE-DICOUNTVALUEPLC" => "Discount Value", 
+
+    "COUPONSCREATE-DISCOUNTTYPE" => "Discount Type",
+
+    "COUPONSCREATE-DICOUNTCODE" => "Code", 
+    "COUPONSCREATE-DISCOUNTCODEPLC" => "Coupon Code",
+
+    "COUPONSCREATE-EXPIREDATE" => "Expiration Date", 
+    "COUPONSCREATE-STARTDATE" => "Start Date", 
+    
+    "COUPONSCREATE-USAGE" => "Usage Per Customer", 
+
+    "COUPONSCREATE-TYPE" => "Type", 
+
+    "COUPONSCREATE-ADD" => "Add",
+    "COUPONSCREATE-EDIT" => "Edit",
+
+    
+    "SHIPPINGFEE-TOTAL" => "Total",
+    "SHIPPINGFEE-DISTANCE" => "Distance", 
+    "SHIPPINGFEE-VALUE" => "Value",
+    "SHIPPINGFEE-EDITDATA" => "Edit Data", 
+    
+    "SHIPPINGFEECREATE-ADD" => "Add",
+    "SHIPPINGFEECREATE-EDIT" => "Edit",
+    
+    "SHIPPINGFEECREATE-EDITDATA" => "Edit Shipping Data",
+    "SHIPPINGFEECREATE-ADDNEW" => "Add New Data",
+    "SHIPPINGFEECREATE-DILIVERYFEE" => "Delivery Fee In riyals",
+    "SHIPPINGFEECREATE-DISTANCEINKILO" => "Distance in Kilometers",
+    
+    
+
 ];

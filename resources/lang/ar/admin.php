@@ -206,7 +206,6 @@ return [
     "REGISTER-JOB" => "تأكيد كلمة المرور",
     "REGISTER-ADD" => "اضافة",   
 
-<<<<<<< HEAD
 
     "CUTOMERSCREATE-ADDNEW" => "اضافة عميل جديد", 
     "CUTOMERSCREATE-EDITDATA" => "تعديل البيانات",    
@@ -219,7 +218,7 @@ return [
     "CUTOMERSCREATE-GENDER" => "النوع",       
     "CUTOMERSCREATE-ADD" => "اضافة",
     "CUTOMERSCREATE-EDIT" => "تعديل",
-=======
+
     "MALE" => "ذكر",       
     "FEMALE" => "انثى",
     "LANGUAGE" => "اللغة",
@@ -230,5 +229,86 @@ return [
     "WELCOME" => "مرحباً",
     "DATE" => "التاريخ",
 
->>>>>>> main
+    "DRIVERSCREATE-ADDNEW" => "اضافة سائق جديد", 
+    "DRIVERSCREATE-EDITDATA" => "تعديل البيانات",    
+    "DRIVERSCREATE-NAME" => "الاسم",
+    "DRIVERSCREATE-NAMEPLC" => "اسم السائق",
+    "DRIVERSCREATE-PHONE" => "الهاتف",
+    "DRIVERSCREATE-PHONEPLC" => "رقم الهاتف", 
+    "DRIVERSCREATE-EMAIL" => "البريد الالكتروني",
+    "DRIVERSCREATE-EMAILPLC" => "البريد الالكتروني",
+    "DRIVERSCREATE-GENDER" => "النوع",       
+    "DRIVERSCREATE-ADD" => "اضافة",
+    "DRIVERSCREATE-EDIT" => "تعديل",
+
+    "PRODUCTSCREATE-ADDNEW" => "اضافة منتج جديد", 
+    "PRODUCTSCREATE-EDITDATA" => "تعديل البيانات",
+    "PRODUCTSCREATE-NAMEAR" => "الاسم بالعربية",
+    "PRODUCTSCREATE-NAMEPLCAR" => "اسم المنتج",
+    "PRODUCTSCREATE-NAMEEN" => "الاسم بالانجليزية",
+    "PRODUCTSCREATE-NAMEPLCEN" => "Product Name", 
+    "PRODUCTSCREATE-DESRIPTIONAR" => "الوصف بالعربية",
+    "PRODUCTSCREATE-DESRIPTIONPLCAR" => "وصف المنتج",
+    "PRODUCTSCREATE-DESRIPTIONEN" => "الوصف بالانجليزية",
+    "PRODUCTSCREATE-DESRIPTIONPLCEN" => "Description",     
+    "PRODUCTSCREATE-PRICE" => "السعر",
+    "PRODUCTSCREATE-PRICEPLC" => "سعر المنتج", 
+    "PRODUCTSCREATE-TYPE" => "النوع",
+    "PRODUCTSCREATE-IMAGE" => "الصورة", 
+    "PRODUCTSCREATE-ADD" => "اضافة",
+    "PRODUCTSCREATE-EDIT" => "تعديل",  
+    
+    
+    "OFFERSCREATE-ADDNEW" => "اضافة عرض جديد", 
+    "OFFERSCREATE-EDITDATA" => "تعديل البيانات",
+    "OFFERSCREATE-NAMEAR" => "الاسم بالعربية",
+    "OFFERSCREATE-NAMEPLCAR" => "اسم العرض",
+    "OFFERSCREATE-NAMEEN" => "الاسم بالانجليزية",
+    "OFFERSCREATE-NAMEPLCEN" => "Offer Name", 
+    "OFFERSCREATE-DESRIPTIONAR" => "الوصف بالعربية",
+    "OFFERSCREATE-DESRIPTIONPLCAR" => "وصف العرض",
+    "OFFERSCREATE-DESRIPTIONEN" => "الوصف بالانجليزية",
+    "OFFERSCREATE-DESRIPTIONPLCEN" => "Description",     
+    "OFFERSCREATE-PRICE" => "السعر",
+    "OFFERSCREATE-PRICEPLC" => "سعر العرض", 
+    "OFFERSCREATE-IMAGE" => "الصورة", 
+    "OFFERSCREATE-ADD" => "اضافة",
+    "OFFERSCREATE-EDIT" => "تعديل",      
+
+
+    "COUPONSCREATE-ADDNEW" => "اضافة عرض جديدة", 
+    "COUPONSCREATE-EDITDATA" => "تعديل البيانات",
+
+    "COUPONSCREATE-DICOUNTVALUE" => "قيمة الخصم", 
+    "COUPONSCREATE-DICOUNTVALUEPLC" => "قيمة الخصم", 
+
+    "COUPONSCREATE-DISCOUNTTYPE" => "نوع الخصم",
+
+    "COUPONSCREATE-DICOUNTCODE" => "كود", 
+    "COUPONSCREATE-DISCOUNTCODEPLC" => "كود الكوبون",
+
+    "COUPONSCREATE-EXPIREDATE" => "تاريخ النتهاء", 
+    "COUPONSCREATE-STARTDATE" => "تاريخ البدء", 
+    
+    "COUPONSCREATE-USAGE" => "الاستخدام لكل عميل", 
+
+    "COUPONSCREATE-TYPE" => "نوع", 
+
+    "COUPONSCREATE-ADD" => "اضافة",
+    "COUPONSCREATE-EDIT" => "تعديل",
+
+
+    "SHIPPINGFEE-TOTAL" => "اجمالي الشرائح",
+    "SHIPPINGFEE-DISTANCE" => "المسافة", 
+    "SHIPPINGFEE-VALUE" => "قيمة التوصيل",
+    "SHIPPINGFEE-EDITDATA" => " تعديل بيانات",  
+
+
+    "SHIPPINGFEECREATE-ADD" => "اضافة",
+    "SHIPPINGFEECREATE-EDIT" => "تعديل",
+    "SHIPPINGFEECREATE-ADDNEW" => "اضافة الشريحة جديدة",
+    "SHIPPINGFEECREATE-EDITDATA" => "تعديل بيانات الشريحة",
+    "SHIPPINGFEECREATE-DILIVERYFEE" => "قيمة التوصيل بالريال",
+    "SHIPPINGFEECREATE-DISTANCEINKILO" => "المسافة بالكيلو",    
+
 ];

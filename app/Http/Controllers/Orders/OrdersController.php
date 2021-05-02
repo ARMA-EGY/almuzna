@@ -97,6 +97,8 @@ class OrdersController extends Controller
     {
         $dv_data = array();
         $order     = Order::with('OrderItemsmodel.Product')->where('id', $request->orderid)->first();
+  
+        $lastUserOrder = Order::where('user_id',$order->Customer->id)->whereNotNull('driver_id')->orderBy('created_at', 'desc')->skip(1)->take(1)->get();
         $drivers   = Driver::all();
         $driver_order_limit = Configuration::select('decimal_value')->where('name', 'driver_order_limit')->first();
 
@@ -113,13 +115,25 @@ class OrdersController extends Controller
             array_push($dv_data,$data);
         }
 
+        if($lastUserOrder->isEmpty())
+        {
+            return view('admin.modals.order_details', [
+                'order'    => $order,
+                'drivers'    => $drivers,
+                'dv_data'   =>$dv_data,
+                'driver_order_limit'  => $driver_order_limit
+            ]);
+        }else{
+            return view('admin.modals.order_details', [
+                'order'    => $order,
+                'drivers'    => $drivers,
+                'lastdriver' => $lastUserOrder[0]->driver_id,
+                'dv_data'   =>$dv_data,
+                'driver_order_limit'  => $driver_order_limit
+            ]);
+        }
        
-        return view('admin.modals.order_details', [
-            'order'    => $order,
-            'drivers'    => $drivers,
-            'dv_data'   =>$dv_data,
-            'driver_order_limit'  => $driver_order_limit
-        ]);
+
     }
     
 
@@ -204,12 +218,64 @@ class OrdersController extends Controller
     //======== assign order ======== 
     public function assignorder(Request $request)
     {
-        $item = Order::where('id', $request->order_id)->update([
-            'driver_id' => $request->edit_order_status
-        ]);
-
-        if($item)
+        $item = Order::where('id', $request->order_id)->first();            
+        if(!$item)
         {
+            $item->update(['driver_id' => $request->edit_order_status]); 
+            if($order->Driver->fcm_token != '')
+            {
+                if($item->Driver->fcm_lang == 'ar')
+                {
+                    $notification = array(  
+                        'title' => 'طلب',
+                        'body'  => 'لديك طلب جديد'
+                    );  
+
+                }else{
+                    $notification = array(  
+                        'title' => 'Order',
+                        'body'  => 'You Have One New Order'
+                    );              
+                }        
+
+                $click = array(  
+                    'activity' => 'order',
+                    'order_id'  => $item->order_id
+                );
+                $data = array(  
+                    'to' => $item->Driver->fcm_token,
+                    'notification'  =>$notification,
+                    'data' => $click
+                );
+
+                $data_string = json_encode($data);
+                $ch = curl_init('https://fcm.googleapis.com/fcm/send');
+
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(          
+                    'Content-Type: application/json',
+                    'Authorization: key=AAAARku3Lrs:APA91bFdZ6yECIhru1KHjyAV9bBCZ2lnsw5fdb_4AO0497BsN28E6j9htXTbdzRLgV1RoD2h8-UnNXoRet-KVvoXiSAHImQCo2W7gbcUm30muh87pnKH8I03-DupZ_dQLTnMRVIZKQc0'
+                )                                                                       
+                            );
+
+                $response = curl_exec($ch);
+                $err = curl_error($ch);
+
+                curl_close($ch);
+
+
+                if ($err) {
+                    return response()->json([
+                        'status' => 'false',
+                        'msg' => 'error'
+                    ]) ;
+                }
+            }
             return response()->json([
                 'status' => 'true',
                 'msg' => 'success'
