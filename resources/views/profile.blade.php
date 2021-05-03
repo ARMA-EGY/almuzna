@@ -130,7 +130,10 @@
                         <!-- LOCATIONS -->
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                            <div class="row">
+                            <div class="row justify-content-center">
+
+
+                        @if ($locations->count() > 0)
         
                                 <div class="col-md-4">
                                     <!-- List of Locations -->
@@ -143,128 +146,103 @@
                                             </div>
                                         </div>
 
-                                        <div class="nav flex-column nav-pills nav-locations {{$text}}" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active" id="v-pills-location1-tab" data-toggle="pill" href="#v-pills-location1" role="tab" aria-controls="v-pills-location1" aria-selected="true">{{__('core.LOCATION')}} #1</a>
-                                            <a class="nav-link" id="v-pills-location2-tab" data-toggle="pill" href="#v-pills-location2" role="tab" aria-controls="v-pills-location2" aria-selected="false">{{__('core.LOCATION')}} #2</a>
+                                        <div class="nav nav-pills nav-locations {{$text}}" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                                        @foreach ($locations as $location)
+
+                                            <a class="nav-link @if($loop->index == 0) active @endif" id="v-pills-location{{ $loop->iteration }}-tab" data-toggle="pill" href="#v-pills-location{{ $loop->iteration }}" role="tab" aria-controls="v-pills-location{{ $loop->iteration }}" aria-selected="true">{{__('core.LOCATION')}} #{{ $loop->iteration }}</a>
+
+                                        @endforeach
+
                                         </div>
 
                                     </div>
                                 </div>
                                 
-        
+
+                               
+
                                 <div class="col-md-8">
+                                    
                                     <div class="tab-content {{$text}}" id="v-pills-tabContent" dir="{{ $dir }}">
+                                        @foreach ($locations as $location)
+                                        
+                                            <div class="tab-pane fade show  @if($loop->index == 0) active @endif" id="v-pills-location{{ $loop->iteration }}" role="tabpanel" aria-labelledby="v-pills-location{{ $loop->iteration }}-tab">
+                                                <!-- Address Info -->
+                                                <div class="card profile-info-card is-auto animated preFadeInUp fadeInUp">
+                                                    <!-- Title -->
+                                                    <div class="card-title">
+                                                        <h3>{{__('core.LOCATION-DETAILS')}}</h3>
+                                                        <!-- Cog Button -->
+                                                        <div class="edit-account is-vhidden is-danger">
+                                                            <a href="#">
+                                                                <i class="fa fa-trash-alt text-danger"></i>
+                                                            </a>
+                                                        </div>
+                    
+                                                    </div>
+                                                    <!-- Billing Address -->
+                                                    <div class="card-body">
+                                                        <div class="row">
 
-                                        <div class="tab-pane fade show active" id="v-pills-location1" role="tabpanel" aria-labelledby="v-pills-location1-tab">
-                                            <!-- Address Info -->
-                                            <div class="card profile-info-card is-auto animated preFadeInUp fadeInUp">
-                                                <!-- Title -->
-                                                <div class="card-title">
-                                                    <h3>{{__('core.LOCATION-DETAILS')}}</h3>
-                                                    <!-- Cog Button -->
-                                                    <div class="edit-account is-vhidden">
-                                                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings feather-icons"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
-                                                    </div>
-                
-                                                </div>
-                                                <!-- Billing Address -->
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="info-block">
-                                                                <span class="label-text">Number</span>
-                                                                <span class="label-value">23, Block C2</span>
+                                                            <div class="col-md-12">
+                                                                <div class="info-block">
+                                                                    <span class="label-text">Address</span>
+                                                                    <span class="label-value">{{$location->delivery_address}} </span>
+                                                                </div>
                                                             </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">City</span>
-                                                                <span class="label-value">Los Angeles</span>
-                                                            </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">State</span>
-                                                                <span class="label-value">CA</span>
-                                                            </div>
-                                                        </div>
-                
-                                                        <div class="col-md-6">
-                                                            <div class="info-block">
-                                                                <span class="label-text">Street</span>
-                                                                <span class="label-value">Church Street</span>
-                                                            </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">Postal Code</span>
-                                                                <span class="label-value">100065</span>
-                                                            </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">Country</span>
-                                                                <span class="label-value">United States</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- /Address Form -->
-                                            </div>
-                                        </div>
 
-                                        <div class="tab-pane fade" id="v-pills-location2" role="tabpanel" aria-labelledby="v-pills-location2-tab">
-                                            <!-- Address Info -->
-                                            <div class="card profile-info-card is-auto animated preFadeInUp fadeInUp">
-                                                <!-- Title -->
-                                                <div class="card-title">
-                                                    <h3>{{__('core.LOCATION-DETAILS')}}</h3>
-                                                    <!-- Cog Button -->
-                                                    <div class="edit-account is-vhidden">
-                                                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings feather-icons"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
-                                                    </div>
-                
-                                                </div>
-                                                <!-- Billing Address -->
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="info-block">
-                                                                <span class="label-text">Number</span>
-                                                                <span class="label-value">23, Block C2</span>
+                                                            <div class="col-md-6">
+                                                                <div class="info-block">
+                                                                    <span class="label-text">Street</span>
+                                                                    <span class="label-value">{{$location->street}} </span>
+                                                                </div>
+                    
+                                                                <div class="info-block">
+                                                                    <span class="label-text">Building</span>
+                                                                    <span class="label-value">{{$location->building}}</span>
+                                                                </div>
                                                             </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">City</span>
-                                                                <span class="label-value">Los Angeles</span>
+                    
+                                                            <div class="col-md-6">
+                                                                <div class="info-block">
+                                                                    <span class="label-text">Floor</span>
+                                                                    <span class="label-value">{{$location->floor}}</span>
+                                                                </div>
+                    
+                                                                <div class="info-block">
+                                                                    <span class="label-text">Apartment</span>
+                                                                    <span class="label-value">{{$location->apartment}}</span>
+                                                                </div>
                                                             </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">State</span>
-                                                                <span class="label-value">CA</span>
+
+                                                            <div class="col-md-12">
+                                                                <div class="info-block">
+                                                                    <span class="label-text">Note</span>
+                                                                    <span class="label-value">{{$location->note}} </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                
-                                                        <div class="col-md-6">
-                                                            <div class="info-block">
-                                                                <span class="label-text">Street</span>
-                                                                <span class="label-value">Church Street</span>
-                                                            </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">Postal Code</span>
-                                                                <span class="label-value">100065</span>
-                                                            </div>
-                
-                                                            <div class="info-block">
-                                                                <span class="label-text">Country</span>
-                                                                <span class="label-value">United States</span>
-                                                            </div>
+
                                                         </div>
                                                     </div>
+                                                    <!-- /Address Form -->
                                                 </div>
-                                                <!-- /Address Form -->
                                             </div>
-                                        </div>
+
+                                        @endforeach
                                     </div>
+
                                 </div>
+        
                                 
+                                
+                        @else  
+                        <div class="col-md-5">
+                            <img src="{{ asset('front_assets/images/no-location.svg')}}" alt="Image" class="mb-0">
+                            <h4 class="text-center mt-4">{{__('core.NO-LOCATION')}}</h4>
+                        </div>
+                        @endif
+
                             </div>
 
                         </div>

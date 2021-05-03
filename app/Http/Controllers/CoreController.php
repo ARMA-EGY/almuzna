@@ -265,6 +265,43 @@ class CoreController extends Controller
             if(!$products['status'])
                 abort(500);
         }
+
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/offers/wb",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+                'lang:'.LaravelLocalization::getCurrentLocale()
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+
+        if ($err) {
+            abort(500);
+        } else {
+            $offers = json_decode($response, true);
+            if(isset($offers['message'])){
+             if ($offers['message'] == 'Unauthenticated.')
+                abort(500);               
+            }
+            if(!$offers['status'])
+                abort(500);
+        }
         
 
         if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
@@ -276,6 +313,7 @@ class CoreController extends Controller
             'seo'=>$seo,
             'socials'=>$socials,
             'products'=>$products,
+            'offers'=>$offers,
             'user'=>$user,
         ];
 
@@ -286,6 +324,7 @@ class CoreController extends Controller
             'seo'=>$seo,
             'socials'=>$socials,
             'products'=>$products,
+            'offers'=>$offers,
             ];   
 
         }

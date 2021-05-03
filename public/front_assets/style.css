@@ -443,6 +443,10 @@ input::-webkit-inner-spin-button {
     border: 1.8px solid #0023ff;
 }
 
+.is-danger a:hover {
+    border: 1.8px solid #dc3545 !important;
+}
+
 .profile-info-card .card-title .edit-account a:hover svg, .menu-card .card-title .edit-account a:hover svg {
     stroke: #0023ff;
     -webkit-transform: rotate(90deg);

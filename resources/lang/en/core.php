@@ -31,6 +31,7 @@ return [
     "NO-OFFERS" => "There are no offers now.",
     "NO-PRODUCTS" => "No products found.",
     "NO-ORDERS" => "No orders placed.",
+    "NO-LOCATION" => "No locations found.",
     "EMPTY-CART" => "Your cart is empty.",
     "OFF" => "OFF",
     "PROMO-CODE" => "Promo Code:",
