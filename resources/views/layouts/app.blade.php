@@ -97,6 +97,8 @@
     <input type="hidden" name="page_token" value="@isset($page_token){{$page_token}}@endisset">
 </form>
 
+<div id="loader" data-load='<div class="divload"><img src="{{asset("images/loader.gif")}}" width="50" class="m-auto d-flex"></div>'></div>
+
         <div id="wrapper" class="clearfix">
 
                 <!-- Login Modal -->

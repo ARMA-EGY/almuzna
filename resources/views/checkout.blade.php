@@ -19,397 +19,12 @@
 
 @section('style')
     
-<style>
+<link rel="stylesheet" href="{{ asset('front_assets/checkout.css')}}" type="text/css" />
 
-    .card-header {
-        padding: 0.75rem 1.875rem;
-        margin-bottom: 0;
-        color: #252525;
-        background-color: transparent;
-        border-bottom: 1px solid transparent;
-    }
+@if (LaravelLocalization::getCurrentLocale() == 'ar')
+    <link rel="stylesheet" href="{{ asset('front_assets/checkout-ar.css')}}" type="text/css" />
+@endif
 
-    .card:hover {
-        box-shadow: 0px 0 5px 1px rgb(0 0 0 / 10%) !important;
-    }
-
-    .form-control-simple {
-        background-color: transparent !important;
-        border-color: #d5d5d5;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        padding-left: 0;
-        padding-right: 0;
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-        border-radius: 0;
-    }
-
-    .panel {
-    border:1px solid #fff;
-    border-radius:10px;
-    background-color:#fff;
-    box-shadow:0px 1px 3px #ccc;
-    }
-
-    /*
-    Template Name: Monster Admin
-    Author: Themedesigner
-    Email: niravjoshi87@gmail.com
-    File: css
-    */
-
-    .wizard-content .wizard>.steps>ul>li:after,
-    .wizard-content .wizard>.steps>ul>li:before {
-        content: '';
-        z-index: 9;
-        display: block;
-        position: absolute
-    }
-
-    .wizard-content .wizard {
-        width: 100%;
-        overflow: hidden
-    }
-
-    .wizard-content .wizard .content {
-        margin-left: 0!important
-    }
-
-    .wizard-content .wizard>.steps {
-        position: relative;
-        display: block;
-        width: 100%
-    }
-
-    .wizard-content .wizard>.steps .current-info {
-        position: absolute;
-        left: -99999px
-    }
-
-    .wizard-content .wizard>.steps>ul {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-        margin: 0;
-        padding: 0;
-        list-style: none
-    }
-
-    .wizard-content .wizard>.steps>ul>li {
-        display: table-cell;
-        width: auto;
-        vertical-align: top;
-        text-align: center;
-        position: relative
-    }
-
-    .wizard-content .wizard>.steps>ul>li a {
-        position: relative;
-        padding-top: 52px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        display: block
-    }
-
-    .wizard-content .wizard>.steps>ul>li:before {
-        left: 0
-    }
-
-    .wizard-content .wizard>.steps>ul>li:after {
-        right: 0
-    }
-
-    .wizard-content .wizard>.steps>ul>li:first-child:before,
-    .wizard-content .wizard>.steps>ul>li:last-child:after {
-        content: none
-    }
-
-    .wizard-content .wizard>.steps>ul>li.current>a {
-        color: #2f3d4a;
-        cursor: default
-    }
-
-    .wizard-content .wizard>.steps>ul>li.current .step {
-        border-color: #009efb ;
-        background-color: #fff;
-        color: #009efb 
-    }
-
-    .wizard-content .wizard>.steps>ul>li.disabled a,
-    .wizard-content .wizard>.steps>ul>li.disabled a:focus,
-    .wizard-content .wizard>.steps>ul>li.disabled a:hover {
-        color: #999;
-        cursor: default
-    }
-
-    .wizard-content .wizard>.steps>ul>li.done a,
-    .wizard-content .wizard>.steps>ul>li.done a:focus,
-    .wizard-content .wizard>.steps>ul>li.done a:hover {
-        color: #999
-    }
-
-    .wizard-content .wizard>.steps>ul>li.done .step {
-        background-color: #009efb ;
-        border-color: #009efb ;
-        color: #fff
-    }
-
-    .wizard-content .wizard>.steps>ul>li.error .step {
-        border-color: #f62d51;
-        color: #f62d51
-    }
-
-    .wizard-content .wizard>.steps .step {
-        background-color: #fff;
-        display: inline-block;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        margin-left: -24px;
-        z-index: 10;
-        text-align: center
-    }
-
-    .wizard-content .wizard>.content {
-        overflow: hidden;
-        position: relative;
-        width: auto;
-        padding: 0;
-        margin: 0
-    }
-
-    .wizard-content .wizard>.content>.title {
-        position: absolute;
-        left: -99999px
-    }
-
-    .wizard-content .wizard>.content>.body {
-        padding: 0 20px
-    }
-
-    .wizard-content .wizard>.content>iframe {
-        border: 0;
-        width: 100%;
-        height: 100%
-    }
-
-    .wizard-content .wizard>.actions {
-        position: relative;
-        display: block;
-        text-align: right;
-        padding: 0 20px 20px
-    }
-
-    .wizard-content .wizard>.actions>ul {
-        float: right;
-        list-style: none;
-        padding: 0;
-        margin: 0
-    }
-
-    .wizard-content .wizard>.actions>ul:after {
-        content: '';
-        display: table;
-        clear: both
-    }
-
-    .wizard-content .wizard>.actions>ul>li {
-        float: left
-    }
-
-    .wizard-content .wizard>.actions>ul>li+li {
-        margin-left: 10px
-    }
-
-    .wizard-content .wizard>.actions>ul>li>a {
-        background: #009efb ;
-        color: #fff;
-        display: block;
-        padding: 7px 12px;
-        border-radius: 4px;
-        border: 1px solid transparent
-    }
-
-    .wizard-content .wizard>.actions>ul>li>a:focus,
-    .wizard-content .wizard>.actions>ul>li>a:hover {
-        -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .05) inset;
-        box-shadow: 0 0 0 100px rgba(0, 0, 0, .05) inset
-    }
-
-    .wizard-content .wizard>.actions>ul>li>a:active {
-        -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .1) inset;
-        box-shadow: 0 0 0 100px rgba(0, 0, 0, .1) inset
-    }
-
-    .wizard-content .wizard>.actions>ul>li>a[href="#previous"] {
-        background-color: #fff;
-        color: #54667a;
-        border: 1px solid #d9d9d9
-    }
-
-    .wizard-content .wizard>.actions>ul>li>a[href="#previous"]:focus,
-    .wizard-content .wizard>.actions>ul>li>a[href="#previous"]:hover {
-        -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .02) inset;
-        box-shadow: 0 0 0 100px rgba(0, 0, 0, .02) inset
-    }
-
-    .wizard-content .wizard>.actions>ul>li>a[href="#previous"]:active {
-        -webkit-box-shadow: 0 0 0 100px rgba(0, 0, 0, .04) inset;
-        box-shadow: 0 0 0 100px rgba(0, 0, 0, .04) inset
-    }
-
-    .wizard-content .wizard>.actions>ul>li.disabled>a,
-    .wizard-content .wizard>.actions>ul>li.disabled>a:focus,
-    .wizard-content .wizard>.actions>ul>li.disabled>a:hover {
-        color: #999
-    }
-
-    .wizard-content .wizard>.actions>ul>li.disabled>a[href="#previous"],
-    .wizard-content .wizard>.actions>ul>li.disabled>a[href="#previous"]:focus,
-    .wizard-content .wizard>.actions>ul>li.disabled>a[href="#previous"]:hover {
-        -webkit-box-shadow: none;
-        box-shadow: none
-    }
-
-    .wizard-content .wizard.wizard-circle>.steps>ul>li:after,
-    .wizard-content .wizard.wizard-circle>.steps>ul>li:before {
-        top: 45px;
-        width: 50%;
-        height: 3px;
-        background-color: #009efb 
-    }
-
-    .wizard-content .wizard.wizard-circle>.steps>ul>li.current:after,
-    .wizard-content .wizard.wizard-circle>.steps>ul>li.current~li:after,
-    .wizard-content .wizard.wizard-circle>.steps>ul>li.current~li:before {
-        background-color: #F3F3F3
-    }
-
-    .wizard-content .wizard.wizard-circle>.steps .step {
-        width: 50px;
-        height: 50px;
-        line-height: 45px;
-        border: 3px solid #F3F3F3;
-        font-size: 1.3rem;
-        border-radius: 50%
-    }
-
-    .wizard-content .wizard.wizard-notification>.steps>ul>li:after,
-    .wizard-content .wizard.wizard-notification>.steps>ul>li:before {
-        top: 39px;
-        width: 50%;
-        height: 2px;
-        background-color: #009efb 
-    }
-
-    .wizard-content .wizard.wizard-notification>.steps>ul>li.current .step {
-        border: 2px solid #009efb ;
-        color: #009efb ;
-        line-height: 36px
-    }
-
-    .wizard-content .wizard.wizard-notification>.steps>ul>li.current .step:after,
-    .wizard-content .wizard.wizard-notification>.steps>ul>li.done .step:after {
-        border-top-color: #009efb 
-    }
-
-    .wizard-content .wizard.wizard-notification>.steps>ul>li.current:after,
-    .wizard-content .wizard.wizard-notification>.steps>ul>li.current~li:after,
-    .wizard-content .wizard.wizard-notification>.steps>ul>li.current~li:before {
-        background-color: #F3F3F3
-    }
-
-    .wizard-content .wizard.wizard-notification>.steps>ul>li.done .step {
-        color: #FFF
-    }
-
-    .wizard-content .wizard.wizard-notification>.steps .step {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        font-size: 1.3rem;
-        border-radius: 15%;
-        background-color: #F3F3F3
-    }
-
-    .wizard-content .wizard.wizard-notification>.steps .step:after {
-        content: "";
-        width: 0;
-        height: 0;
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        margin-left: -8px;
-        margin-bottom: -8px;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-top: 8px solid #F3F3F3
-    }
-
-    .wizard-content .wizard.vertical>.steps {
-        display: inline;
-        float: left;
-        width: 20%
-    }
-
-    .wizard-content .wizard.vertical>.steps>ul>li {
-        display: block;
-        width: 100%
-    }
-
-    .wizard-content .wizard.vertical>.steps>ul>li.current:after,
-    .wizard-content .wizard.vertical>.steps>ul>li.current:before,
-    .wizard-content .wizard.vertical>.steps>ul>li.current~li:after,
-    .wizard-content .wizard.vertical>.steps>ul>li.current~li:before,
-    .wizard-content .wizard.vertical>.steps>ul>li:after,
-    .wizard-content .wizard.vertical>.steps>ul>li:before {
-        background-color: transparent
-    }
-
-    @media (max-width:768px) {
-        .wizard-content .wizard>.steps>ul {
-            margin-bottom: 20px
-        }
-        .wizard-content .wizard>.steps>ul>li {
-            display: block;
-            float: left;
-            width: 50%
-        }
-        .wizard-content .wizard>.steps>ul>li>a {
-            margin-bottom: 0
-        }
-        .wizard-content .wizard>.steps>ul>li:first-child:before {
-            content: ''
-        }
-        .wizard-content .wizard>.steps>ul>li:last-child:after {
-            content: '';
-            background-color: #009efb 
-        }
-        .wizard-content .wizard.vertical>.steps {
-            width: 15%
-        }
-    }
-
-    @media (max-width:480px) {
-        .wizard-content .wizard>.steps>ul>li {
-            width: 100%
-        }
-        .wizard-content .wizard>.steps>ul>li.current:after {
-            background-color: #009efb 
-        }
-        .wizard-content .wizard.vertical>.steps>ul>li {
-            display: block;
-            float: left;
-            width: 50%
-        }
-        .wizard-content .wizard.vertical>.steps {
-            width: 100%;
-            float:none;
-        }
-    }
-</style>
 
 @endsection
 
@@ -451,7 +66,7 @@
                                         <div class="row justify-content-center">
                                             <div class="col-lg-8">
                                 
-                                                <h3 class="pre-label font-size-base">Cart Items</h3>
+                                                <h3 class="pre-label font-size-base {{$text}}">Cart Items</h3>
 
                         
                                                 @if(Cart::count() > 0) 
@@ -473,7 +88,7 @@
                                                             <img src="{{ asset('front_assets/demos/shop/images/items/1.png')}}" alt="" class="img-fluid" />
                                                         </div>
                                                         <div class="col-lg-5 pl-lg-3 mb-2 mb-lg-0">
-                                                            <h5 class="mb-0">{{$item->model->name_en}}</h5>
+                                                            <h5 class="mb-0 {{$text}}">{{$item->model->name_en}}</h5>
                                                         </div>
                                                         <div class="col-6 col-lg-2">
                                                             <div class=" d-flex justify-content-between align-items-center actions-section-cart" style="width: unset">
@@ -482,7 +97,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-6 col-lg-3 text-right">
-                                                            <div class="h5 mb-0">{{$item->model->price}} {{__('core.SAR')}}</div>
+                                                            <div class="h5 mb-0 mx-2">{{$item->model->price}} {{__('core.SAR')}}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -496,7 +111,7 @@
                                                 
                                                 <!-- Discount and promocode -->
                                 
-                                                <div class="bg-white shadow-sm rounded mb-3 p-3">
+                                                <div class="bg-white shadow-sm rounded mb-3 p-3" dir="ltr">
                                                     <div class="row align-items-center no-gutters p-md-2">
                                 
                                                         <div class="col-lg-7">
@@ -527,7 +142,7 @@
                 
 
                                                 <!-- Locations -->
-                                                <h3>Choose Delivery Address</h3>
+                                                <h3 class="{{$text}}">Choose Delivery Address</h3>
                                                 <div class="accordion br-sm" id="accordionLocationExample">
                                 
                                 @foreach($locations as $location)
@@ -569,7 +184,7 @@
                                                 <hr>
 
                                                 <!-- Date -->
-                                                <h3>Choose Delivery Date</h3>
+                                                <h3 class="{{$text}}">Choose Delivery Date</h3>
                                                 
                                                 <input type="date" class="form-control" name="delivery_date">
 
@@ -584,7 +199,7 @@
                                         <div class="row justify-content-center">
                                             <div class="col-lg-10 col-xl-8">
                                 
-                                                <h3 class="pre-label font-size-base">Choose Payment Method</h3>
+                                                <h3 class="pre-label font-size-base {{$text}}">Choose Payment Method</h3>
                                 
                                                 <!-- Checkout credit card -->
                                 
@@ -596,7 +211,7 @@
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
                                                                         <input type="radio" id="customRadio1" name="payment_method" class="custom-control-input form-radio" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
-                                                                        <label class="custom-control-label pl-2 pl-lg-4" for="customRadio1">
+                                                                        <label class="custom-control-label px-2 px-lg-4" for="customRadio1">
                                                                             <span class="h6 m-0">Credit cart</span> <br />
                                                                         </label>
                                                                     </div>
@@ -653,7 +268,7 @@
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
                                                                         <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" data-toggle="collapse" data-target="#collapseTwo" aria-controls="collapseTwo">
-                                                                        <label class="custom-control-label pl-2 pl-lg-4" for="customRadio2">
+                                                                        <label class="custom-control-label px-2 px-lg-4" for="customRadio2">
                                                                             <span class="h6 m-0">Wallet</span><br />
                                                                         </label>
                                                                     </div>
@@ -681,7 +296,7 @@
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
                                                                         <input type="radio" id="customRadio3" name="paymentmethod" value="cash" class="custom-control-input" data-toggle="collapse" data-target="#collapseThree" aria-controls="collapseThree" checked>
-                                                                        <label class="custom-control-label pl-2 pl-lg-4" for="customRadio3">
+                                                                        <label class="custom-control-label px-2 px-lg-4" for="customRadio3">
                                                                             <span class="h6 m-0">Cash on Deliver </span><br />
                                                                         </label>
                                                                     </div>
@@ -704,7 +319,7 @@
 
                                                 <hr>
 
-                                                <h3>Payment Summary</h3>
+                                                <h3 class="{{$text}}">Payment Summary</h3>
                                                 <!-- Total subtable -->
                                                 <div class="col-md-9 mx-auto">
                                                     <table class="table table-sm sub-table text-right my-4">

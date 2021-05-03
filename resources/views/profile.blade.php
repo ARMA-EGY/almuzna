@@ -280,12 +280,12 @@
                                             {{__('core.ORDERS-LIST')}}
                                         </div>
                                         <!-- List -->
-                                        <div class="nav flex-column nav-pills nav-locations" id="v-pills-tab2" role="tablist" aria-orientation="vertical">
+                                        <div class="nav nav-pills nav-locations" id="v-pills-tab2" role="tablist" aria-orientation="vertical">
                                             @if(isset($orders))
+
                                                 @foreach($orders as $orderlst)
 
-                                                <a class="nav-link active getorder" data-id="{{$orderlst['id']}}" id="v-pills-order1-tab" data-toggle="pill" href="#v-pills-order1" role="tab" aria-controls="v-pills-order1" aria-selected="true">{{__('core.ORDER')}} #{{$orderlst['id']}}</a>
-                                                
+                                                    <a class="nav-link @if($loop->index == 0) active @endif getorder" data-id="{{$orderlst['id']}}" id="v-pills-order1-tab" data-toggle="pill" href="#v-pills-order1" role="tab" aria-controls="v-pills-order1" aria-selected="true">{{__('core.ORDER')}} #{{$orderlst['id']}}</a>
 
                                                 @endforeach
 
@@ -439,101 +439,7 @@
                                                 @endif
                                             </div>
                                         </div>
-
-                                        <div class="tab-pane fade" id="v-pills-order2" role="tabpanel" aria-labelledby="v-pills-order2-tab">
-                                            <div class="card profile-card is-auto order-list-card animated preFadeInUp fadeInUp">
-                                                <div class="progress-block">
-                                                    <!-- Title -->
-                                                    <h3>ORDER 46895</h3>
-                                                </div>
-        
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <!-- Order status -->
-                                                        <div class="order-block">
-                                                            <div class="order-icon">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="8"></line></svg>
-                                                            </div>
-                                                            <div class="status">
-                                                                <div>Status</div>
-                                                                <div><span class="tag primary-tag">Shipping</span></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-        
-                                                    <div class="col-md-6">
-                                                        <!-- Order date -->
-                                                        <div class="order-block">
-                                                            <div class="order-icon">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                            </div>
-                                                            <div class="date">
-                                                                <div>Date</div>
-                                                                <div class="is-date">mar 23 2018</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                        
-                                                </div>
-                                                
-                                                <!-- Order details -->
-                                                <div class="table-block">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">Product</th>
-                                                                <th scope="col">SKU</th>
-                                                                <th scope="col">Quantity</th>
-                                                                <th scope="col">Total</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td data-label="Product">Shipping A1</td>
-                                                                <td data-label="SKU">-</td>
-                                                                <td data-label="Quantity">1</td>
-                                                                <td data-label="Total">$39,00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td data-label="Product">Conqueror</td>
-                                                                <td data-label="SKU">587</td>
-                                                                <td data-label="Quantity">1</td>
-                                                                <td data-label="Total">$295,00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td data-label="Product">Gentleman</td>
-                                                                <td data-label="SKU">029</td>
-                                                                <td data-label="Quantity">1</td>
-                                                                <td data-label="Total">$349,99</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                    </div>
-                                                    <!-- Total subtable -->
-                                                    <div class="col-md-5">
-                                                        <table class="table table-sm sub-table text-right my-4">
-                                                            <tbody><tr>
-                                                                <td><span class="subtotal">Subtotal</span></td>
-                                                                <td class="text-right"><span class="subtotal">481,90</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="vat">VAT (20%)</span></td>
-                                                                <td class="text-right"><span class="vat-value">96,38</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><span class="total">Total</span></td>
-                                                                <td class="text-right"><span class="total">578,28</span></td>
-                                                            </tr>
-                                                        </tbody></table>
-                                                    </div>
-                                                </div>
-        
-                                            </div>
-                                        </div>
+                                        
 
 
                                     </div>
@@ -795,6 +701,10 @@
 
 
     $('.getorder').click(function(){
+
+        var loader 	= $('#loader').attr('data-load');
+        $('.order-list').html(loader);
+
             $.ajax({
                 url:        "{{route('singleOrder')}}",
                 method:     'GET',

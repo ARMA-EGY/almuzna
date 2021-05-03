@@ -186,7 +186,7 @@ Route::post('/removeslider', 'Slider\SliderController@removegallery')->name('rem
 Route::post('/getorderdetails', 'Orders\OrdersController@getorderdetails')->name('get-order-details');
 
 Route::post('/assignorder', 'Orders\OrdersController@assignorder')->name('assign-order');
-
+Route::post('/addlocation', 'Customers\CustomersController@addlocation')->name('addlocation');
 
 /*
 |------------------------------------------------------------------------

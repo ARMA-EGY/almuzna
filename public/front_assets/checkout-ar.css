@@ -1,0 +1,24 @@
+
+.wizard-content .wizard>.steps>ul>li:after {
+    left: 0;
+	right: unset;
+}
+
+.wizard-content .wizard>.steps>ul>li:before {
+    right: 0;
+    left: unset;
+}
+
+.wizard-content .wizard>.actions>ul {
+    float: left;
+}
+
+.custom-control-label::before {
+    right: 0;
+	left: unset;
+}
+
+.custom-control-label::after {
+    right: 0;
+	left: unset;
+}
