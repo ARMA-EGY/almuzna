@@ -685,13 +685,13 @@ $(document).ready(function(){
                           type: 'success',
                           title: data.msg
                         }) 
-                        if(data.msg == 'Coupon is Applied')
+                        if(data.msg == 'promo code is Applied' || data.msg == 'تم تطبيق الرمز الترويجي')
                         {
                             $('#couponDiscount').val(data.couponDiscount);
                             
                             var tl = (parseFloat(data.totalTax) + parseFloat($('#shippingFee').val())) - parseFloat($('#couponDiscount').val());
                             var total = (parseFloat(tl) - parseFloat($('#couponDiscount').val()));
-console.log(total);
+
                             $('.total-value').html(total+' SAR');
                             $('#total').val(total);
 
