@@ -662,8 +662,8 @@
                           <div class="form-group col-12">
                             <label for="gender">Gender</label>
                             <select id="gender" name="gender" class="form-control">
-                              <option <?php if($user['gender']=="male" ) { echo 'selected';} ?> >Male</option>
-                              <option <?php if($user['gender']=="female" ) { echo 'selected';} ?> >Female</option>
+                              <option <?php if($user['gender']=="male" ) { echo 'selected';} ?> value="male" >Male</option>
+                              <option <?php if($user['gender']=="female" ) { echo 'selected';} ?> value="female">Female</option>
                             </select>
                           </div>
                         </div>
@@ -717,7 +717,7 @@
                       type: 'success',
                       title: data.msg
                     }) 
-                    if(data.msg == 'Profile is updated successfully')
+                    if(data.msg == 'Profile is updated successfully' || data.msg == 'تم تحديث الملف الشخصي بنجاح')
                     {
                         $('#AccountDetailsModal').modal('hide'); 
                     }

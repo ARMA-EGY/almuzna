@@ -91,9 +91,9 @@
 
 					<div class="row grid-6 content-103 justify-content-center">
 
-                        @if ($coupons['total'] > 0)
 
-                        @foreach ($coupons['data'] as $coupon)
+
+                        @forelse  ($coupons['data'] as $coupon)
                             <div class="col-md-4">
                                 <div class='coupon_box'>
                                     <div class='body'>
@@ -107,12 +107,12 @@
                                     <h4 class='title mt-3'> {{$coupon['code']}} </h4>
                                 </div>
                             </div>
-                        @endforeach
-
-                        @else 
-                            <img src="{{ asset('front_assets/images/no-coupons.svg')}}" alt="Image" class="mb-0" width="500">
+                        @empty
+                        <img src="{{ asset('front_assets/images/no-coupons.svg')}}" alt="Image" class="mb-0" width="500">
                             <h4 class="col-12 text-center mt-4">{{__('core.NO-COUPONS')}}</h4>
-                        @endif
+                        @endforelse 
+
+                    
 
 					</div>
 

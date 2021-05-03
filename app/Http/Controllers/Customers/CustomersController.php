@@ -15,6 +15,7 @@ use App\Configuration;
 use App\OrderItemsmodel;
 use App\Http\Requests\locationValid;
 use App\customer_location;
+use LaravelLocalization;
 
 class CustomersController extends Controller
 {
@@ -101,7 +102,8 @@ public function addlocation(locationValid $request)
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(          
                 'Content-Type: application/json',
                 'x-api-password: ase1iXcLAxanvXLZcgh6tk',
-                'auth-token:'.$api_token
+                'auth-token:'.$api_token,
+                'lang:'.LaravelLocalization::getCurrentLocale()
             )                                                                       
                         );
 
@@ -130,7 +132,7 @@ public function addlocation(locationValid $request)
                                
                 }
                 if(!$user['status']){
-                    if( $user['msg'] == "Unauthenticated user"){
+                    if( $user['msg'] == "Unauthenticated user" || $user['msg'] == "مستخدم غير مصدق"){
                         $request->session()->forget(['user_id', 'api_token']);
                         return response()->json([
                             'status' => 'false'
@@ -144,7 +146,7 @@ public function addlocation(locationValid $request)
                 }
               
 
-              if($user['msg'] == "Coupon is Applied")
+              if($user['msg'] == "promo code is Applied" || $user['msg'] =="تم تطبيق الرمز الترويجي")
               {
                     if($user['data']['type'] == "percentage")
                     {
@@ -272,7 +274,8 @@ public function addlocation(locationValid $request)
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($data_string),
                 'x-api-password: ase1iXcLAxanvXLZcgh6tk',
-                'auth-token:'.$api_token
+                'auth-token:'.$api_token,
+                'lang:'.LaravelLocalization::getCurrentLocale()
             )                                                                       
                         );
 
@@ -300,7 +303,7 @@ public function addlocation(locationValid $request)
                                
                 }
                 if(!$user['status']){
-                    if( $user['msg'] == "Unauthenticated user"){
+                    if( $user['msg'] == "Unauthenticated user" || $user['msg'] == "مستخدم غير مصدق"){
                         $request->session()->forget(['user_id', 'api_token']);
                         return response()->json([
                             'status' => 'false'
@@ -506,6 +509,7 @@ public function addlocation(locationValid $request)
         if ($request->session()->has('user_id') && $request->session()->has('api_token')){
 
             $api_token = $request->session()->get('api_token');
+            
             $data = array(  
                 'name' => $request->post('username'),
                 'email'  =>$request->post('email'),
@@ -526,7 +530,8 @@ public function addlocation(locationValid $request)
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($data_string),
                 'x-api-password: ase1iXcLAxanvXLZcgh6tk',
-                'auth-token:'.$api_token
+                'auth-token:'.$api_token,
+                'lang:'.LaravelLocalization::getCurrentLocale()
             )                                                                       
                         );
 
@@ -554,7 +559,7 @@ public function addlocation(locationValid $request)
                                
                 }
                 if(!$user['status']){
-                    if( $user['msg'] == "Unauthenticated user"){
+                    if( $user['msg'] == "Unauthenticated user" || $user['msg'] == "مستخدم غير مصدق"){
                         $request->session()->forget(['user_id', 'api_token']);
                         return response()->json([
                             'status' => 'false'
@@ -613,7 +618,8 @@ public function addlocation(locationValid $request)
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => array(    
             'x-api-password:ase1iXcLAxanvXLZcgh6tk',
-            'auth-token:'.$api_token
+            'auth-token:'.$api_token,
+            'lang:'.LaravelLocalization::getCurrentLocale()
                                 ),
             ));
 
@@ -635,7 +641,7 @@ public function addlocation(locationValid $request)
                                
                 }
                 if(!$order['status']){
-                    if( $order['msg'] == "Unauthenticated user"){
+                    if( $order['msg'] == "Unauthenticated user" || $user['msg'] == "مستخدم غير مصدق"){
                         $request->session()->forget(['user_id', 'api_token']);
                         return 'false';
                     }
@@ -681,7 +687,8 @@ public function addlocation(locationValid $request)
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($data_string),
                 'x-api-password: ase1iXcLAxanvXLZcgh6tk',
-                'auth-token:'.$api_token
+                'auth-token:'.$api_token,
+                'lang:'.LaravelLocalization::getCurrentLocale()
             )                                                                       
                         );
 
@@ -709,7 +716,7 @@ public function addlocation(locationValid $request)
                                
                 }
                 if(!$user['status']){
-                    if( $user['msg'] == "Unauthenticated user"){
+                    if( $user['msg'] == "Unauthenticated user" || $user['msg'] == "مستخدم غير مصدق"){
                         $request->session()->forget(['user_id', 'api_token']);
                         return response()->json([
                             'status' => 'false'

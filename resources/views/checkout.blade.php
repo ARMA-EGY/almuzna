@@ -746,39 +746,18 @@
                                                     </button>
                                                 </div>
 
-                                                <h3>Order Details</h3>
 
                                                 <div class="bg-white shadow-sm rounded mb-3 p-3 p-md-5">
     
                                                     <div class="row">
                                 
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <small class="pre-label">Order no.</small>
-                                                                <p>52522-63259226</p>
+                                                              
+                                                                <p>Press Finish to Place Your Order To Be Delivered To you As Soon As Possible</p>
                                                             </div>
                                                         </div>
-                                
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <small class="pre-label">Transaction ID</small>
-                                                                <p>2265996</p>
-                                                            </div>
-                                                        </div>
-                                
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <small class="pre-label">Order date</small>
-                                                                <p>20/04/2020</p>
-                                                            </div>
-                                                        </div>
-                                
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <small class="pre-label">Shipping arrival</small>
-                                                                <p>25/04/2020</p>
-                                                            </div>
-                                                        </div>
+                            
                                                     </div>
                                 
                                                 </div>

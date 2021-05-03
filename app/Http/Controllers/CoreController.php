@@ -170,6 +170,7 @@ class CoreController extends Controller
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+                'lang:'.LaravelLocalization::getCurrentLocale()
             ),
         ));
 
@@ -233,7 +234,7 @@ class CoreController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/product",
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/product/wb",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -243,6 +244,7 @@ class CoreController extends Controller
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+                'lang:'.LaravelLocalization::getCurrentLocale()
             ),
         ));
 
@@ -316,7 +318,8 @@ class CoreController extends Controller
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => array(
                         "x-api-password: ase1iXcLAxanvXLZcgh6tk",
-                        'auth-token:'.$api_token
+                        'auth-token:'.$api_token,
+                        'lang:'.LaravelLocalization::getCurrentLocale()
                     ),
                 ));
 
@@ -338,7 +341,7 @@ class CoreController extends Controller
                         }
 
                         if(!$coupons['status']){
-                            if( $coupons['msg'] == "Unauthenticated user"){
+                            if( $coupons['msg'] == "Unauthenticated user" || $order['msg'] == "مستخدم غير مصدق"){
                                 $request->session()->forget(['user_id', 'api_token']);
                                 return redirect(route('welcome'));
                             }
@@ -371,6 +374,7 @@ class CoreController extends Controller
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => array(
                         "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+                        'lang:'.LaravelLocalization::getCurrentLocale()
                     ),
                 ));
 
@@ -415,7 +419,7 @@ class CoreController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/offers",
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/offers/wb",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -425,6 +429,7 @@ class CoreController extends Controller
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "x-api-password: ase1iXcLAxanvXLZcgh6tk",
+                'lang:'.LaravelLocalization::getCurrentLocale()
             ),
         ));
 

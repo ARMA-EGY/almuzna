@@ -247,7 +247,7 @@ $i =1;
                                 @endif
                                <?php unset($found); ?>
                             @endforeach
-
+							
                         @else 
                             <img src="{{ asset('front_assets/images/no-products.svg')}}" alt="Image" class="mb-0" width="400">
                             <h4 class="col-12 text-center mt-4">{{__('core.NO-PRODUCTS')}}</h4>

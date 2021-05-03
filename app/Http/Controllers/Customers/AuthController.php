@@ -9,6 +9,7 @@ use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use LaravelLocalization;
 
 class AuthController extends Controller
 {
@@ -59,7 +60,8 @@ class AuthController extends Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(          
             'Content-Type: application/json',
             'Content-Length: ' . strlen($data_string),
-            'x-api-password: ase1iXcLAxanvXLZcgh6tk'
+            'x-api-password: ase1iXcLAxanvXLZcgh6tk',
+            'lang:'.LaravelLocalization::getCurrentLocale()
         )                                                                       
                     );                                                                                                                     
 

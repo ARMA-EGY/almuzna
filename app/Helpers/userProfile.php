@@ -18,7 +18,8 @@ function userProfile($request) {
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(	
 		'x-api-password:ase1iXcLAxanvXLZcgh6tk',
-		'auth-token:'.$api_token
+		'auth-token:'.$api_token,
+        'lang:'.LaravelLocalization::getCurrentLocale()
 	                        ),
         ));
 
@@ -36,10 +37,10 @@ function userProfile($request) {
             if(isset($user['message'])){
              if ($user['message'] == 'Unauthenticated.')
                 abort(500);  
-                           
+                        
             }
             if(!$user['status']){
-            	if( $user['msg'] == "Unauthenticated user"){
+            	if( $user['msg'] == "Unauthenticated user" || $user['msg'] == "مستخدم غير مصدق"){
             		$request->session()->forget(['user_id', 'api_token']);
             		return redirect(route('welcome'));
             	}
@@ -72,7 +73,8 @@ function userOrders($request) {
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(    
         'x-api-password:ase1iXcLAxanvXLZcgh6tk',
-        'auth-token:'.$api_token
+        'auth-token:'.$api_token,
+        'lang:'.LaravelLocalization::getCurrentLocale()
                             ),
         ));
 
@@ -93,10 +95,10 @@ function userOrders($request) {
                            
             }
             if(!$orders['status']){
-                if( $orders['msg'] == "Unauthenticated user"){
+                if( $orders['msg'] == "Unauthenticated user" || $orders['msg'] == "مستخدم غير مصدق" ){
                     $request->session()->forget(['user_id', 'api_token']);
                     return redirect(route('welcome'));
-                }elseif ($orders['msg'] == "no order found") {
+                }elseif ($orders['msg'] == "no order found" || $orders['msg'] == "لم يتم العثور على طلب") {
                     return 'no orders';
                 }
               abort(500);
@@ -128,7 +130,8 @@ function order($request , $orderId) {
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(    
         'x-api-password:ase1iXcLAxanvXLZcgh6tk',
-        'auth-token:'.$api_token
+        'auth-token:'.$api_token,
+        'lang:'.LaravelLocalization::getCurrentLocale()
                             ),
         ));
 
@@ -149,7 +152,7 @@ function order($request , $orderId) {
                            
             }
             if(!$order['status']){
-                if( $order['msg'] == "Unauthenticated user"){
+                if( $order['msg'] == "Unauthenticated user" || $order['msg'] == "مستخدم غير مصدق"){
                     $request->session()->forget(['user_id', 'api_token']);
                     return redirect(route('welcome'));
                 }
