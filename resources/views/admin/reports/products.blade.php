@@ -26,6 +26,7 @@
   {
     width: 40px;
   }
+
 </style>
 
 @endsection
@@ -44,7 +45,7 @@
                   <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
                   <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.HOME-DASHBOARD')}}</a></li>
                   <li class="breadcrumb-item"><a href="#">{{__('admin.NAV-REPORTS')}}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.ALLORDERS-ALLORDERS')}}</li>
+                  <li class="breadcrumb-item active" aria-current="page">{{__('admin.NAV-PRODUCTS')}}</li>
                 </ol>
               </nav>
             </div>
@@ -76,25 +77,13 @@
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">{{__('admin.ALLORDERS-TOTALORDERS')}}  <span class="badge badge-primary p-2">{{$orders_count}}</span></h3>
+                  <h3 class="mb-0">{{__('admin.PRODUCT-TOTALPRODUCTs')}}  <span class="badge badge-primary p-2">{{$products_count}}</span></h3>
                 </div>
               </div>
             </div>
 
-            @if ($orders->count() > 0)
+            @if ($products->count() > 0)
 
-            <table cellspacing="5" cellpadding="5">
-              <tbody>
-                <tr>
-                    <td>Date From:</td>
-                    <td><input type="text" id="min" name="min"></td>
-                </tr>
-                <tr>
-                    <td>Date To:</td>
-                    <td><input type="text" id="max" name="max"></td>
-                </tr>
-              </tbody>
-            </table>
 
             <div class="table-responsive">
               <!-- Projects table -->
@@ -102,26 +91,24 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" class="sort" >{{__('admin.ALLORDERS-TABLE-CODE')}}</th>
-                    <th scope="col" class="sort" > {{__('admin.DATE')}}</th>
-                    <th scope="col" class="sort" >{{__('admin.ALLORDERS-TABLE-TOTAL')}}</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-NAME')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-DESCRIPTION')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-PRICE')}}</th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-TYPE')}} </th>
+                    <th scope="col" class="sort" >{{__('admin.PRODUCT-TABLE-SOLD')}} </th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  @foreach ($orders as $order)
+                  @foreach ($products as $product)
 
                   <tr class="parent">
                     <td>{{ $loop->iteration }}</td>
-                    <td>
-                     <b> # {{  $order->id }} </b>
-                    </td>
-                    <td>{{ $order->created_at->format('Y/m/d') }}</td>
-                    <td>{{ $order->total }}</td>
-                    <td>
-                      <a href="#" class="btn btn-warning btn-sm mx-1 get_order_details" data-id="{{  $order->id }}"><i class="fa fa-eye"></i> {{__('admin.ALLORDERS-TABLE-VIEW')}}</a>
-                    </td>
+                    <td> <b>  {{  $product->name_ar }} </b> </td>
+                    <td>{{ $product->description_ar }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td> @if ($product->refill == 0) جديد @elseif ($product->refill == 1) اعادة تعبئة @endif </td>
+                    <td>{{ number_format($product->report->sum('quantity')) }}</td>
                   </tr>
 
                   @endforeach
@@ -130,10 +117,11 @@
                 <tfoot>
                     <tr>
                         <th class="p-2 search_number"></th>
-                        <th scope="col" class="sort p-2" >{{__('admin.ALLORDERS-TABLE-CODE')}}</th>
-                        <th scope="col" class="sort p-2" > {{__('admin.DATE')}}</th>
-                        <th scope="col" class="sort p-2" >{{__('admin.ALLORDERS-TABLE-TOTAL')}}</th>
-                        <th scope="col"></th>
+                        <th scope="col" class="sort p-2" >{{__('admin.PRODUCT-TABLE-NAME')}}</th>
+                        <th scope="col" class="sort p-2" >{{__('admin.PRODUCT-TABLE-DESCRIPTION')}}</th>
+                        <th scope="col" class="sort p-2" >{{__('admin.PRODUCT-TABLE-PRICE')}}</th>
+                        <th scope="col" class="sort p-2" >{{__('admin.PRODUCT-TABLE-TYPE')}} </th>
+                        <th scope="col" class="sort p-2" >{{__('admin.PRODUCT-TABLE-SOLD')}} </th>
                     </tr>
                 </tfoot>
               </table>
@@ -142,7 +130,7 @@
             
 
             @else 
-                <p class="text-center"> لا يوجد طلبات</p>
+                <p class="text-center"> لا يوجد منتجات</p>
             @endif
 
             <!-- Card footer -->
@@ -156,7 +144,7 @@
           <div class="row">
 
             <div class="col-md-4">
-              <button class="btn btn-primary btn-sm total">Show Total</button>
+              <button class="btn btn-primary btn-sm total">Show Total Sold</button>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-4">
@@ -194,7 +182,7 @@ $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var min = minDate.val();
         var max = maxDate.val();
-        var date = new Date( data[2] );
+        var date = new Date( data[6] );
  
         if (
             ( min === null && max === null ) ||
@@ -216,9 +204,10 @@ $(document).ready(function() {
     maxDate = new DateTime($('#max'), {
         format: 'MMMM Do YYYY'
     });
-    
-   // Setup - add a text input to each footer cell
-   $('#example tfoot th').each( function () {
+
+
+      // Setup - add a text input to each footer cell
+      $('#example tfoot th').each( function () {
           var title = $(this).text();
           $(this).html( '<input type="text" placeholder=" '+title+'" />' );
       } );
@@ -242,42 +231,20 @@ $(document).ready(function() {
           "pagingType": "numbers",
       });
  
+ 
     // Refilter the table
     $('#min, #max').on('change', function () {
         table.draw();
     });
 
     $('.total').on('click', function () {
-      console.log(table.rows( { search: 'applied' }).data().pluck(3).sum());
-      $('#totals').text(table.rows( { search: 'applied' }).data().pluck(3).sum());
+      console.log(table.rows( { search: 'applied' }).data().pluck(5).sum());
+      $('#totals').text(table.rows( { search: 'applied' }).data().pluck(5).sum());
     })
 
 });
 
 
-
-
-  $('.get_order_details').click(function()
-        {
-            var orderid 	= $(this).attr('data-id');
-            var loader 	= $('#loader').attr('data-load');
-
-            $('#popup').modal('show');
-            $('#modal_body').html(loader);
-
-            $.ajax({
-                url:"{{route('get-order-details')}}",
-                type:"POST",
-                dataType: 'text',
-                data:    {"_token": "{{ csrf_token() }}",
-                            orderid: orderid},
-                success : function(response)
-                    {
-                    $('#modal_body').html(response);
-                    }  
-                })
-
-        });
 
 </script>
     

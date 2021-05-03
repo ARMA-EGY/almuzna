@@ -15,6 +15,10 @@ class Driver extends Model
 
     public function Order(){
         return $this->hasMany('App\Order','driver_id');
-    }     
+    }   
+
+    public function report(){
+        return $this->hasMany('App\Order','driver_id')->where('status', 'delivered');
+    }   
 
 }

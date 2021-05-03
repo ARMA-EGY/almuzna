@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\ProductCategory;
 use App\ProductImages;
 use App\Visit;
+use App\OrderItemsmodel;
 //use digital-bird\shoppingcart\src\Contracts\Buyable;
 
 class Product extends Model
@@ -30,5 +31,10 @@ class Product extends Model
     public function visits()
     {
         return $this->hasMany(Visit::class, 'page_token', 'token');
+    }
+
+    public function report()
+    {
+        return $this->hasMany(OrderItemsmodel::class, 'product_id');
     }
 }

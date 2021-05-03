@@ -44,6 +44,9 @@
   <!-- JQUERY UI -->
   <link rel="stylesheet" href="{{ asset('admin_assets/css/jquery-ui.css') }}" type="text/css">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+  
     @if (LaravelLocalization::getCurrentLocale() == 'ar')
         <!-- RTL CSS -->
         <link rel="stylesheet" href="{{ asset('admin_assets/css/rtl.css') }}" type="text/css">
@@ -242,6 +245,34 @@
 
 
                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#navbar-slider" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
+                        <i class="fa fa-images text-yellow"></i>
+                      <span class="nav-link-text">{{__('admin.NAV-SLIDESHOW')}}</span>
+                    </a>
+                    <div class="collapse" id="navbar-slider" style="">
+                      <ul class="nav nav-sm flex-column">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-sub {{request()->is('slideshow/en') ? 'active' : '' }}" href="{{ route('admin-show-slider', 'en')}}">
+                                <i class="fa fa-images"></i>
+                                <span class="nav-link-text">{{__('admin.ENGLISH')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-sub {{request()->is('slideshow/ar') ? 'active' : '' }}" href="{{route('admin-show-slider', 'ar')}}">
+                                <i class="fa fa-images"></i>
+                                <span class="nav-link-text">{{__('admin.ARABIC')}}</span>
+                            </a>
+                        </li>
+                        
+                      </ul>
+                    </div>
+                </li>
+
+                
+
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="#navbar-reports" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
                       <i class="far fa-chart-bar"></i>
                       <span class="nav-link-text">{{__('admin.NAV-REPORTS')}}</span>
@@ -257,21 +288,21 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link nav-link-sub" href="">
+                            <a class="nav-link nav-link-sub {{request()->routeIs('admin-reports-products') ? 'active' : '' }}" href="{{route('admin-reports-products')}}">
                                 <i class="fa fa-cubes"></i>
                                 <span class="nav-link-text">{{__('admin.NAV-PRODUCTS')}}</span>
                             </a>
                         </li>
     
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-reports-customers')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-reports-customers') ? 'active' : '' }}">
                             <i class="fas fa-user-tie"></i>
                             <span class="sidenav-normal"> {{__('admin.NAV-CUSTOMERS')}} </span>
                           </a>
                         </li>
 
                         <li class="nav-item">
-                          <a href="#" class="nav-link nav-link-sub">
+                          <a href="{{route('admin-reports-drivers')}}" class="nav-link nav-link-sub {{request()->routeIs('admin-reports-drivers') ? 'active' : '' }}">
                             <i class="fas fa-user-astronaut"></i>
                             <span class="sidenav-normal"> {{__('admin.NAV-DRIVERS')}} </span>
                           </a>
@@ -490,7 +521,43 @@
     </div>
 
 
+
+    <!--========= Upload Photos Modal =========-->
+    <div id="upload_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Upload</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                
+                <div class="modal-body" id="upload_body">
+                    
+                    <div class="form-row">
+    
+                        <div class="form-group col-md-12">
+                        <label for="" class="font-weight-bold"><i class="fa fa-image"></i> Upload : </label>
+                        </div>
+    
+                        <div class="bararea m-2">
+                            <div class="bar"></div>
+                        </div>
+    
+                        <div class="percent"></div>
+                        <div class="status"></div> 
+    
+                    </div>
+                    
+                </div>
+            
+        </div>
+        </div>
+      </div>
+
     <div class="row justify-content-center">
+
 
                 <!--============== Start To-Do List App ==============-->
                 <div class="col-lg-4 col-sm-6 features draggable">
@@ -590,6 +657,9 @@
 
     <script src="{{ asset('admin_assets/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/jquery.ui.touch-punch.min.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 {{-- 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>

@@ -79,6 +79,12 @@
 
 	<script src="https://unpkg.com/cart-localstorage@1.1.4/dist/cart-localstorage.min.js" type="text/javascript"></script>
     
+<style>
+    .loader, .verifiy-box
+    {
+        display: none;
+    }
+</style>
 
     @yield('style')
 
@@ -104,33 +110,37 @@
                             <h4 class="mb-3 text-center">{{__('core.LOGIN-WITH-PHONE')}}</h4>
                             
 
-                    
-                                <div class="col-12">
-                                    <input type="number" id="get-code-form-number" name="get-code-form-number" value="" class="form-control phn not-dark" placeholder="05x-xxx-xxxx" pattern="[0-9]{11}"  maxlength="11">
-                                </div>
+                                <form id="get-code-form-submit">
+                                    <div class="col-12">
+                                        <input type="number" id="get-code-form-number" name="get-code-form-number" class="form-control phn not-dark" placeholder="05x-xxx-xxxx" required>
+                                    </div>
 
-                                <div class="col-12">
-                                    <a href="#" class="text-dark font-weight-light mt-2"><small>{{__('core.ACCEPTS-SAUDI-ONLY')}}</small></a>
-                                </div>
+                                    <div class="col-12">
+                                        <a href="#" class="text-dark font-weight-light mt-2"><small>{{__('core.ACCEPTS-SAUDI-ONLY')}}</small></a>
+                                    </div>
 
-                                <div class="col-12 mt-4">
-                                    <button class="button btn-block m-0" id="get-code-form-submit">Get Code</button>
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="button btn-block m-0 submit" id="get-code-form-submit2" >Get Code</button>
+                                    </div>
+                                </form>
+
+                                <div class="verifiy-box">
+                                    <div class="col-12 mt-2">
+                                        <input type="text" id="vcode-form-vcode" name="vcode-form-vcode" value="" class="form-control not-dark" placeholder="verfication code">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <a href="#" class="text-dark font-weight-light mt-2"><small>A code was sent to your phone</small></a>
+                                    </div>
+
+                                    <div class="col-12 mt-4">
+                                        <button class="button btn-block m-0" id="vcode-form-submit">Verify</button>
+                                    </div> 
                                 </div>
                             
-                 
-
-
-                                <div class="col-12">
-                                    <input type="text" id="vcode-form-vcode" name="vcode-form-vcode" value="" class="form-control not-dark" placeholder="verfication code">
+                                <div class="loader text-center mt-3">
+                                   <img src="{{ asset('images/loader.gif') }}" width="40" alt=""> 
                                 </div>
-
-                                <div class="col-12">
-                                    <a href="#" class="text-dark font-weight-light mt-2"><small>A code was sent to your phone</small></a>
-                                </div>
-
-                                <div class="col-12 mt-4">
-                                    <button class="button btn-block m-0" id="vcode-form-submit">Verify</button>
-                                </div> 
 
                         </div>
                         <div class="card-footer py-4 center">
@@ -177,21 +187,25 @@
                                         </ul>
                                     </div>
 
-                                    <!-- Top Search
-                                    ============================================= -->
-                                    <div id="top-account">
-                                        @if(isset($user))
-                                        <a href="{{route('profile')}}" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
-                                            {{$user['name']}}
-                                        </span></a>    
-                                        @else
-                                        <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
-                                            {{__('core.LOGIN')}}
-                                        </span></a>
-                                        @endif
- 
-                                    </div>
-                                    <!-- #top-search end -->
+                                    @if(isset($user))
+                                        <div class="top-links" dir="ltr">
+                                            <ul class="top-links-container">
+                                                <li class="top-links-item">
+                                                    <a href="{{route('profile')}}" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">{{$user['name']}}</span></a>  
+                                                    <ul class="top-links-sub-menu">
+                                                        <li class="top-links-item"><a href="{{route('profile')}}"><i class="fa fa-user-circle mx-1 position-relative"></i> {{__('admin.PROFILE')}}</a></li>
+                                                        <li class="top-links-item"><a href="#"><i class="fas fa-sign-out-alt mx-1 position-relative" style="top: 1px;"></i> {{__('admin.LOGOUT')}}</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div> 
+                                    @else
+                                        <div id="top-account">
+                                            <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user mx-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary font-weight-medium">
+                                                {{__('core.LOGIN')}}
+                                            </span></a>
+                                        </div>
+                                    @endif
 
                                     <!-- Top Cart
                                     ============================================= -->
@@ -505,7 +519,7 @@
 
 
         firebase.auth().languageCode = 'en';
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('get-code-form-submit', {
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('get-code-form-submit2', {
           'size': 'invisible',
           'callback': (response) => {
             // reCAPTCHA solved, allow signInWithPhoneNumber.
@@ -518,12 +532,22 @@
   };
 
 
+                        
+  const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+                });
+                       
 
-        $( "#get-code-form-submit" ).click(function()
-        //function onSignInSubmit()
-        {
+        $( "#get-code-form-submit" ).submit(function(e)
+            {
+            e.preventDefault();
+            $('.submit').prop('disabled', true);
             const phoneNumber = '+20-'+$('#get-code-form-number').val().substring(1).replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-            
+            $('.loader').slideDown();
+
             console.log(phoneNumber);
             const appVerifier = window.recaptchaVerifier;
             firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
@@ -531,10 +555,16 @@
                   // SMS sent. Prompt user to type the code from the message, then sign the
                   // user in with confirmationResult.confirm(code).
                   window.confirmationResult = confirmationResult;
-                  alert("check your phone");
+                  $('.loader').slideUp();
+                  $('.verifiy-box').slideDown();
+                  $('.submit').prop('disabled', false);
+                  toastr.success('SMS Sent Successfully');
                   // ...
                 }).catch((error) => {
-                    console.log(error);
+                  $('.loader').slideUp();
+                  $('.submit').prop('disabled', false);
+                  toastr.error('SMS Not Sent');
+                  console.log(error);
                   console.log("SMS not sent");
                 });
         });
@@ -546,6 +576,8 @@
         $( "#vcode-form-submit" ).click(function()
         //function onSignInSubmit()
         {
+            $('.loader').slideUp();
+            $('#vcode-form-submit').prop('disabled', true);
             const code = $('#vcode-form-vcode').val();
             confirmationResult.confirm(code).then((result) => {
               // User signed in successfully.
@@ -562,8 +594,10 @@
                          {
                             if(response == 'failure')
                             {
-                                alert('Oops Something went wrong');
+                              $('#vcode-form-submit').prop('disabled', false);
+                              alert('Oops Something went wrong');
                             }else if (response == 'success'){
+                              $('#vcode-form-submit').prop('disabled', false);
                                 console.log('redirect to home');
                                 window.location.replace("{{route('welcome')}}");
                             }

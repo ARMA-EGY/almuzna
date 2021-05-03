@@ -73,7 +73,7 @@
                                                 } ?>
 <div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer  {{$minCls}}" id="min_card_{{$product['id']}}" data-rowId="{{$rowId}}" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="{{$product['photo']}}"></i><p class="quantity m-0" id="card_{{$product['id']}}"> {{$qty}}</p><i class="fa fa-plus main-color pointer stepper_up"  data-rowId="{{$rowId}}" data-id="{{$product['id']}}"></i></div>
                                                 @else
-                                      <a class="btn btn-cart add-order mx-2 crtbtn" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="http://localhost:8000/storage/images/product/{{$product['photo']}}"><i class="icon-shopping-basket"></i></a>
+                                      <a class="btn btn-cart add-order mx-2 crtbtn" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="/storage/{{$product['photo']}}"><i class="icon-shopping-basket"></i></a>
                                                 @endif
           
                                             </div>
