@@ -469,7 +469,8 @@ public function addlocation(locationValid $request)
       
 
         if ($request->session()->has('user_id') && $request->session()->has('api_token')) {
-            
+
+            $locations = customer_location::where('customer_id' , $request->session()->get('user_id'))->get();
             $user = userProfile($request);
             $orders = userOrders($request);
             if ($orders == 'no orders') {
@@ -477,6 +478,7 @@ public function addlocation(locationValid $request)
                     'page_token'=>'',
                     'socials'=>$socials,
                     'user'=>$user,
+                    'locations'=>$locations,
                 ];
 
                 return view('profile')->with($data); 
@@ -491,6 +493,7 @@ public function addlocation(locationValid $request)
             'user'=>$user,
             'orders'=>$orders,
             'order'=>$order['data'][0],
+            'locations'=>$locations,
 
             ];
 
