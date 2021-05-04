@@ -597,10 +597,7 @@
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                    Toast.fire({
-                      type: 'success',
-                      title: data.msg
-                    }) 
+                        toastr.success(data.msg);
                     if(data.msg == 'Profile is updated successfully' || data.msg == 'تم تحديث الملف الشخصي بنجاح')
                     {
                         $('#AccountDetailsModal').modal('hide'); 
@@ -617,7 +614,7 @@
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
 
@@ -646,10 +643,7 @@
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                    Toast.fire({
-                      type: 'success',
-                      title: data.msg
-                    }) 
+                        toastr.success(data.msg);
                     if(data.msg == 'order is cancelled successfully')
                     {
                         $('.order_actions').empty();
@@ -668,7 +662,7 @@
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
 
@@ -702,10 +696,7 @@
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                    Toast.fire({
-                      type: 'success',
-                      title: 'Woops something went'
-                    }) 
+                        toastr.error('Woops something went wrong');
 
                     
                 }else
@@ -722,7 +713,7 @@
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
 

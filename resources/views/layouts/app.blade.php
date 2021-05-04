@@ -238,7 +238,7 @@
                                                     <div class="top-cart-item" id="item_{{$item->model->id}}">
                                                         <div class="top-cart-item-image mx-2">
                                                             <a href="#">
-                                                                <img src="{{$item->model->photo}}"  />
+                                                                <img src="/storage/{{$item->model->photo}}"  />
                                                             </a>
                                                         </div>
                                                         <div class="top-cart-item-desc">
@@ -717,10 +717,7 @@ $(document).ready(function(){
                             showConfirmButton: false,
                             timer: 3000
                                                    });
-                        Toast.fire({
-                          type: 'success',
-                          title: data.msg
-                        }) 
+                        toastr.success(data.msg);
                         if(data.msg == 'promo code is Applied' || data.msg == 'تم تطبيق الرمز الترويجي')
                         {
                             $('#couponDiscount').val(data.couponDiscount);
@@ -743,7 +740,7 @@ $(document).ready(function(){
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
         });
@@ -806,7 +803,7 @@ $(document).ready(function(){
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
         });    
@@ -870,7 +867,7 @@ $(document).ready(function(){
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
 
@@ -940,7 +937,7 @@ $(document).ready(function(){
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
          });    
@@ -984,7 +981,7 @@ $(document).ready(function(){
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
 
@@ -1046,7 +1043,7 @@ $(document).ready(function(){
                         showConfirmButton: false,
                         timer: 3000
                                                });
-                        toastr.error('Woops something went');
+                        toastr.error('Woops something went wrong');
                 }
             })
 

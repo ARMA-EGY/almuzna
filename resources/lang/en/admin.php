@@ -163,7 +163,7 @@ return [
 
 
 
-    "CONFIG-CONFIG" => "Pending orders",    
+    "CONFIG-CONFIG" => "Configuration",    
     "CONFIG-MINIORDERVALUE" => "Minimum order value",
     "CONFIG-MAXORDERVALUEDAY" => "Maximum order value for same day delivery",    
     "CONFIG-SALESTAX" => "sales tax",

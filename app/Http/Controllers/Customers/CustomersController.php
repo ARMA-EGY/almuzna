@@ -320,7 +320,7 @@ public function addlocation(locationValid $request)
                         'status' => 'true',
                         'msg' => $user['msg']
                     ]) ;
-
+                    Cart::destroy();
             }
 
         }else{

@@ -196,9 +196,9 @@
 					<div class="row grid-6 content-103 justify-content-center">
 
 						@if ($products['total'] > 0)
-<?php 
-$i =1;
-?>
+							<?php 
+							$i =1;
+							?>
                             @foreach ($products['data'] as $product)
                             	@if($i < 5)
                                 <div class="col-md-3 col-6 px-product">
@@ -233,16 +233,16 @@ $i =1;
                                                   
 
  												} ?>
-<div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer  {{$minCls}}" id="min_card_{{$product['id']}}" data-rowId="{{$rowId}}" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="{{$product['photo']}}"></i><p class="quantity m-0" id="card_{{$product['id']}}"> {{$qty}}</p><i class="fa fa-plus main-color pointer stepper_up"  data-rowId="{{$rowId}}" data-id="{{$product['id']}}"></i></div>
+											<div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer  {{$minCls}}" id="min_card_{{$product['id']}}" data-rowId="{{$rowId}}" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="{{$product['photo']}}"></i><p class="quantity m-0" id="card_{{$product['id']}}"> {{$qty}}</p><i class="fa fa-plus main-color pointer stepper_up"  data-rowId="{{$rowId}}" data-id="{{$product['id']}}"></i></div>
                                             	@else
-                                      <a class="btn btn-cart add-order mx-2 crtbtn" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="/storage/{{$product['photo']}}"><i class="icon-shopping-basket"></i></a>
+                                      		<a class="btn btn-cart add-order mx-2 crtbtn" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="/storage/{{$product['photo']}}"><i class="icon-shopping-basket"></i></a>
                                             	@endif
           
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
-                                </div>
+                    </div>
                                 <?php $i++ ?>
                                 @endif
                                <?php unset($found); ?>
@@ -255,7 +255,7 @@ $i =1;
 
 						<a href="{{route('products')}}">{{__('core.VIEW-MORE')}}</a>
 
-					</div>
+				</div>
 
 				</div>
 
@@ -295,46 +295,74 @@ $i =1;
 
 				<!-- Offer
 				============================================= -->
-				<div class="section my-4 py-5 bg-white">
-					<div class="container">
-						<div class="row justify-content-center">
-							<div class="col-10">
-								<div class="row align-items-stretch align-items-center">
-									<div class="col-md-5 bg-white px-0 m-auto">
-										<img src="{{ asset('front_assets/images/services-2.jpg')}}" alt="">
-									</div>
-									<div class="col-md-6 bg-light">
-										<div class="card border-0 py-2 bg-light {{ $text }}" dir="{{ $dir }}">
-											<div class="card-body">
-												<h2 class="card-title mb-4 ls0">{{__('core.SPECIAL-OFFER')}}</h2>
-												<p class="mb-3">{{__('core.offer-desc')}}</p>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="product-price font-primary" style="text-align: center;">
-															<del class="mr-1" style="font-size: 15px;">20.00 {{__('core.SAR')}}</del> 
-															<ins style="font-size: 35px;">15.00 {{__('core.SAR')}}</ins>
-														</div>
-													</div>
-													<div class="col-md-12">
-														<ul class="iconlist ml-3">
-															<li class="bg-white p-2"><i class="icon-circle-blank text-black-50"></i>{{__('core.offer-title')}}</li>
-														</ul>
-													</div>
-												</div>
-												<div class="text-center my-3">
-													<a href="#" class="button button-rounded button-small"><i class="icon-shopping-basket"></i>  {{__('core.ADD-TO-CART')}}</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+			@if ($products['total'] > 0)
+				<div class="container clearfix" id="offers" dir="{{ $dir }}">
+
+					<div class="fancy-title title-border title-center mb-4">
+						<h2>{{__('core.OFFERS')}}</h2>
 					</div>
+
+					<div class="row grid-6 content-103 justify-content-center">
+						<?php 
+						$i =1;
+						?>
+						@foreach ($products['data'] as $product)
+                            	@if($i < 5)
+                                <div class="col-md-3 col-6 px-product">
+                                    <div class="product">
+                                        <div class="product-image">
+                                            <img src="{{ asset('storage/'.$product['photo'])}}">
+                                        </div>
+
+                                        <div class="product-desc">
+                                            <div class="product-title mb-1"><h3> {{$product['name_en']}}</h3></div>
+                                            <div class="product-price font-primary">
+ 
+                                                    <ins>{{$product['price']}} {{__('core.SAR')}}</ins></div>
+                                           <?php
+
+                                           $found = Cart::search(function ($cartItem, $rowId) use($product){
+												return $cartItem->id === (string)$product['id'];
+											});
+
+                                           ?>
+                                            <div class="mt-3 order-section {{$inverse_text}}" id="prd_{{$product['id']}}">
+                                            	@if($found->isNotEmpty())
+                                            	<?php foreach ($found as $its) {
+ 												$qty = $its->qty;
+ 												$rowId = $its->rowId;
+
+                                                if($qty > 1){
+                                                    $minCls = 'fa-minus stepper_down';
+                                                }else{
+                                                    $minCls = 'fa-trash-alt text-danger remove_item';
+                                                }
+                                                  
+
+ 												} ?>
+											<div class="text-center d-flex justify-content-between align-items-center actions-section"><i class="fa main-color pointer  {{$minCls}}" id="min_card_{{$product['id']}}" data-rowId="{{$rowId}}" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="{{$product['photo']}}"></i><p class="quantity m-0" id="card_{{$product['id']}}"> {{$qty}}</p><i class="fa fa-plus main-color pointer stepper_up"  data-rowId="{{$rowId}}" data-id="{{$product['id']}}"></i></div>
+                                            	@else
+                                      		<a class="btn btn-cart add-order mx-2 crtbtn" data-id="{{$product['id']}}" data-name="{{$product['name_en']}}" data-price="{{$product['price']}}" data-photo="/storage/{{$product['photo']}}"><i class="icon-shopping-basket"></i></a>
+                                            	@endif
+          
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                    </div>
+						<?php $i++ ?>
+						@endif
+						<?php unset($found); ?>
+                        @endforeach
+						
 				</div>
+						
+			</div>
 
 
 				<div class="clear"></div>
+						
+			@endif
 
 
 				<!-- Contact Us

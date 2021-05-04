@@ -56,7 +56,7 @@
               <form class="configuration_form">
                 @csrf
 
-                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-MINIORDERVALUE')}}  </h6>
+                <h6 class="heading-small text-muted {{$text}} mb-4">{{__('admin.CONFIG-MINIORDERVALUE')}}  </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -74,7 +74,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-MAXORDERVALUEDAY')}}  </h6>
+                <h6 class="heading-small text-muted {{$text}} mb-4">{{__('admin.CONFIG-MAXORDERVALUEDAY')}}  </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -92,7 +92,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-SALESTAX')}} </h6>
+                <h6 class="heading-small text-muted {{$text}} mb-4">{{__('admin.CONFIG-SALESTAX')}} </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -110,7 +110,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-DFLTDELIVVALUE')}} </h6>
+                <h6 class="heading-small text-muted {{$text}} mb-4">{{__('admin.CONFIG-DFLTDELIVVALUE')}} </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -128,7 +128,7 @@
                 </div>
                 <hr class="my-4" />
 
-                <h6 class="heading-small text-muted text-right mb-4">{{__('admin.CONFIG-MAXORDERSPERDAY')}} </h6>
+                <h6 class="heading-small text-muted {{$text}} mb-4">{{__('admin.CONFIG-MAXORDERSPERDAY')}} </h6>
                 <div class="pr-lg-4">
                   <div class="row">
 
@@ -148,7 +148,7 @@
 
 
                 <!-- Save -->
-                <div class="col-12 text-right">
+                <div class="col-12 {{$inverse_text}}">
                   <button type="submit" class="btn btn-sm btn-primary submit">{{__('admin.CONFIG-SAVECHANGES')}}</button>
                 </div>
               </form>
@@ -173,8 +173,8 @@
                 <div class="pr-lg-4">
                   <div class="row">
 
-                    <div class="form-group col-md-4 mb-2 text-right">
-                        <h6 class="heading-small text-muted text-right">نوع الخصم</h6>
+                    <div class="form-group col-md-4 mb-2 {{$text}}">
+                        <h6 class="heading-small text-muted {{$text}}">نوع الخصم</h6>
 
                         <select class="form-control" name="type" required>
                           <option value="percentage"  @if ($first_order_discount->type == 'percentage') selected  @endif  >نسبة مئوية</option>
@@ -190,8 +190,8 @@
                     </div>
 
                     <!--=================  Discount  =================-->
-                    <div class="form-group col-md-4 mb-2 text-right">
-                        <h6 class="heading-small text-muted text-right">قيمة الخصم</h6>
+                    <div class="form-group col-md-4 mb-2 {{$text}}">
+                        <h6 class="heading-small text-muted {{$text}}">قيمة الخصم</h6>
                     
                         <input type="number" name="value" class="@error('discount') is-invalid @enderror form-control" placeholder="قيمة الخصم" value="{{$first_order_discount->value}}" >
 
@@ -214,8 +214,8 @@
 
 
                 <!-- Save -->
-                <div class="col-12 text-right">
-                  <button type="submit" class="btn btn-sm btn-primary submit">حفظ التغيرات</button>
+                <div class="col-12 {{$inverse_text}}">
+                  <button type="submit" class="btn btn-sm btn-primary submit">{{__('admin.CONFIG-SAVECHANGES')}}</button>
                 </div>
               </form>
             </div>

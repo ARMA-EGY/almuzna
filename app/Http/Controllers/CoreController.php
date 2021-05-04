@@ -271,7 +271,7 @@ class CoreController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/offers/wb",
+            CURLOPT_URL => "https://armasoftware.com/demo/almuzna_api/api/v1/product/refillwb",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",

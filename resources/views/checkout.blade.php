@@ -122,7 +122,7 @@
                                                         </div>
                                 
                                                         <div class="col-lg-5 text-right pt-4">
-                                                            <a href="#" class="btn btn-primary btn-sm btn-rounded px-lg-5 applycode">APPLY</a>
+                                                            <a  class="btn btn-primary btn-sm btn-rounded px-lg-5 applycode">APPLY</a>
                                                         </div>
                                 
                                                     </div>
@@ -151,7 +151,7 @@
                                                             <div class="row align-items-center">
                                                                 <div class="col-9">
                                                                     <div class="custom-control custom-radio d-flex align-items-center">
-                                                                        <input type="radio" id="{{$location->id}}" name="loationRadio" data-lat="{{$location->lat}}" data-lng="{{$location->lng}}" data-delivery_address="{{$location->delivery_address}}" class="custom-control-input locationRdbtn" data-toggle="collapse" data-target="#collapseOne1" aria-controls="collapseOne1">
+                                                                        <input type="radio" id="{{$location->id}}" name="loationRadio" data-lat="{{$location->lat}}" data-lng="{{$location->lng}}" data-delivery_address="{{$location->delivery_address}}" class="custom-control-input locationRdbtn" data-toggle="collapse" data-target="#collapseOne1" aria-controls="collapseOne1" @if($loop->index == 0) checked @endif>
                                                                         <label class="custom-control-label pl-2 pl-lg-4" for="{{$location->id}}">
                                                                             <span class="h6 m-0">{{$location->delivery_address}}</span><br />
                                                                         </label>
@@ -161,9 +161,6 @@
                                                         </div>
                                                         <div id="collapseOne1" class="collapse pt-0" aria-labelledby="{{$location->id}}" data-parent="#accordionLocationExample">
                                                             <hr class="m-0">
-                                                            <div class="card-body">
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                            </div>
                                                         </div>
                                                     </div>
                                 
@@ -310,9 +307,6 @@
                                                         </div>
                                                         <div id="collapseThree" class="collapse pt-0" aria-labelledby="customRadio3" data-parent="#accordionPaymentExample">
                                                             <hr class="m-0">
-                                                            <div class="card-body">
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -533,15 +527,13 @@
                             showConfirmButton: false,
                             timer: 3000
                                                    });
-                        Toast.fire({
-                          type: 'success',
-                          title: data.msg
-                        }) 
-
+                        toastr.success(data.msg);
                         
+                        setTimeout(function () 
+                        {
+                            window.location.replace("{{route('profile')}}");
+                        }, 3000);
                     } 
-                       
-
                     },error:function(data)
                     {
                            const Toast = Swal.mixin({
@@ -596,10 +588,7 @@
                             showConfirmButton: false,
                             timer: 3000
                                                    });
-                        Toast.fire({
-                          type: 'success',
-                          title: data.msg
-                        }) 
+                        toastr.success(data.msg);
 
                         $('#LocationModal').modal('hide');
                     }
